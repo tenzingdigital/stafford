@@ -194,6 +194,7 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
   </div>
 </section>
 
+{site.journalIntro.show && (
 <section class="band sheet" id="journal" style="border-top:1px solid var(--rule)">
   <div class="marg">
     <p class="label">{site.journalIntro.label}</p>
@@ -209,6 +210,7 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     ))}
   </div>
 </section>
+)}
 
 <section class="band sheet" id="partners" style="background:var(--mist); max-width:none">
   <div style="max-width:88rem; margin-inline:auto">
@@ -266,7 +268,7 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
 
 <footer>
   <span>{site.name}</span>
-  <span>{site.footer.note}</span>
+  {site.footer.note && <span>{site.footer.note}</span>}
   <span class="credit">
     {site.footer.creditPrefix}{' '}
     <a href={site.footer.creditUrl} target="_blank" rel="noopener noreferrer">{site.footer.creditName}</a>

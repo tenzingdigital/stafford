@@ -72,7 +72,7 @@ collections:
         fields:
           - { name: name, label: Name, widget: string }
           - name: notice
-            label: Yellow warning bar
+            label: Notice bar
             widget: object
             fields:
               - { name: show, label: Show the bar, widget: boolean, default: true }
@@ -174,6 +174,8 @@ collections:
             label: Journal introduction
             widget: object
             fields:
+              - { name: show, label: Show the Journal section, widget: boolean, default: true,
+                  hint: "Turn off to hide Dispatches entirely until there are real entries to show." }
               - { name: label, label: Small label, widget: string }
               - { name: heading, label: Heading, widget: string }
           - name: partners

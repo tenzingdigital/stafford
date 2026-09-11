@@ -1,7 +1,7 @@
 {
   "name": "Stafford Tyrrell",
   "notice": {
-    "show": true,
+    "show": false,
     "label": "Prototype",
     "text": "Facts come from Stafford's own expedition documents.",
     "more": " Descriptive writing and journal entries are draft, and nothing has been checked with him."
@@ -114,7 +114,8 @@
   },
   "journalIntro": {
     "label": "Journal",
-    "heading": "Dispatches"
+    "heading": "Dispatches",
+    "show": true
   },
   "partners": {
     "label": "Partners",
@@ -202,7 +203,7 @@
     }
   ],
   "footer": {
-    "note": "Prototype — draft content",
+    "note": "",
     "creditPrefix": "Website built by",
     "creditName": "Tenzing Digital AI",
     "creditUrl": "https://tenzing.ie"
