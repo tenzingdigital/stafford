@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Tenzing">
+  <title>Tenzing</title>
+  <!-- summit -->
+  <path d="M50 9 L69 43 L31 43 Z" fill="currentColor"/>
+  <!-- two ridgelines below, reading as ascent and elevation -->
+  <path d="M19 67 L50 49 L81 67" fill="none" stroke="currentColor" stroke-width="9"
+        stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M11 90 L50 67 L89 90" fill="none" stroke="currentColor" stroke-width="9"
+        stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>
