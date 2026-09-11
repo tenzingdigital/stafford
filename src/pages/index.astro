@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import site from '../data/site.json';
+import Photo from '../components/Photo.astro';
 import '../styles/site.css';
 
 /* Tiny inline-markdown helper for short CMS strings (bold, line breaks).
@@ -68,7 +69,8 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     </div>
   </div>
   <div class="hero-shot">
-    <img src={site.hero.photo} alt={site.hero.photoAlt} style={`object-position:${site.hero.photoPosition}`} />
+    <Photo src={site.hero.photo} alt={site.hero.photoAlt} style={`object-position:${site.hero.photoPosition}`}
+           sizes="(min-width: 900px) 50vw, 100vw" loading="eager" fetchpriority="high" />
   </div>
 </header>
 
@@ -88,7 +90,7 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
 </dl>
 
 <figure class="plate-wide">
-  <img src={site.plate.photo} alt={site.plate.alt} />
+  <Photo src={site.plate.photo} alt={site.plate.alt} sizes="100vw" />
   <figcaption>{site.plate.caption}</figcaption>
 </figure>
 
@@ -105,7 +107,8 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
 {rendered.map(({ data, Body }) => (
   <article class={`exp${data.flip ? ' rev' : ''}`}>
     <div class="exp-shot">
-      <img src={data.photo} alt={data.photoAlt} style={`object-position:${data.photoPosition}`} />
+      <Photo src={data.photo} alt={data.photoAlt} style={`object-position:${data.photoPosition}`}
+             sizes="(min-width: 900px) 50vw, 100vw" />
     </div>
     <div class="exp-text">
       <p class="lat d">{data.latitude}
@@ -165,12 +168,12 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
 )}
 
 <figure class="dark">
-  <img src={site.quote.photo} alt={site.quote.alt} />
+  <Photo src={site.quote.photo} alt={site.quote.alt} sizes="100vw" />
   <figcaption>{site.quote.text}<cite>{site.quote.cite}</cite></figcaption>
 </figure>
 
 <section class="split" id="patagonia">
-  <div class="split-shot"><img src={site.vessel.photo} alt={site.vessel.alt} /></div>
+  <div class="split-shot"><Photo src={site.vessel.photo} alt={site.vessel.alt} sizes="(min-width: 900px) 50vw, 100vw" /></div>
   <div class="split-text">
     <p class="label">{site.vessel.label}</p>
     <h2 class="d">{site.vessel.heading}</h2>
@@ -181,7 +184,8 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
 
 <section class="split rev" id="about" style="border-top:1px solid var(--rule)">
   <div class="split-shot">
-    <img src={site.about.photo} alt={site.about.alt} style={`object-position:${site.about.photoPosition}`} />
+    <Photo src={site.about.photo} alt={site.about.alt} style={`object-position:${site.about.photoPosition}`}
+           sizes="(min-width: 900px) 50vw, 100vw" />
   </div>
   <div class="split-text">
     <p class="label">{site.about.label}</p>

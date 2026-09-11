@@ -1,0 +1,626 @@
+{
+  "images/light/baikal-camp.jpg": {
+    "width": 2000,
+    "height": 1126,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/baikal-camp-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/baikal-camp-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/baikal-camp-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/baikal-camp-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/baikal-camp-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/baikal-camp-1200.webp"
+      },
+      {
+        "w": 1600,
+        "fmt": "avif",
+        "path": "images/derived/baikal-camp-1600.avif"
+      },
+      {
+        "w": 1600,
+        "fmt": "webp",
+        "path": "images/derived/baikal-camp-1600.webp"
+      },
+      {
+        "w": 2000,
+        "fmt": "avif",
+        "path": "images/derived/baikal-camp-2000.avif"
+      },
+      {
+        "w": 2000,
+        "fmt": "webp",
+        "path": "images/derived/baikal-camp-2000.webp"
+      }
+    ]
+  },
+  "images/light/baikal-hovercraft.jpg": {
+    "width": 2000,
+    "height": 1126,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/baikal-hovercraft-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/baikal-hovercraft-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/baikal-hovercraft-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/baikal-hovercraft-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/baikal-hovercraft-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/baikal-hovercraft-1200.webp"
+      },
+      {
+        "w": 1600,
+        "fmt": "avif",
+        "path": "images/derived/baikal-hovercraft-1600.avif"
+      },
+      {
+        "w": 1600,
+        "fmt": "webp",
+        "path": "images/derived/baikal-hovercraft-1600.webp"
+      },
+      {
+        "w": 2000,
+        "fmt": "avif",
+        "path": "images/derived/baikal-hovercraft-2000.avif"
+      },
+      {
+        "w": 2000,
+        "fmt": "webp",
+        "path": "images/derived/baikal-hovercraft-2000.webp"
+      }
+    ]
+  },
+  "images/light/baikal-ice.jpg": {
+    "width": 1932,
+    "height": 2576,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/baikal-ice-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/baikal-ice-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/baikal-ice-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/baikal-ice-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/baikal-ice-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/baikal-ice-1200.webp"
+      },
+      {
+        "w": 1600,
+        "fmt": "avif",
+        "path": "images/derived/baikal-ice-1600.avif"
+      },
+      {
+        "w": 1600,
+        "fmt": "webp",
+        "path": "images/derived/baikal-ice-1600.webp"
+      },
+      {
+        "w": 1932,
+        "fmt": "avif",
+        "path": "images/derived/baikal-ice-1932.avif"
+      },
+      {
+        "w": 1932,
+        "fmt": "webp",
+        "path": "images/derived/baikal-ice-1932.webp"
+      }
+    ]
+  },
+  "images/light/berg-patagonia.jpg": {
+    "width": 2000,
+    "height": 1125,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/berg-patagonia-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/berg-patagonia-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/berg-patagonia-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/berg-patagonia-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/berg-patagonia-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/berg-patagonia-1200.webp"
+      },
+      {
+        "w": 1600,
+        "fmt": "avif",
+        "path": "images/derived/berg-patagonia-1600.avif"
+      },
+      {
+        "w": 1600,
+        "fmt": "webp",
+        "path": "images/derived/berg-patagonia-1600.webp"
+      },
+      {
+        "w": 2000,
+        "fmt": "avif",
+        "path": "images/derived/berg-patagonia-2000.avif"
+      },
+      {
+        "w": 2000,
+        "fmt": "webp",
+        "path": "images/derived/berg-patagonia-2000.webp"
+      }
+    ]
+  },
+  "images/light/crew-bow.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/crew-bow-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/crew-bow-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/crew-bow-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/crew-bow-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/crew-bow-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/crew-bow-1200.webp"
+      }
+    ]
+  },
+  "images/light/crew-patagonia.jpg": {
+    "width": 1600,
+    "height": 1067,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/crew-patagonia-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/crew-patagonia-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/crew-patagonia-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/crew-patagonia-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/crew-patagonia-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/crew-patagonia-1200.webp"
+      },
+      {
+        "w": 1600,
+        "fmt": "avif",
+        "path": "images/derived/crew-patagonia-1600.avif"
+      },
+      {
+        "w": 1600,
+        "fmt": "webp",
+        "path": "images/derived/crew-patagonia-1600.webp"
+      }
+    ]
+  },
+  "images/light/deck-rigging.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/deck-rigging-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/deck-rigging-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/deck-rigging-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/deck-rigging-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/deck-rigging-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/deck-rigging-1200.webp"
+      },
+      {
+        "w": 1600,
+        "fmt": "avif",
+        "path": "images/derived/deck-rigging-1600.avif"
+      },
+      {
+        "w": 1600,
+        "fmt": "webp",
+        "path": "images/derived/deck-rigging-1600.webp"
+      }
+    ]
+  },
+  "images/light/glacier-boat.jpg": {
+    "width": 1600,
+    "height": 900,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/glacier-boat-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/glacier-boat-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/glacier-boat-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/glacier-boat-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/glacier-boat-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/glacier-boat-1200.webp"
+      },
+      {
+        "w": 1600,
+        "fmt": "avif",
+        "path": "images/derived/glacier-boat-1600.avif"
+      },
+      {
+        "w": 1600,
+        "fmt": "webp",
+        "path": "images/derived/glacier-boat-1600.webp"
+      }
+    ]
+  },
+  "images/light/glacier-wall.jpg": {
+    "width": 900,
+    "height": 1600,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/glacier-wall-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/glacier-wall-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/glacier-wall-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/glacier-wall-800.webp"
+      },
+      {
+        "w": 900,
+        "fmt": "avif",
+        "path": "images/derived/glacier-wall-900.avif"
+      },
+      {
+        "w": 900,
+        "fmt": "webp",
+        "path": "images/derived/glacier-wall-900.webp"
+      }
+    ]
+  },
+  "images/light/icecap-traverse.jpg": {
+    "width": 747,
+    "height": 1600,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/icecap-traverse-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/icecap-traverse-480.webp"
+      },
+      {
+        "w": 747,
+        "fmt": "avif",
+        "path": "images/derived/icecap-traverse-747.avif"
+      },
+      {
+        "w": 747,
+        "fmt": "webp",
+        "path": "images/derived/icecap-traverse-747.webp"
+      }
+    ]
+  },
+  "images/light/portrait-frost.jpg": {
+    "width": 1200,
+    "height": 1599,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/portrait-frost-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/portrait-frost-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/portrait-frost-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/portrait-frost-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/portrait-frost-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/portrait-frost-1200.webp"
+      }
+    ]
+  },
+  "images/light/stafford-portrait.jpg": {
+    "width": 1014,
+    "height": 771,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/stafford-portrait-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/stafford-portrait-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/stafford-portrait-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/stafford-portrait-800.webp"
+      },
+      {
+        "w": 1014,
+        "fmt": "avif",
+        "path": "images/derived/stafford-portrait-1014.avif"
+      },
+      {
+        "w": 1014,
+        "fmt": "webp",
+        "path": "images/derived/stafford-portrait-1014.webp"
+      }
+    ]
+  },
+  "images/light/stafford-pulk.jpg": {
+    "width": 1450,
+    "height": 2576,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/stafford-pulk-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/stafford-pulk-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/stafford-pulk-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/stafford-pulk-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/stafford-pulk-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/stafford-pulk-1200.webp"
+      },
+      {
+        "w": 1450,
+        "fmt": "avif",
+        "path": "images/derived/stafford-pulk-1450.avif"
+      },
+      {
+        "w": 1450,
+        "fmt": "webp",
+        "path": "images/derived/stafford-pulk-1450.webp"
+      }
+    ]
+  },
+  "images/light/sunset-helm.jpg": {
+    "width": 1500,
+    "height": 1001,
+    "variants": [
+      {
+        "w": 480,
+        "fmt": "avif",
+        "path": "images/derived/sunset-helm-480.avif"
+      },
+      {
+        "w": 480,
+        "fmt": "webp",
+        "path": "images/derived/sunset-helm-480.webp"
+      },
+      {
+        "w": 800,
+        "fmt": "avif",
+        "path": "images/derived/sunset-helm-800.avif"
+      },
+      {
+        "w": 800,
+        "fmt": "webp",
+        "path": "images/derived/sunset-helm-800.webp"
+      },
+      {
+        "w": 1200,
+        "fmt": "avif",
+        "path": "images/derived/sunset-helm-1200.avif"
+      },
+      {
+        "w": 1200,
+        "fmt": "webp",
+        "path": "images/derived/sunset-helm-1200.webp"
+      },
+      {
+        "w": 1500,
+        "fmt": "avif",
+        "path": "images/derived/sunset-helm-1500.avif"
+      },
+      {
+        "w": 1500,
+        "fmt": "webp",
+        "path": "images/derived/sunset-helm-1500.webp"
+      }
+    ]
+  }
+}

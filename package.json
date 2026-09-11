@@ -5,10 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && node scripts/relativise.mjs",
-    "preview": "astro preview"
+    "build": "node scripts/images.mjs && astro build && node scripts/relativise.mjs",
+    "preview": "astro preview",
+    "images": "node scripts/images.mjs"
   },
   "dependencies": {
     "astro": "^7.3.2"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.4"
   }
 }

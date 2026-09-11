@@ -34,6 +34,7 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 img{ max-width:100%; display:block; }
+picture{ display:contents; }
 a{ color:inherit; }
 ::selection{ background:var(--ink); color:#fff; }
 :focus-visible{ outline:2px solid var(--flare); outline-offset:3px; }
@@ -236,11 +237,11 @@ h1,h2,h3{ margin:0; }
   .exp.rev .exp-shot{ order:2; }
 }
 .exp-shot{ position:relative; overflow:hidden; background:var(--mist); min-height:clamp(17rem,40vw,30rem); }
-.exp-shot > img{
+.exp-shot img{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
   transition:transform .8s cubic-bezier(.2,.6,.2,1);
 }
-.exp:hover .exp-shot > img{ transform:scale(1.035); }
+.exp:hover .exp-shot img{ transform:scale(1.035); }
 .exp-text{
   padding:clamp(2.5rem,5vw,4.25rem) var(--gutter);
   display:flex; flex-direction:column; gap:1.3rem; justify-content:center;
