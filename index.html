@@ -381,6 +381,7 @@ h2.section-title{
   color:var(--haze-dim);
 }
 .exped.featured .exped-body h3{ font-size:clamp(1.75rem,3.4vw,2.5rem); }
+@media (min-width:820px){ .exped.featured{ align-items:start; } }
 
 /* ── latitude scale ────────────────────────────────────────── */
 
@@ -534,17 +535,134 @@ footer{
 @media (prefers-reduced-motion:reduce){
   *{ transition:none !important; animation:none !important; }
 }
+
+/* ── live status strip ─────────────────────────────────────── */
+
+.live{
+  display:flex;
+  align-items:center;
+  gap:.9rem 1.5rem;
+  flex-wrap:wrap;
+  padding:1rem var(--gutter);
+  background:var(--ink-2);
+  border-block:1px solid var(--ink-3);
+  font-family:var(--f-mono);
+  font-size:.74rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+}
+.live-dot{
+  width:9px; height:9px; border-radius:50%;
+  background:var(--flare);
+  flex:0 0 auto;
+  box-shadow:0 0 0 0 rgba(221,91,42,.7);
+  animation:ping 2.4s ease-out infinite;
+}
+@keyframes ping{
+  0%{ box-shadow:0 0 0 0 rgba(221,91,42,.55); }
+  70%{ box-shadow:0 0 0 11px rgba(221,91,42,0); }
+  100%{ box-shadow:0 0 0 0 rgba(221,91,42,0); }
+}
+.live b{ color:var(--flare); font-weight:500; }
+.live span{ color:var(--haze); }
+.live .live-sep{ color:var(--ink-3); }
+
+/* ── vessel ────────────────────────────────────────────────── */
+
+.vessel{
+  display:grid;
+  gap:clamp(2rem,5vw,4rem);
+  grid-template-columns:1fr;
+  align-items:center;
+}
+@media (min-width:820px){ .vessel{ grid-template-columns:1.1fr 1fr; } }
+.vessel img{ width:100%; aspect-ratio:3/2; object-fit:cover; object-position:center 48%; }
+.spec{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:0;
+  margin-top:1.5rem;
+  border-top:1px solid var(--ink-3);
+}
+.spec div{
+  display:flex;
+  justify-content:space-between;
+  gap:1.5rem;
+  padding:.7rem 0;
+  border-bottom:1px solid var(--ink-3);
+  font-family:var(--f-mono);
+  font-size:.76rem;
+  letter-spacing:.06em;
+}
+.spec dt{ color:var(--haze-dim); text-transform:uppercase; font-size:.68rem; letter-spacing:.13em; }
+.spec dd{ margin:0; color:var(--snow); text-align:right; font-variant-numeric:tabular-nums; }
+
+/* ── route legs ────────────────────────────────────────────── */
+
+.legs{
+  margin-top:2rem;
+  border-top:1px solid var(--ink-3);
+  font-family:var(--f-mono);
+  font-size:.78rem;
+}
+.leg{
+  display:grid;
+  grid-template-columns:2.5rem 1fr auto;
+  gap:1rem;
+  align-items:baseline;
+  padding:.65rem 0;
+  border-bottom:1px solid var(--ink-3);
+}
+.leg-n{ color:var(--flare); font-size:.68rem; letter-spacing:.1em; }
+.leg-name{ color:var(--snow); letter-spacing:.02em; }
+.leg-d{ color:var(--haze-dim); font-variant-numeric:tabular-nums; white-space:nowrap; }
+.leg.done .leg-name{ color:var(--haze); }
+
+/* ── tiers ─────────────────────────────────────────────────── */
+
+.tiers{
+  display:grid;
+  gap:1px;
+  grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));
+  background:var(--ink-3);
+  border:1px solid var(--ink-3);
+  margin-top:2.5rem;
+}
+.tier{
+  background:var(--ink);
+  padding:1.5rem;
+  display:flex;
+  flex-direction:column;
+  gap:.5rem;
+}
+.tier h4{
+  margin:0;
+  font-size:.72rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--haze-dim);
+  font-family:var(--f-mono);
+  font-weight:400;
+}
+.tier p{
+  margin:0;
+  font-family:var(--f-prose);
+  font-size:.95rem;
+  line-height:1.6;
+  color:var(--haze);
+}
 </style>
 
 <div class="notice">
   <b>Prototype</b>
-  <span>Expedition names, latitudes and years are taken from Stafford&rsquo;s own patches. The descriptive writing, the journal entries and any figure not shown on a patch are still placeholder.</span>
+  <span>Facts, routes, distances and biography are taken from Stafford&rsquo;s own expedition documents. Descriptive writing and journal entries are still draft. Nothing has been checked with him.</span>
 </div>
 
 <nav class="nav">
   <a class="mark" href="#top">Stafford&nbsp;Tyrrell</a>
   <div class="nav-links">
     <a href="#expeditions">Expeditions</a>
+    <a href="#vessel">Patagonia</a>
     <a href="#about">About</a>
     <a href="#journal">Journal</a>
     <a href="#partners">Partners</a>
@@ -554,19 +672,30 @@ footer{
 
 <header class="hero" id="top">
   <div class="hero-text">
-    <p class="eyebrow">Polar travel &middot; High-latitude sail</p>
+    <p class="eyebrow">Captain &middot; Expedition leader</p>
     <h1><span>Stafford</span><span class="surname">Tyrrell</span></h1>
-    <p class="hero-lede">Across the Greenland ice sheet on ski. North to 82&deg; under sail. Winter on the ice of Lake Baikal.</p>
+    <p class="hero-lede">Sailing a steel ketch to 82&deg; North and walking off the end of the chart. Ellesmere Island, the Greenland ice cap, and the frozen surface of Lake Baikal.</p>
     <div class="hero-actions">
       <a class="btn btn-solid" href="#expeditions">The expeditions</a>
       <a class="btn btn-ghost" href="#partners">For partners</a>
     </div>
   </div>
   <figure class="hero-figure">
-    <img src="images/portrait-frost.jpg" alt="Stafford Tyrrell in a frost-covered fur-lined hood, ice forming on his beard, against a pale winter sky">
-    <figcaption class="figure-credit">Greenland Ice Sheet<br>−32&deg;C</figcaption>
+    <img src="images/portrait-frost.jpg" alt="Stafford Tyrrell in a frost-covered fur-lined hood, ice formed across his beard, against a pale winter sky">
+    <figcaption class="figure-credit">High Arctic</figcaption>
   </figure>
 </header>
+
+<section class="live" aria-label="Current expedition status">
+  <span class="live-dot" aria-hidden="true"></span>
+  <b>At sea now</b>
+  <span class="live-sep">/</span>
+  <span>High Arctic Expedition &mdash; Ellesmere Island</span>
+  <span class="live-sep">/</span>
+  <span>30 Jun &ndash; 25 Sep 2026</span>
+  <span class="live-sep">/</span>
+  <span>S/Y Patagonia</span>
+</section>
 
 <section class="logbook" aria-label="Logbook summary">
   <div class="log-cell">
@@ -574,16 +703,16 @@ footer{
     <span class="log-label">Furthest north</span>
   </div>
   <div class="log-cell">
-    <span class="log-value">4</span>
-    <span class="log-label">Expeditions</span>
+    <span class="log-value">5,626<span style="font-size:.5em;letter-spacing:.08em"> NM</span></span>
+    <span class="log-label">This season&rsquo;s route</span>
   </div>
   <div class="log-cell">
-    <span class="log-value">2</span>
-    <span class="log-label">Arctic voyages under sail</span>
+    <span class="log-value">1,400<span style="font-size:.5em;letter-spacing:.08em"> KM</span></span>
+    <span class="log-label">Baikal, on ski</span>
   </div>
   <div class="log-cell">
-    <span class="log-value">2</span>
-    <span class="log-label">Crossings on ski</span>
+    <span class="log-value">700+</span>
+    <span class="log-label">Days on glaciated terrain</span>
   </div>
 </section>
 
@@ -592,61 +721,35 @@ footer{
     <div class="band-head">
       <p class="eyebrow">Expeditions</p>
       <h2 class="section-title">Where the work has been done</h2>
-      <p class="prose">Four expeditions, each with its own patch and its own latitude. The latitude is the honest measure of a journey north &mdash; and of how much further there is to go.</p>
+      <p class="prose">Each expedition is marked with the latitude it reached. Latitude is the honest measure of a journey north &mdash; and of how much further there is to go.</p>
     </div>
 
     <article class="exped featured">
       <figure class="exped-figure">
-        <img src="images/glacier-wall.jpg" alt="Stafford at the rail of the yacht Patagonia before a towering glacier face, turquoise meltwater below" style="object-position:center 42%">
-        <span class="lat-stamp"><b>82&deg;00&prime;N</b> &nbsp;/&nbsp; S/Y Patagonia</span>
+        <img src="images/glacier-wall.jpg" alt="Stafford at the rail of Patagonia before a towering glacier face, turquoise meltwater below" style="object-position:center 42%">
+        <span class="lat-stamp"><b>82&deg;00&prime;N</b> &nbsp;/&nbsp; 2026</span>
       </figure>
       <div class="exped-body">
-        <p class="eyebrow" style="color:var(--flare)">Furthest north</p>
+        <p class="eyebrow" style="color:var(--flare)">In progress &middot; Furthest north</p>
         <div class="exped-title-row">
           <img class="patch" src="images/patches/high-arctic-82n.webp" alt="High Arctic Expedition patch: an Arctic wolf beneath the aurora, marked 82 degrees North, S/Y Patagonia">
           <h3>High Arctic Expedition</h3>
         </div>
         <div class="exped-meta">
-          <span>82&deg; North</span><span>Canada &amp; Greenland</span><span>S/Y Patagonia</span>
+          <span>30 Jun &ndash; 25 Sep 2026</span><span>76 days sailing</span><span>Ellesmere Island</span>
         </div>
-        <p class="prose">Eighty-two degrees north is the top of the navigable Arctic &mdash; the latitude where the charts thin out, the ice stops moving aside for you and very few small boats go at all. Getting a sailing yacht there and back is the hardest thing on this page.</p>
-        <a class="exped-link" href="#">Read the account &rarr;</a>
-      </div>
-    </article>
-
-    <article class="exped flip">
-      <figure class="exped-figure">
-        <img src="images/icecap-traverse.jpg" alt="Two skiers hauling loaded sledges across the flat white Greenland ice cap under a hard low sun" style="object-position:center 55%">
-        <span class="lat-stamp"><b>66&deg;N</b> &nbsp;/&nbsp; 2024</span>
-      </figure>
-      <div class="exped-body">
-        <div class="exped-title-row">
-          <img class="patch" src="images/patches/trans-greenland.webp" alt="Trans Greenland Expedition 2024 patch: a polar bear against an ice field">
-          <h3>Trans Greenland Expedition</h3>
+        <p class="prose">Iceland to Ellesmere Island by way of the west coast of Greenland, then a basecamp at Tanquary Fjord and a ski-mountaineering push onto the glacier to climb Mount Barbeau &mdash; and, a hundred kilometres south-west of it, a peak that has never been climbed by anybody.</p>
+        <p class="prose">Ellesmere is the tenth largest island on earth and has a hundred and fifty permanent residents. The channels leading to it are uncharted, shoal-ridden and choked with multi-year ice. <strong>Tanquary Fjord lies 720 km from the North Pole.</strong></p>
+        <div class="legs" aria-label="Route legs">
+          <div class="leg"><span class="leg-n">L1</span><span class="leg-name">Reykjav&iacute;k &rarr; Nuuk</span><span class="leg-d">1,080 nm &middot; 11 d</span></div>
+          <div class="leg"><span class="leg-n">L2</span><span class="leg-name">Nuuk &rarr; Qaanaaq</span><span class="leg-d">1,101 nm &middot; 15 d</span></div>
+          <div class="leg"><span class="leg-n">L3</span><span class="leg-name">Qaanaaq &rarr; Ellesmere</span><span class="leg-d">723 nm &middot; 8 d</span></div>
+          <div class="leg"><span class="leg-n">L4</span><span class="leg-name">Tanquary Fjord basecamp</span><span class="leg-d">21 d ashore</span></div>
+          <div class="leg"><span class="leg-n">L5</span><span class="leg-name">Ellesmere &rarr; Pond Inlet</span><span class="leg-d">780 nm &middot; 6 d</span></div>
+          <div class="leg"><span class="leg-n">L6</span><span class="leg-name">Pond Inlet &rarr; Sisimiut</span><span class="leg-d">677 nm &middot; 5 d</span></div>
+          <div class="leg"><span class="leg-n">L7</span><span class="leg-name">Sisimiut &rarr; Qaqortoq</span><span class="leg-d">485 nm &middot; 5 d</span></div>
+          <div class="leg"><span class="leg-n">L8</span><span class="leg-name">Qaqortoq &rarr; Reykjav&iacute;k</span><span class="leg-d">780 nm &middot; 5 d</span></div>
         </div>
-        <div class="exped-meta">
-          <span>2024</span><span>Coast to coast</span><span>Man-hauled</span>
-        </div>
-        <p class="prose">A full crossing of the Greenland ice sheet on ski, everything needed dragged behind on pulks. No resupply and no way off the ice except forward. The days are identical and that is the hardest part of it.</p>
-        <a class="exped-link" href="#">Read the account &rarr;</a>
-      </div>
-    </article>
-
-    <article class="exped">
-      <figure class="exped-figure">
-        <img src="images/crew-patagonia.jpg" alt="Six crew in survival suits on the bow of the expedition yacht Patagonia" style="object-position:center 45%">
-        <span class="lat-stamp"><b>Canadian Arctic</b> &nbsp;/&nbsp; 2026</span>
-      </figure>
-      <div class="exped-body">
-        <div class="exped-title-row">
-          <img class="patch" src="images/patches/nunavut.webp" alt="Nunavut Expedition 2026 patch: the yacht Patagonia at anchor among icebergs beneath the aurora">
-          <h3>Nunavut Expedition</h3>
-        </div>
-        <div class="exped-meta">
-          <span>2026</span><span>Canadian Arctic</span><span>S/Y Patagonia</span>
-        </div>
-        <p class="prose">Back aboard <em>Patagonia</em> and west into the Canadian Arctic archipelago &mdash; the water that swallowed Franklin, and that is only now open long enough each summer for a small boat to try it.</p>
-        <a class="exped-link" href="#">Read the account &rarr;</a>
       </div>
     </article>
 
@@ -658,13 +761,30 @@ footer{
       <div class="exped-body">
         <div class="exped-title-row">
           <img class="patch" src="images/patches/baikal.webp" alt="">
-          <h3>Trans-Siberian Baikal</h3>
+          <h3>Circumnavigation of Lake Baikal</h3>
         </div>
         <div class="exped-meta">
-          <span>Winter 2026</span><span>53&deg;N</span><span>On ski</span>
+          <span>From 20 Feb 2026</span><span>1,400 km</span><span>53&deg;N</span><span>Unsupported</span>
         </div>
-        <p class="prose">The deepest lake on earth, frozen a metre thick and crossed on ski in midwinter. Not a journey north but a journey into cold &mdash; Siberian winter is a different animal from Arctic winter, and it is colder.</p>
-        <a class="exped-link" href="#">Read the account &rarr;</a>
+        <p class="prose">A full circuit of the frozen shoreline of the oldest and deepest lake on earth, on ski, hauling everything from the start with no resupply. South to north, then back again. Between forty-five and fifty-five days on the ice at <strong>&minus;25&deg;C to &minus;40&deg;C</strong>.</p>
+        <p class="prose">It has been attempted and never completed. With Mark McInerney.</p>
+      </div>
+    </article>
+
+    <article class="exped">
+      <figure class="exped-figure">
+        <img src="images/icecap-traverse.jpg" alt="Two skiers hauling loaded sledges across the flat white Greenland ice cap under a hard low sun" style="object-position:center 55%">
+        <span class="lat-stamp"><b>66&deg;N</b> &nbsp;/&nbsp; 2024</span>
+      </figure>
+      <div class="exped-body">
+        <div class="exped-title-row">
+          <img class="patch" src="images/patches/trans-greenland.webp" alt="Trans Greenland Expedition 2024 patch: a polar bear against an ice field">
+          <h3>Trans Greenland Expedition</h3>
+        </div>
+        <div class="exped-meta">
+          <span>2024</span><span>100 days</span><span>Nine crew</span><span>Captain</span>
+        </div>
+        <p class="prose">A hundred days and nine people, combining a sail passage with a man-hauled crossing of the world&rsquo;s largest ice cap. Sixty-kilo pulks, crevasses, polar bears and a late-season weather window. Stafford captained it.</p>
       </div>
     </article>
   </div>
@@ -675,63 +795,75 @@ footer{
     <div class="band-head">
       <p class="eyebrow">Progress north</p>
       <h2 class="section-title" id="scale-title">Eighty-two degrees north</h2>
-      <p class="prose">Latitude is the only scoreboard that matters in this work. Here is where the journeys have reached so far.</p>
+      <p class="prose">Latitude is the only scoreboard that matters in this work. Tanquary Fjord, this season&rsquo;s basecamp, sits 720 kilometres from the Pole.</p>
     </div>
     <div class="scale-wrap">
-      <svg viewBox="0 0 900 118" role="img" aria-label="A latitude scale from 50 to 90 degrees north. Expeditions are marked at 53 degrees north for Lake Baikal, 66 degrees north for the Greenland crossing, and 82 degrees north for the High Arctic voyage. A dashed line continues to 90 degrees north.">
-        <line x1="30.0" y1="70" x2="686.0" y2="70" stroke="#6FA6C2" stroke-width="2"/>
-        <line x1="686.0" y1="70" x2="850.0" y2="70" stroke="#2C3C4C" stroke-width="2" stroke-dasharray="3 7"/>
-
+      <svg viewBox="0 0 900 118" role="img" aria-label="A latitude scale from 50 to 90 degrees north. Expeditions are marked at 53 degrees north for Lake Baikal, 66 degrees north for the Greenland crossing, and 82 degrees north for Ellesmere Island. A dashed line continues to 90 degrees north.">
+        <line x1="30" y1="70" x2="686" y2="70" stroke="#6FA6C2" stroke-width="2"/>
+        <line x1="686" y1="70" x2="850" y2="70" stroke="#2C3C4C" stroke-width="2" stroke-dasharray="3 7"/>
         <g font-family="IBM Plex Mono, monospace" text-anchor="middle">
-          <line x1="30.0" y1="66" x2="30.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="30.0" y="90" fill="#5C6C7C" font-size="9">50</text>
+          <line x1="30" y1="66" x2="30" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="30" y="90" fill="#5C6C7C" font-size="9">50</text>
           <line x1="132.5" y1="66" x2="132.5" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="132.5" y="90" fill="#5C6C7C" font-size="9">55</text>
-          <line x1="235.0" y1="66" x2="235.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="235.0" y="90" fill="#5C6C7C" font-size="9">60</text>
+          <line x1="235" y1="66" x2="235" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="235" y="90" fill="#5C6C7C" font-size="9">60</text>
           <line x1="337.5" y1="66" x2="337.5" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="337.5" y="90" fill="#5C6C7C" font-size="9">65</text>
-          <line x1="440.0" y1="66" x2="440.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="440.0" y="90" fill="#5C6C7C" font-size="9">70</text>
+          <line x1="440" y1="66" x2="440" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="440" y="90" fill="#5C6C7C" font-size="9">70</text>
           <line x1="542.5" y1="66" x2="542.5" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="542.5" y="90" fill="#5C6C7C" font-size="9">75</text>
-          <line x1="645.0" y1="66" x2="645.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="645.0" y="90" fill="#5C6C7C" font-size="9">80</text>
+          <line x1="645" y1="66" x2="645" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="645" y="90" fill="#5C6C7C" font-size="9">80</text>
           <line x1="747.5" y1="66" x2="747.5" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="747.5" y="90" fill="#5C6C7C" font-size="9">85</text>
-          <line x1="850.0" y1="66" x2="850.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="850.0" y="90" fill="#5C6C7C" font-size="9">90</text>
+          <line x1="850" y1="66" x2="850" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="850" y="90" fill="#5C6C7C" font-size="9">90</text>
         </g>
-
         <g font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">
           <line x1="91.5" y1="56" x2="91.5" y2="84" stroke="#DD5B2A" stroke-width="2"/>
           <text x="91.5" y="46" fill="#DD5B2A">53&#176;N</text>
           <text x="91.5" y="110" fill="#8B9CAC" font-size="11">Baikal</text>
-
-          <line x1="358.0" y1="56" x2="358.0" y2="84" stroke="#DD5B2A" stroke-width="2"/>
-          <text x="358.0" y="46" fill="#DD5B2A">66&#176;N</text>
-          <text x="358.0" y="110" fill="#8B9CAC" font-size="11">Greenland</text>
-
-          <line x1="686.0" y1="52" x2="686.0" y2="88" stroke="#DD5B2A" stroke-width="3"/>
-          <text x="686.0" y="42" fill="#DD5B2A" font-size="15">82&#176;N</text>
-          <text x="686.0" y="110" fill="#8B9CAC" font-size="11">High Arctic</text>
-
-          <line x1="850.0" y1="60" x2="850.0" y2="80" stroke="#3E4E5E" stroke-width="2"/>
-          <text x="842.0" y="46" fill="#5C6C7C" text-anchor="end">90&#176;N</text>
+          <line x1="358" y1="56" x2="358" y2="84" stroke="#DD5B2A" stroke-width="2"/>
+          <text x="358" y="46" fill="#DD5B2A">66&#176;N</text>
+          <text x="358" y="110" fill="#8B9CAC" font-size="11">Greenland</text>
+          <line x1="686" y1="52" x2="686" y2="88" stroke="#DD5B2A" stroke-width="3"/>
+          <text x="686" y="42" fill="#DD5B2A" font-size="15">82&#176;N</text>
+          <text x="686" y="110" fill="#8B9CAC" font-size="11">Ellesmere</text>
+          <text x="842" y="46" fill="#5C6C7C" text-anchor="end">90&#176;N</text>
         </g>
       </svg>
     </div>
   </div>
 </section>
 
+<section class="band" id="vessel">
+  <div class="inner vessel">
+    <img src="images/crew-patagonia.jpg" alt="The expedition yacht Patagonia alongside, crew in survival suits on the bow">
+    <div class="exped-body">
+      <p class="eyebrow">The vessel</p>
+      <h2 class="section-title">S/Y Patagonia</h2>
+      <p class="prose">A steel Van de Stadt ketch, welded in the Netherlands and ice-reinforced for Arctic and Antarctic water. Solar, a diesel generator and tankage for transatlantic passages. Watertight crash bulkhead.</p>
+      <dl class="spec">
+        <div><dt>Length</dt><dd>60 ft</dd></div>
+        <div><dt>Rig</dt><dd>Ketch</dd></div>
+        <div><dt>Berths</dt><dd>12</dd></div>
+        <div><dt>Hull</dt><dd>Steel, ice-reinforced</dd></div>
+        <div><dt>Design</dt><dd>Van de Stadt</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
+
 <section class="interlude" aria-label="At the helm at dusk">
-  <img src="images/sunset-helm.jpg" alt="Stafford at the helm of a boat in survival gear at dusk, orange sunset reflected on flat water">
+  <img src="images/sunset-helm.jpg" alt="Stafford at the helm in survival gear at dusk, an orange sunset reflected on flat water">
   <blockquote>
-    &ldquo;Nobody is impressed by the cold. They are impressed that you kept making good decisions in it.&rdquo;
-    <cite>Placeholder quote &mdash; Stafford&rsquo;s words go here</cite>
+    &ldquo;A ship in the harbour is safe, but that is not what ships are for.&rdquo;
+    <cite>Quoted in the expedition prospectus</cite>
   </blockquote>
 </section>
 
 <section class="band" id="about">
   <div class="inner about">
-    <img src="images/deck-rigging.jpg" alt="Stafford sitting against the mast of a yacht in grey light, coiled rope beside him">
+    <img src="images/deck-rigging.jpg" alt="Stafford sitting against the mast of Patagonia in grey light, coiled rope beside him">
     <div class="about-body">
       <p class="eyebrow">About</p>
-      <h2 class="section-title">A slow apprenticeship in cold places</h2>
-      <p class="prose">Stafford Tyrrell is a polar traveller and sailor. He came to it the long way round &mdash; crewing deliveries, learning to navigate, then learning what a body does at thirty below when the nearest help is four days away.</p>
-      <p class="prose">The work is unfashionably ordinary: <strong>miles under the keel, kilometres under the ski</strong>. He is interested in the parts of an expedition nobody photographs. The rationing. The repair in the dark. The decision to turn round, and the decision not to.</p>
-      <p class="prose">He is based in Ireland and travels north whenever the season allows.</p>
+      <h2 class="section-title">Captain and expedition leader</h2>
+      <p class="prose">Stafford Tyrrell is an Irish expedition leader and sailor with more than ten years of expeditions behind him, from the Himalayas to Africa and the Middle East. He has crossed all three of Iceland&rsquo;s largest ice caps &mdash; Vatnaj&ouml;kull, Langj&ouml;kull and M&yacute;rdalsj&ouml;kull &mdash; and has <strong>over seven hundred days in glaciated terrain</strong>.</p>
+      <p class="prose">He was part of the first Irish team to climb Mount Damavand in winter, and finished the Marathon des Sables in 2024. He is a commercial offshore diver, a 22-metre captain with fifteen years at sea, and in 2024 he captained a nine-person, hundred-day expedition to Greenland.</p>
+      <p class="prose">He is a Wilderness EMT, ice-field safety trained, a search and rescue member and an AIMG hard ice guide. He is a keen ice climber. He is based in Ireland.</p>
     </div>
   </div>
 </section>
@@ -745,19 +877,19 @@ footer{
     </div>
     <div class="journal">
       <a class="entry" href="#">
-        <span class="entry-date">14 March 2026</span>
+        <span class="entry-date">Draft entry</span>
+        <h3>Uncharted means uncharted</h3>
+        <p>The channels into Ellesmere are shoal-ridden and full of multi-year ice, and the chart stops being a promise somewhere north of Qaanaaq. What you do instead.</p>
+      </a>
+      <a class="entry" href="#">
+        <span class="entry-date">Draft entry</span>
         <h3>What a pulk actually weighs</h3>
-        <p>Everyone asks about the cold. Nobody asks about the drag coefficient of a sledge on wind-packed snow, which is the thing that decides whether you make your distance.</p>
+        <p>Everyone asks about the cold. Nobody asks about the drag of sixty-five kilos on wind-packed snow, which is the thing that decides whether you make your distance.</p>
       </a>
       <a class="entry" href="#">
-        <span class="entry-date">2 February 2026</span>
-        <h3>Ice in the rigging</h3>
-        <p>Notes on what freezes first on a steel yacht, in what order, and what you can do about each one with cold hands.</p>
-      </a>
-      <a class="entry" href="#">
-        <span class="entry-date">19 December 2025</span>
-        <h3>Turning round at 82&deg;</h3>
-        <p>The best decision made at eighty-two degrees was the one that turned the boat around. An account of how that call gets made, and how it feels afterwards.</p>
+        <span class="entry-date">Draft entry</span>
+        <h3>A peak with no name</h3>
+        <p>A hundred kilometres south-west of Barbeau there is a mountain nobody has stood on. Notes on planning a first ascent from a boat.</p>
       </a>
     </div>
   </div>
@@ -768,20 +900,24 @@ footer{
     <div class="band-head">
       <p class="eyebrow">Partners</p>
       <h2 class="section-title">Working with brands</h2>
-      <p class="prose">Kit that works in Ireland in February is not kit that works on an ice cap. Stafford puts equipment into genuinely unforgiving conditions and reports back honestly &mdash; publicly if it performs, privately if it doesn't.</p>
+      <p class="prose">Kit that works in Ireland in February is not kit that works at eighty-two degrees north. Stafford puts equipment into genuinely unforgiving conditions and reports back honestly &mdash; publicly if it performs, privately if it doesn&rsquo;t.</p>
     </div>
     <div class="offer">
       <div class="offer-item">
+        <h3>Name a mountain</h3>
+        <p>There is an unclimbed peak south-west of Mount Barbeau. A first ascent carries naming rights, and that is a rare thing to be able to offer anyone.</p>
+      </div>
+      <div class="offer-item">
+        <h3>Hull, sails and screen</h3>
+        <p>Logo space on the hull and sails of a sixty-foot ketch working the High Arctic, plus product placement through a feature-length documentary shot by professionals &mdash; and drone footage coming through the pack ice.</p>
+      </div>
+      <div class="offer-item">
         <h3>Field testing</h3>
-        <p>Sustained use at temperature, on the ice and at sea, with structured feedback to your product team rather than a photograph and a thumbs up.</p>
+        <p>Sustained use at temperature, with structured feedback to your product team rather than a photograph and a thumbs up.</p>
       </div>
       <div class="offer-item">
-        <h3>Story &amp; imagery</h3>
-        <p>Stills and footage from places most brands cannot send a crew, with full usage rights and a narrative your audience will actually follow.</p>
-      </div>
-      <div class="offer-item">
-        <h3>Talks &amp; events</h3>
-        <p>Expedition talks for teams, clients and schools &mdash; on decision-making, risk and turning round, not on heroics.</p>
+        <h3>Talks &amp; corporate events</h3>
+        <p>Expedition talks, screenings and corporate events &mdash; on decision-making, risk and turning round, not on heroics.</p>
       </div>
     </div>
   </div>
@@ -792,12 +928,12 @@ footer{
     <p class="eyebrow">Contact</p>
     <h2 class="section-title">Get in touch</h2>
     <p class="prose">For expedition enquiries, partnership conversations and press.</p>
-    <a class="contact-mail" href="mailto:hello@staffordtyrrell.com">hello@staffordtyrrell.com</a>
+    <a class="contact-mail" href="mailto:stafford.tyrrell@gmail.com">stafford.tyrrell@gmail.com</a>
     <a class="btn btn-ghost" href="#">Download press kit &mdash; bio &amp; high-res images</a>
   </div>
 </section>
 
 <footer>
   <span>Stafford Tyrrell</span>
-  <span>Prototype &mdash; placeholder content</span>
+  <span>Prototype &mdash; draft content</span>
 </footer>
