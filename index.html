@@ -351,10 +351,16 @@ a.row:hover h3{ color:var(--flare); }
   align-items:center;
 }
 .sponsor{
-  display:flex; flex-direction:column; gap:.4rem;
+  display:flex; align-items:center; gap:.8rem;
   text-decoration:none; color:var(--ink-2);
-  transition:color .18s;
+  transition:color .18s, opacity .18s;
 }
+.sponsor-txt{ display:flex; flex-direction:column; gap:.35rem; }
+.sponsor-mark{
+  height:clamp(40px,5vw,54px); width:auto; flex:0 0 auto;
+  opacity:.9; transition:opacity .18s;
+}
+.sponsor:hover .sponsor-mark{ opacity:1; }
 .sponsor:hover{ color:var(--ink); }
 /* a wordmark until a real logo file replaces it — swap the span for an
    <img class="sponsor-logo"> and the row keeps its alignment */
@@ -650,20 +656,27 @@ footer{
     <ul>
       <li>
         <a class="sponsor" href="#" target="_blank" rel="noopener noreferrer">
-          <span class="wm">Natterjack</span>
-          <span class="sub">Irish Whiskey</span>
+          <img class="sponsor-mark" src="images/sponsors/natterjack.webp" alt="" aria-hidden="true">
+          <span class="sponsor-txt">
+            <span class="wm">Natterjack</span>
+            <span class="sub">Irish Whiskey</span>
+          </span>
         </a>
       </li>
       <li>
         <a class="sponsor" href="https://buyirishart.ie" target="_blank" rel="noopener noreferrer">
-          <span class="wm">Buy Irish Art</span>
-          <span class="sub">buyirishart.ie</span>
+          <span class="sponsor-txt">
+            <span class="wm">Buy Irish Art</span>
+            <span class="sub">buyirishart.ie</span>
+          </span>
         </a>
       </li>
       <li>
         <a class="sponsor" href="https://tenzing.ie" target="_blank" rel="noopener noreferrer">
-          <span class="wm">Tenzing</span>
-          <span class="sub">Tenzing Digital &middot; tenzing.ie</span>
+          <span class="sponsor-txt">
+            <span class="wm">Tenzing</span>
+            <span class="sub">Tenzing Digital &middot; tenzing.ie</span>
+          </span>
         </a>
       </li>
     </ul>
