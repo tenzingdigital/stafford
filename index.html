@@ -343,6 +343,45 @@ h2.section-title{
 }
 .exped-link:hover{ border-bottom-color:var(--flare); }
 
+
+.exped-title-row{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  flex-wrap:wrap;
+}
+.patch{
+  width:clamp(58px,8vw,80px);
+  height:auto;
+  aspect-ratio:1;
+  flex:0 0 auto;
+}
+.exped-figure.patch-only{
+  background:var(--ink-2);
+  border:1px solid var(--ink-3);
+  aspect-ratio:4/3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:1.25rem;
+  padding:1.5rem;
+}
+.exped-figure.patch-only img{
+  width:min(58%,220px);
+  height:auto;
+  aspect-ratio:1;
+  object-fit:contain;
+}
+.patch-note{
+  font-family:var(--f-mono);
+  font-size:.64rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--haze-dim);
+}
+.exped.featured .exped-body h3{ font-size:clamp(1.75rem,3.4vw,2.5rem); }
+
 /* ── latitude scale ────────────────────────────────────────── */
 
 .scale-band{ background:var(--ink-2); }
@@ -499,7 +538,7 @@ footer{
 
 <div class="notice">
   <b>Prototype</b>
-  <span>Design direction only — every word below is placeholder copy, and the expedition names, dates and figures are guesses from the photographs. Nothing here is confirmed.</span>
+  <span>Expedition names, latitudes and years are taken from Stafford&rsquo;s own patches. The descriptive writing, the journal entries and any figure not shown on a patch are still placeholder.</span>
 </div>
 
 <nav class="nav">
@@ -517,7 +556,7 @@ footer{
   <div class="hero-text">
     <p class="eyebrow">Polar travel &middot; High-latitude sail</p>
     <h1><span>Stafford</span><span class="surname">Tyrrell</span></h1>
-    <p class="hero-lede">Hauling sledges across ice sheets and sailing small boats into cold water. Slowly working north.</p>
+    <p class="hero-lede">Across the Greenland ice sheet on ski. North to 82&deg; under sail. Winter on the ice of Lake Baikal.</p>
     <div class="hero-actions">
       <a class="btn btn-solid" href="#expeditions">The expeditions</a>
       <a class="btn btn-ghost" href="#partners">For partners</a>
@@ -531,20 +570,20 @@ footer{
 
 <section class="logbook" aria-label="Logbook summary">
   <div class="log-cell">
-    <span class="log-value">72&deg;N</span>
+    <span class="log-value">82&deg;N</span>
     <span class="log-label">Furthest north</span>
   </div>
   <div class="log-cell">
-    <span class="log-value">410<span style="font-size:.5em;letter-spacing:.08em"> KM</span></span>
-    <span class="log-label">Hauled on ski</span>
+    <span class="log-value">4</span>
+    <span class="log-label">Expeditions</span>
   </div>
   <div class="log-cell">
-    <span class="log-value">2,300<span style="font-size:.5em;letter-spacing:.08em"> NM</span></span>
-    <span class="log-label">Under sail</span>
+    <span class="log-value">2</span>
+    <span class="log-label">Arctic voyages under sail</span>
   </div>
   <div class="log-cell">
-    <span class="log-value">−38&deg;C</span>
-    <span class="log-label">Coldest night</span>
+    <span class="log-value">2</span>
+    <span class="log-label">Crossings on ski</span>
   </div>
 </section>
 
@@ -553,50 +592,78 @@ footer{
     <div class="band-head">
       <p class="eyebrow">Expeditions</p>
       <h2 class="section-title">Where the work has been done</h2>
-      <p class="prose">Each entry is marked with the latitude it reached. The number is the honest measure of how far north a journey actually got &mdash; and of how much further there is to go.</p>
+      <p class="prose">Four expeditions, each with its own patch and its own latitude. The latitude is the honest measure of a journey north &mdash; and of how much further there is to go.</p>
     </div>
 
-    <article class="exped">
+    <article class="exped featured">
       <figure class="exped-figure">
-        <img src="images/icecap-traverse.jpg" alt="Two skiers hauling loaded sledges across a flat white icecap under a hard low sun" style="object-position:center 55%">
-        <span class="lat-stamp"><b>69&deg;42&prime;N</b> &nbsp;/&nbsp; 2024</span>
+        <img src="images/glacier-wall.jpg" alt="Stafford at the rail of the yacht Patagonia before a towering glacier face, turquoise meltwater below" style="object-position:center 42%">
+        <span class="lat-stamp"><b>82&deg;00&prime;N</b> &nbsp;/&nbsp; S/Y Patagonia</span>
       </figure>
       <div class="exped-body">
-        <h3>The Greenland Ice Sheet</h3>
-        <div class="exped-meta">
-          <span>21 days</span><span>410 km</span><span>Unsupported</span>
+        <p class="eyebrow" style="color:var(--flare)">Furthest north</p>
+        <div class="exped-title-row">
+          <img class="patch" src="images/patches/high-arctic-82n.webp" alt="High Arctic Expedition patch: an Arctic wolf beneath the aurora, marked 82 degrees North, S/Y Patagonia">
+          <h3>High Arctic Expedition</h3>
         </div>
-        <p class="prose">Man-hauling east to west across the ice cap. Two people, two pulks, everything needed for three weeks dragged behind them. No resupply, no snowmobile, no way off the ice except forward. The days were identical and that was the hardest part of it.</p>
+        <div class="exped-meta">
+          <span>82&deg; North</span><span>Canada &amp; Greenland</span><span>S/Y Patagonia</span>
+        </div>
+        <p class="prose">Eighty-two degrees north is the top of the navigable Arctic &mdash; the latitude where the charts thin out, the ice stops moving aside for you and very few small boats go at all. Getting a sailing yacht there and back is the hardest thing on this page.</p>
         <a class="exped-link" href="#">Read the account &rarr;</a>
       </div>
     </article>
 
     <article class="exped flip">
       <figure class="exped-figure">
-        <img src="images/glacier-wall.jpg" alt="Stafford at the rail of a yacht in front of a towering glacier calving face, turquoise meltwater below" style="object-position:center 42%">
-        <span class="lat-stamp"><b>70&deg;18&prime;N</b> &nbsp;/&nbsp; 2023</span>
+        <img src="images/icecap-traverse.jpg" alt="Two skiers hauling loaded sledges across the flat white Greenland ice cap under a hard low sun" style="object-position:center 55%">
+        <span class="lat-stamp"><b>66&deg;N</b> &nbsp;/&nbsp; 2024</span>
       </figure>
       <div class="exped-body">
-        <h3>Scoresby Sund by Sail</h3>
-        <div class="exped-meta">
-          <span>6 weeks</span><span>East Greenland</span><span>Crew of six</span>
+        <div class="exped-title-row">
+          <img class="patch" src="images/patches/trans-greenland.webp" alt="Trans Greenland Expedition 2024 patch: a polar bear against an ice field">
+          <h3>Trans Greenland Expedition</h3>
         </div>
-        <p class="prose">Into the largest fjord system on earth aboard a steel expedition yacht, picking a way through brash ice to anchorages that see a handful of boats a year. The glacier faces here are eighty metres high and they come apart while you watch.</p>
+        <div class="exped-meta">
+          <span>2024</span><span>Coast to coast</span><span>Man-hauled</span>
+        </div>
+        <p class="prose">A full crossing of the Greenland ice sheet on ski, everything needed dragged behind on pulks. No resupply and no way off the ice except forward. The days are identical and that is the hardest part of it.</p>
         <a class="exped-link" href="#">Read the account &rarr;</a>
       </div>
     </article>
 
     <article class="exped">
       <figure class="exped-figure">
-        <img src="images/crew-patagonia.jpg" alt="Six crew members in survival suits cheering on the bow of the expedition yacht Patagonia at a Norwegian dock" style="object-position:center 45%">
-        <span class="lat-stamp"><b>59&deg;54&prime;N</b> &nbsp;/&nbsp; 2023</span>
+        <img src="images/crew-patagonia.jpg" alt="Six crew in survival suits on the bow of the expedition yacht Patagonia" style="object-position:center 45%">
+        <span class="lat-stamp"><b>Canadian Arctic</b> &nbsp;/&nbsp; 2026</span>
       </figure>
       <div class="exped-body">
-        <h3>Norway &mdash; The North Sea Passage</h3>
-        <div class="exped-meta">
-          <span>11 days</span><span>Oslofjord &rarr; open water</span><span>Delivery</span>
+        <div class="exped-title-row">
+          <img class="patch" src="images/patches/nunavut.webp" alt="Nunavut Expedition 2026 patch: the yacht Patagonia at anchor among icebergs beneath the aurora">
+          <h3>Nunavut Expedition</h3>
         </div>
-        <p class="prose">The unglamorous half of the job: sea miles, night watches and weather routing, done properly and repeatedly until cold water stops being an event. Every expedition further north was paid for with passages like this one.</p>
+        <div class="exped-meta">
+          <span>2026</span><span>Canadian Arctic</span><span>S/Y Patagonia</span>
+        </div>
+        <p class="prose">Back aboard <em>Patagonia</em> and west into the Canadian Arctic archipelago &mdash; the water that swallowed Franklin, and that is only now open long enough each summer for a small boat to try it.</p>
+        <a class="exped-link" href="#">Read the account &rarr;</a>
+      </div>
+    </article>
+
+    <article class="exped flip">
+      <figure class="exped-figure patch-only">
+        <img src="images/patches/baikal.webp" alt="Trans-Siberian Baikal Winter Expedition 2026 patch: crossed ski poles, a compass rose, and the Russian and Irish flags">
+        <span class="patch-note">Photographs to come</span>
+      </figure>
+      <div class="exped-body">
+        <div class="exped-title-row">
+          <img class="patch" src="images/patches/baikal.webp" alt="">
+          <h3>Trans-Siberian Baikal</h3>
+        </div>
+        <div class="exped-meta">
+          <span>Winter 2026</span><span>53&deg;N</span><span>On ski</span>
+        </div>
+        <p class="prose">The deepest lake on earth, frozen a metre thick and crossed on ski in midwinter. Not a journey north but a journey into cold &mdash; Siberian winter is a different animal from Arctic winter, and it is colder.</p>
         <a class="exped-link" href="#">Read the account &rarr;</a>
       </div>
     </article>
@@ -607,33 +674,38 @@ footer{
   <div class="inner">
     <div class="band-head">
       <p class="eyebrow">Progress north</p>
-      <h2 class="section-title" id="scale-title">Sixty degrees and rising</h2>
+      <h2 class="section-title" id="scale-title">Eighty-two degrees north</h2>
       <p class="prose">Latitude is the only scoreboard that matters in this work. Here is where the journeys have reached so far.</p>
     </div>
     <div class="scale-wrap">
-      <svg viewBox="0 0 900 118" role="img" aria-label="A latitude scale from 55 to 90 degrees north. Expeditions are marked at 59 degrees north and at 69 to 70 degrees north. The scale continues, undashed and unreached, to 90 degrees north.">
-        <line x1="30.0" y1="70" x2="381.4" y2="70" stroke="#6FA6C2" stroke-width="2"/>
-        <line x1="381.4" y1="70" x2="850.0" y2="70" stroke="#2C3C4C" stroke-width="2" stroke-dasharray="3 7"/>
+      <svg viewBox="0 0 900 118" role="img" aria-label="A latitude scale from 50 to 90 degrees north. Expeditions are marked at 53 degrees north for Lake Baikal, 66 degrees north for the Greenland crossing, and 82 degrees north for the High Arctic voyage. A dashed line continues to 90 degrees north.">
+        <line x1="30.0" y1="70" x2="686.0" y2="70" stroke="#6FA6C2" stroke-width="2"/>
+        <line x1="686.0" y1="70" x2="850.0" y2="70" stroke="#2C3C4C" stroke-width="2" stroke-dasharray="3 7"/>
 
         <g font-family="IBM Plex Mono, monospace" text-anchor="middle">
-          <line x1="30.0" y1="66" x2="30.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="30.0" y="90" fill="#5C6C7C" font-size="9">55</text>
-          <line x1="147.1" y1="66" x2="147.1" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="147.1" y="90" fill="#5C6C7C" font-size="9">60</text>
-          <line x1="264.3" y1="66" x2="264.3" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="264.3" y="90" fill="#5C6C7C" font-size="9">65</text>
-          <line x1="381.4" y1="66" x2="381.4" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="381.4" y="90" fill="#5C6C7C" font-size="9">70</text>
-          <line x1="498.6" y1="66" x2="498.6" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="498.6" y="90" fill="#5C6C7C" font-size="9">75</text>
-          <line x1="615.7" y1="66" x2="615.7" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="615.7" y="90" fill="#5C6C7C" font-size="9">80</text>
-          <line x1="732.9" y1="66" x2="732.9" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="732.9" y="90" fill="#5C6C7C" font-size="9">85</text>
+          <line x1="30.0" y1="66" x2="30.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="30.0" y="90" fill="#5C6C7C" font-size="9">50</text>
+          <line x1="132.5" y1="66" x2="132.5" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="132.5" y="90" fill="#5C6C7C" font-size="9">55</text>
+          <line x1="235.0" y1="66" x2="235.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="235.0" y="90" fill="#5C6C7C" font-size="9">60</text>
+          <line x1="337.5" y1="66" x2="337.5" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="337.5" y="90" fill="#5C6C7C" font-size="9">65</text>
+          <line x1="440.0" y1="66" x2="440.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="440.0" y="90" fill="#5C6C7C" font-size="9">70</text>
+          <line x1="542.5" y1="66" x2="542.5" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="542.5" y="90" fill="#5C6C7C" font-size="9">75</text>
+          <line x1="645.0" y1="66" x2="645.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="645.0" y="90" fill="#5C6C7C" font-size="9">80</text>
+          <line x1="747.5" y1="66" x2="747.5" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="747.5" y="90" fill="#5C6C7C" font-size="9">85</text>
           <line x1="850.0" y1="66" x2="850.0" y2="74" stroke="#3E4E5E" stroke-width="1"/><text x="850.0" y="90" fill="#5C6C7C" font-size="9">90</text>
         </g>
 
         <g font-family="IBM Plex Mono, monospace" font-size="13" text-anchor="middle">
-          <line x1="123.7" y1="56" x2="123.7" y2="84" stroke="#DD5B2A" stroke-width="2"/>
-          <text x="123.7" y="46" fill="#DD5B2A">59&#176;N</text>
-          <text x="123.7" y="110" fill="#8B9CAC" font-size="11">North Sea</text>
+          <line x1="91.5" y1="56" x2="91.5" y2="84" stroke="#DD5B2A" stroke-width="2"/>
+          <text x="91.5" y="46" fill="#DD5B2A">53&#176;N</text>
+          <text x="91.5" y="110" fill="#8B9CAC" font-size="11">Baikal</text>
 
-          <line x1="369.7" y1="56" x2="369.7" y2="84" stroke="#DD5B2A" stroke-width="2"/>
-          <text x="369.7" y="46" fill="#DD5B2A">69&#8211;70&#176;N</text>
-          <text x="369.7" y="110" fill="#8B9CAC" font-size="11">Greenland</text>
+          <line x1="358.0" y1="56" x2="358.0" y2="84" stroke="#DD5B2A" stroke-width="2"/>
+          <text x="358.0" y="46" fill="#DD5B2A">66&#176;N</text>
+          <text x="358.0" y="110" fill="#8B9CAC" font-size="11">Greenland</text>
+
+          <line x1="686.0" y1="52" x2="686.0" y2="88" stroke="#DD5B2A" stroke-width="3"/>
+          <text x="686.0" y="42" fill="#DD5B2A" font-size="15">82&#176;N</text>
+          <text x="686.0" y="110" fill="#8B9CAC" font-size="11">High Arctic</text>
 
           <line x1="850.0" y1="60" x2="850.0" y2="80" stroke="#3E4E5E" stroke-width="2"/>
           <text x="842.0" y="46" fill="#5C6C7C" text-anchor="end">90&#176;N</text>
@@ -684,8 +756,8 @@ footer{
       </a>
       <a class="entry" href="#">
         <span class="entry-date">19 December 2025</span>
-        <h3>Turning round at 70&deg;</h3>
-        <p>The best decision made on the last trip was the one that ended it early. An account of how that call gets made, and how it feels afterwards.</p>
+        <h3>Turning round at 82&deg;</h3>
+        <p>The best decision made at eighty-two degrees was the one that turned the boat around. An account of how that call gets made, and how it feels afterwards.</p>
       </a>
     </div>
   </div>
