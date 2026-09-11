@@ -1,0 +1,31 @@
+# Render blueprint. In Render: New → Blueprint → point at this repo.
+# Everything below is the free Static Site tier.
+
+services:
+  - type: web
+    name: stafford-tyrrell
+    runtime: static
+    buildCommand: npm ci && npm run build
+    staticPublishPath: ./dist
+
+    # Every pull request gets its own temporary URL. Useful as a safety net:
+    # changes can be looked at before they reach the live site.
+    pullRequestPreviewsEnabled: true
+
+    headers:
+      # Built CSS and JS carry a content hash in the filename, so they can be
+      # cached hard — a change produces a new filename.
+      - path: /assets/*
+        name: Cache-Control
+        value: public, max-age=31536000, immutable
+      # Photographs keep their names, so cache for a week rather than forever;
+      # a replaced photo should appear reasonably quickly.
+      - path: /images/*
+        name: Cache-Control
+        value: public, max-age=604800
+      - path: /*
+        name: X-Content-Type-Options
+        value: nosniff
+      - path: /*
+        name: Referrer-Policy
+        value: strict-origin-when-cross-origin
