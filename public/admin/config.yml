@@ -1,0 +1,223 @@
+# Sveltia CMS — the admin screen at /admin
+# Saving here commits to GitHub and the site rebuilds itself.
+
+backend:
+  name: github
+  repo: tenzingdigital/stafford
+  branch: main
+  # Opens a normal GitHub sign-in. No separate password to remember.
+
+media_folder: "public/images/uploads"   # where uploaded photos are stored
+public_folder: "images/uploads"          # how the site refers to them
+
+collections:
+  # ── Expeditions ───────────────────────────────────────────────
+  - name: expeditions
+    label: Expeditions
+    label_singular: Expedition
+    folder: src/content/expeditions
+    create: true
+    delete: true
+    sortable_fields: [order, title]
+    summary: "{{order}} · {{title}} — {{latitude}}"
+    fields:
+      - { name: title, label: Name, widget: string }
+      - { name: order, label: Position on the page, widget: number, value_type: int, default: 50,
+          hint: "Lower numbers appear first. 10, 20, 30 leaves room to slot new trips between." }
+      - { name: latitude, label: Latitude reached, widget: string, default: "70°N",
+          hint: "Shown very large. This is the page's main organising idea." }
+      - { name: stampTop, label: Small note — first line, widget: string, required: false, hint: "e.g. 2024, or In progress" }
+      - { name: stampBottom, label: Small note — second line, widget: string, required: false, hint: "e.g. Greenland, or S/Y Patagonia" }
+      - { name: meta, label: Facts strip, widget: list, required: false, field: { name: item, label: Fact, widget: string },
+          hint: "Short facts shown in small capitals, e.g. 100 days, Nine crew" }
+      - { name: photo, label: Photograph, widget: image, required: true }
+      - { name: photoAlt, label: Photograph description, widget: string,
+          hint: "Describe the photo for people using a screen reader, and for when images fail to load." }
+      - { name: photoPosition, label: Photograph focus, widget: select, default: "center center",
+          options: ["center center", "center 25%", "center 38%", "center 42%", "center 55%", "center 70%"],
+          hint: "If the crop cuts off the important part, try a different focus." }
+      - { name: patch, label: Expedition patch, widget: image, required: false }
+      - { name: patchAlt, label: Patch description, widget: string, required: false }
+      - { name: note, label: Route panel, widget: text, required: false,
+          hint: "Optional grey panel. **Bold** works, and each new line becomes a new line." }
+      - { name: flip, label: Photograph on the right, widget: boolean, default: false,
+          hint: "Alternate this down the page so the layout zig-zags." }
+      - { name: draft, label: Hide from the site, widget: boolean, default: false }
+      - { name: body, label: Description, widget: markdown,
+          hint: "The main writing. **Bold** for the line you most want read." }
+
+  # ── Journal ───────────────────────────────────────────────────
+  - name: journal
+    label: Journal
+    label_singular: Dispatch
+    folder: src/content/journal
+    create: true
+    delete: true
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: date, label: Date, widget: datetime, required: false, date_format: "D MMMM YYYY", time_format: false }
+      - { name: tag, label: Small label, widget: string, default: "Dispatch" }
+      - { name: summary, label: Summary, widget: text, hint: "Two lines. This is what shows on the homepage." }
+      - { name: draft, label: Hide from the site, widget: boolean, default: false }
+      - { name: body, label: Full entry, widget: markdown, required: false }
+
+  # ── Everything else on the page ───────────────────────────────
+  - name: site
+    label: The rest of the page
+    files:
+      - name: settings
+        label: Homepage content
+        file: src/data/site.json
+        fields:
+          - { name: name, label: Name, widget: string }
+          - name: notice
+            label: Yellow warning bar
+            widget: object
+            fields:
+              - { name: show, label: Show the bar, widget: boolean, default: true }
+              - { name: label, label: Label, widget: string }
+              - { name: text, label: Text, widget: string }
+              - { name: more, label: Extra text (hidden on phones), widget: string, required: false }
+          - name: hero
+            label: Top of the page
+            widget: object
+            fields:
+              - { name: eyebrow, label: Small line above the name, widget: string }
+              - { name: nameLine1, label: Name — first line, widget: string }
+              - { name: nameLine2, label: Name — second line, widget: string }
+              - { name: standfirst, label: Opening sentence, widget: text }
+              - { name: photo, label: Portrait, widget: image }
+              - { name: photoAlt, label: Portrait description, widget: string }
+              - { name: photoPosition, label: Portrait focus, widget: string, default: "center 16%" }
+          - name: status
+            label: "\"At sea now\" bar"
+            widget: object
+            fields:
+              - { name: show, label: Show the bar, widget: boolean, default: true,
+                  hint: "Turn this off when he is home." }
+              - { name: label, label: Status, widget: string }
+              - { name: detail, label: Which expedition, widget: string }
+              - { name: dates, label: Dates, widget: string }
+          - name: figures
+            label: The four numbers
+            widget: list
+            max: 4
+            fields:
+              - { name: label, label: Caption, widget: string }
+              - { name: value, label: Number, widget: string }
+              - { name: unit, label: Unit, widget: string, required: false, hint: "e.g. NM, KM, DAYS" }
+          - name: expeditionsIntro
+            label: Expeditions introduction
+            widget: object
+            fields:
+              - { name: label, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: body, label: Text, widget: text }
+          - name: plate
+            label: Wide photograph
+            widget: object
+            fields:
+              - { name: photo, label: Photograph, widget: image }
+              - { name: alt, label: Description, widget: string }
+              - { name: caption, label: Caption, widget: string }
+          - name: latitudeChart
+            label: Latitude scale
+            widget: object
+            fields:
+              - { name: show, label: Show the scale, widget: boolean, default: true }
+              - { name: label, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: body, label: Text, widget: text }
+              - { name: min, label: Scale starts at, widget: number, value_type: int, default: 50 }
+              - { name: max, label: Scale ends at, widget: number, value_type: int, default: 90 }
+              - { name: reached, label: Furthest north reached, widget: number, value_type: int, default: 82,
+                  hint: "The solid line stops here and the dashed line carries on." }
+              - name: marks
+                label: Marks on the scale
+                widget: list
+                fields:
+                  - { name: lat, label: Latitude, widget: number, value_type: int }
+                  - { name: label, label: Label, widget: string }
+                  - { name: name, label: Place, widget: string }
+                  - { name: highlight, label: Emphasise this one, widget: boolean, default: false }
+          - name: quote
+            label: Quote over a photograph
+            widget: object
+            fields:
+              - { name: text, label: Quote, widget: text }
+              - { name: cite, label: Attribution, widget: string }
+              - { name: photo, label: Photograph, widget: image }
+              - { name: alt, label: Description, widget: string }
+          - name: vessel
+            label: The boat
+            widget: object
+            fields:
+              - { name: label, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: body, label: Text, widget: text }
+              - { name: facts, label: Facts, widget: list, field: { name: item, label: Fact, widget: string } }
+              - { name: photo, label: Photograph, widget: image }
+              - { name: alt, label: Description, widget: string }
+          - name: about
+            label: About
+            widget: object
+            fields:
+              - { name: label, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: paragraphs, label: Paragraphs, widget: list,
+                  field: { name: item, label: Paragraph, widget: text } }
+              - { name: photo, label: Photograph, widget: image }
+              - { name: photoPosition, label: Photograph focus, widget: string, default: "center 38%" }
+              - { name: alt, label: Description, widget: string }
+          - name: journalIntro
+            label: Journal introduction
+            widget: object
+            fields:
+              - { name: label, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+          - name: partners
+            label: Partners
+            widget: object
+            fields:
+              - { name: label, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: body, label: Text, widget: text }
+              - name: offers
+                label: What a partner gets
+                widget: list
+                fields:
+                  - { name: tag, label: Small label, widget: string }
+                  - { name: title, label: Title, widget: string }
+                  - { name: text, label: Text, widget: text }
+          - name: contact
+            label: Contact
+            widget: object
+            fields:
+              - { name: label, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: body, label: Text, widget: text }
+              - { name: email, label: Email address, widget: string }
+              - { name: pressKitText, label: Press kit button text, widget: string }
+              - { name: pressKitUrl, label: Press kit link, widget: string }
+          - name: supporters
+            label: Supported by
+            widget: object
+            fields:
+              - { name: show, label: Show the sponsors band, widget: boolean, default: true }
+              - { name: label, label: Small label, widget: string }
+              - name: items
+                label: Sponsors
+                widget: list
+                fields:
+                  - { name: name, label: Name, widget: string }
+                  - { name: sub, label: Second line, widget: string }
+                  - { name: url, label: Website, widget: string }
+                  - { name: mark, label: Logo, widget: image, required: false,
+                      hint: "PNG or WebP with a transparent background works best." }
+          - name: nav
+            label: Menu
+            widget: list
+            fields:
+              - { name: label, label: Label, widget: string }
+              - { name: href, label: Link, widget: string }

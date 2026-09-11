@@ -1,0 +1,285 @@
+---
+import { getCollection, render } from 'astro:content';
+import site from '../data/site.json';
+import '../styles/site.css';
+
+/* Tiny inline-markdown helper for short CMS strings (bold, line breaks).
+   Long-form prose lives in markdown bodies and is rendered properly. */
+const md = (s = '') =>
+  String(s).trim()
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/\*\*(.+?)\*\*/g, '<b>$1</b>')
+    .replace(/\n/g, '<br>');
+
+const expeditions = (await getCollection('expeditions', (e) => !e.data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(
+  expeditions.map(async (e) => ({ ...e, Body: (await render(e)).Content }))
+);
+
+const journal = (await getCollection('journal', (e) => !e.data.draft))
+  .sort((a, b) =>
+    (b.data.date?.getTime() ?? 0) - (a.data.date?.getTime() ?? 0) ||
+    a.data.order - b.data.order);
+
+/* Latitude scale: one function places every tick, mark and label. */
+const c = site.latitudeChart;
+const X0 = 30, X1 = 850;
+const x = (lat) => X0 + ((lat - c.min) / (c.max - c.min)) * (X1 - X0);
+const minorTicks = [];
+for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
+---
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{site.name}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&family=IBM+Plex+Mono:wght@400;500&display=swap" />
+</head>
+<body>
+
+{site.notice.show && (
+  <div class="notice">
+    <b>{site.notice.label}</b>
+    <span>{site.notice.text}<span class="more">{site.notice.more}</span></span>
+  </div>
+)}
+
+<nav class="nav">
+  <a class="mark" href="#top">{site.name}</a>
+  <button class="navbtn" id="navbtn" aria-expanded="false" aria-controls="navlist">Menu</button>
+  <ul id="navlist">
+    {site.nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-type">
+    <p class="label" style="margin-bottom:clamp(.9rem,1.8vw,1.5rem)">{site.hero.eyebrow}</p>
+    <h1 class="d">{site.hero.nameLine1}<br />{site.hero.nameLine2}</h1>
+    <div class="hero-foot">
+      <p class="stand">{site.hero.standfirst}</p>
+      <div class="acts">
+        <a class="btn btn-solid" href="#expeditions">The expeditions</a>
+        <a class="btn btn-line" href="#partners">For partners</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-shot">
+    <img src={site.hero.photo} alt={site.hero.photoAlt} style={`object-position:${site.hero.photoPosition}`} />
+  </div>
+</header>
+
+{site.status.show && (
+  <div class="status">
+    <span class="dot" aria-hidden="true"></span>
+    <b>{site.status.label}</b>
+    <i>/</i><span>{site.status.detail}</span>
+    <i>/</i><span>{site.status.dates}</span>
+  </div>
+)}
+
+<dl class="log">
+  {site.figures.map((f) => (
+    <div><dt>{f.label}</dt><dd>{f.value}{f.unit && <small class={f.unit === "+" ? "tight" : ""}>{f.unit}</small>}</dd></div>
+  ))}
+</dl>
+
+<figure class="plate-wide">
+  <img src={site.plate.photo} alt={site.plate.alt} />
+  <figcaption>{site.plate.caption}</figcaption>
+</figure>
+
+<section class="band sheet" id="expeditions" style="padding-bottom:clamp(1.75rem,3.5vw,3rem)">
+  <div class="marg">
+    <p class="label">{site.expeditionsIntro.label}</p>
+    <div>
+      <h2 class="d">{site.expeditionsIntro.heading}</h2>
+      <p class="body">{site.expeditionsIntro.body}</p>
+    </div>
+  </div>
+</section>
+
+{rendered.map(({ data, Body }) => (
+  <article class={`exp${data.flip ? ' rev' : ''}`}>
+    <div class="exp-shot">
+      <img src={data.photo} alt={data.photoAlt} style={`object-position:${data.photoPosition}`} />
+    </div>
+    <div class="exp-text">
+      <p class="lat d">{data.latitude}
+        <em>{data.stampTop}{data.stampBottom && <br />}{data.stampBottom}</em>
+      </p>
+      <div class="exp-head">
+        {data.patch && <img class="patch" src={data.patch} alt={data.patchAlt} />}
+        <h3 class="d">{data.title}</h3>
+      </div>
+      {data.meta.length > 0 && (
+        <div class="meta">{data.meta.map((m) => <span>{m}</span>)}</div>
+      )}
+      <div class="prose"><Body /></div>
+      {data.note && <p class="note" set:html={md(data.note)} />}
+    </div>
+  </article>
+))}
+
+{c.show && (
+  <section class="band chart-band" style="border-top:1px solid var(--rule)">
+    <div class="sheet">
+      <div class="marg">
+        <p class="label">{c.label}</p>
+        <div>
+          <h2 class="d">{c.heading}</h2>
+          <p class="body">{c.body}</p>
+        </div>
+      </div>
+      <div class="chart">
+        <svg viewBox="0 0 900 104" role="img"
+             aria-label={`A latitude scale from ${c.min} to ${c.max} degrees north, marked at ${c.marks.map((m) => m.label).join(', ')}. A dashed line continues to ${c.max} degrees north.`}>
+          <line x1={X0} y1="58" x2={x(c.reached)} y2="58" stroke="#0A0C0F" stroke-width="2" />
+          <line x1={x(c.reached)} y1="58" x2={X1} y2="58" stroke="#AFB8C0" stroke-width="2" stroke-dasharray="2 6" />
+          <g font-family="IBM Plex Mono, monospace" text-anchor="middle" font-size="9" fill="#939CA5">
+            {minorTicks.map((l) => (
+              <>
+                <line x1={x(l)} y1="54" x2={x(l)} y2="62" stroke="#C3CBD2" />
+                <text x={x(l)} y="78">{l}</text>
+              </>
+            ))}
+          </g>
+          <g font-family="IBM Plex Mono, monospace" text-anchor="middle" font-size="11" fill="#0A0C0F">
+            {c.marks.map((m) => (
+              <>
+                <line x1={x(m.lat)} y1={m.highlight ? 42 : 48} x2={x(m.lat)} y2={m.highlight ? 74 : 68}
+                      stroke={m.highlight ? '#E8501E' : '#0A0C0F'} stroke-width={m.highlight ? 3 : 2} />
+                <text x={x(m.lat)} y={m.highlight ? 32 : 38} font-size={m.highlight ? 13 : 11}
+                      fill={m.highlight ? '#E8501E' : '#0A0C0F'}>{m.label}</text>
+                <text x={x(m.lat)} y="96" fill="#59646F" font-size="10">{m.name.toUpperCase()}</text>
+              </>
+            ))}
+          </g>
+        </svg>
+      </div>
+    </div>
+  </section>
+)}
+
+<figure class="dark">
+  <img src={site.quote.photo} alt={site.quote.alt} />
+  <figcaption>{site.quote.text}<cite>{site.quote.cite}</cite></figcaption>
+</figure>
+
+<section class="split" id="patagonia">
+  <div class="split-shot"><img src={site.vessel.photo} alt={site.vessel.alt} /></div>
+  <div class="split-text">
+    <p class="label">{site.vessel.label}</p>
+    <h2 class="d">{site.vessel.heading}</h2>
+    <p class="body">{site.vessel.body}</p>
+    <div class="facts">{site.vessel.facts.map((f) => <span>{f}</span>)}</div>
+  </div>
+</section>
+
+<section class="split rev" id="about" style="border-top:1px solid var(--rule)">
+  <div class="split-shot">
+    <img src={site.about.photo} alt={site.about.alt} style={`object-position:${site.about.photoPosition}`} />
+  </div>
+  <div class="split-text">
+    <p class="label">{site.about.label}</p>
+    <h2 class="d">{site.about.heading}</h2>
+    {site.about.paragraphs.map((p) => <p class="body" set:html={md(p)} />)}
+  </div>
+</section>
+
+<section class="band sheet" id="journal" style="border-top:1px solid var(--rule)">
+  <div class="marg">
+    <p class="label">{site.journalIntro.label}</p>
+    <div><h2 class="d">{site.journalIntro.heading}</h2></div>
+  </div>
+  <div class="index">
+    {journal.map((e) => (
+      <a class="row" href="#">
+        <span class="tag">{e.data.tag}</span>
+        <h3 class="d">{e.data.title}</h3>
+        <p>{e.data.summary}</p>
+      </a>
+    ))}
+  </div>
+</section>
+
+<section class="band sheet" id="partners" style="background:var(--mist); max-width:none">
+  <div style="max-width:88rem; margin-inline:auto">
+    <div class="marg">
+      <p class="label">{site.partners.label}</p>
+      <div>
+        <h2 class="d">{site.partners.heading}</h2>
+        <p class="body">{site.partners.body}</p>
+      </div>
+    </div>
+    <div class="index">
+      {site.partners.offers.map((o) => (
+        <div class="row">
+          <span class="tag">{o.tag}</span>
+          <h3 class="d">{o.title}</h3>
+          <p>{o.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="band sheet" id="contact">
+  <div class="marg">
+    <p class="label">{site.contact.label}</p>
+    <div style="display:flex; flex-direction:column; gap:1.4rem; align-items:flex-start">
+      <h2 class="d">{site.contact.heading}</h2>
+      <p class="body">{site.contact.body}</p>
+      <a class="mail" href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+      <a class="btn btn-line" href={site.contact.pressKitUrl}>{site.contact.pressKitText}</a>
+    </div>
+  </div>
+</section>
+
+{site.supporters.show && (
+  <section class="supporters" aria-labelledby="sup-title">
+    <div class="inner">
+      <p class="label" id="sup-title">{site.supporters.label}</p>
+      <ul>
+        {site.supporters.items.map((s) => (
+          <li>
+            <a class="sponsor" href={s.url} target="_blank" rel="noopener noreferrer">
+              {s.mark && <img class="sponsor-mark" src={s.mark} alt="" aria-hidden="true" />}
+              <span class="sponsor-txt">
+                <span class="wm">{s.name}</span>
+                <span class="sub">{s.sub}</span>
+              </span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+)}
+
+<footer>
+  <span>{site.name}</span>
+  <span>Prototype — draft content</span>
+</footer>
+
+<script is:inline>
+  const btn = document.getElementById('navbtn');
+  const list = document.getElementById('navlist');
+  btn.addEventListener('click', () => {
+    const open = list.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+    btn.textContent = open ? 'Close' : 'Menu';
+  });
+  list.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' && list.classList.contains('open')) {
+      list.classList.remove('open');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.textContent = 'Menu';
+    }
+  });
+</script>
+</body>
+</html>

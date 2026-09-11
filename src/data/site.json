@@ -1,0 +1,116 @@
+{
+  "name": "Stafford Tyrrell",
+  "notice": {
+    "show": true,
+    "label": "Prototype",
+    "text": "Facts come from Stafford's own expedition documents.",
+    "more": " Descriptive writing and journal entries are draft, and nothing has been checked with him."
+  },
+  "hero": {
+    "eyebrow": "Captain · Expedition leader · Ireland",
+    "nameLine1": "Stafford",
+    "nameLine2": "Tyrrell",
+    "standfirst": "Eighty-two degrees north under sail, a thousand four hundred kilometres across the ice of Lake Baikal, and a crossing of the Greenland ice cap.",
+    "photo": "images/light/portrait-frost.jpg",
+    "photoAlt": "Stafford Tyrrell in a frost-covered fur-lined hood, ice formed across his beard, against a pale winter sky",
+    "photoPosition": "center 16%"
+  },
+  "status": {
+    "show": true,
+    "label": "At sea now",
+    "detail": "High Arctic Expedition — Ellesmere Island",
+    "dates": "30 June – 25 September 2026"
+  },
+  "figures": [
+    { "label": "Furthest north", "value": "82°N", "unit": "" },
+    { "label": "This season's route", "value": "5,626", "unit": "NM" },
+    { "label": "Longest expedition", "value": "100", "unit": "DAYS" },
+    { "label": "Days on glaciated terrain", "value": "700", "unit": "+" }
+  ],
+  "expeditionsIntro": {
+    "label": "Expeditions",
+    "heading": "Where the work has been done",
+    "body": "Each expedition is indexed by the latitude it reached, because latitude is the honest measure of a journey north — and of how much further there is to go."
+  },
+  "plate": {
+    "photo": "images/light/berg-patagonia.jpg",
+    "alt": "The expedition yacht Patagonia anchored beside an enormous iceberg in a Greenland fjord, mountains behind",
+    "caption": "S/Y Patagonia at anchor — East Greenland"
+  },
+  "latitudeChart": {
+    "show": true,
+    "label": "Progress north",
+    "heading": "Eighty-two degrees north",
+    "body": "Tanquary Fjord, this season's basecamp, sits 720 kilometres from the Pole.",
+    "min": 50,
+    "max": 90,
+    "reached": 82,
+    "marks": [
+      { "lat": 53, "label": "53°N", "name": "Baikal", "highlight": false },
+      { "lat": 66, "label": "66°N", "name": "Greenland", "highlight": false },
+      { "lat": 82, "label": "82°N", "name": "Ellesmere", "highlight": true }
+    ]
+  },
+  "quote": {
+    "text": "A ship in the harbour is safe, but that is not what ships are for",
+    "cite": "Quoted in the expedition prospectus",
+    "photo": "images/light/baikal-ice.jpg",
+    "alt": "A member of the Baikal team in a heavy down jacket beside a shard of clear blue lake ice in fog"
+  },
+  "vessel": {
+    "label": "The vessel",
+    "heading": "S/Y Patagonia",
+    "body": "A steel Van de Stadt ketch, welded in the Netherlands and ice-reinforced for Arctic and Antarctic water. Solar, a diesel generator and tankage for transatlantic passages. Watertight crash bulkhead.",
+    "facts": ["60 ft", "Ketch rig", "12 berths", "Steel, ice-reinforced"],
+    "photo": "images/light/crew-patagonia.jpg",
+    "alt": "The expedition yacht Patagonia alongside, crew in survival suits on the bow"
+  },
+  "about": {
+    "label": "About",
+    "heading": "Captain and expedition leader",
+    "paragraphs": [
+      "An Irish expedition leader and sailor with more than ten years behind him, from the Himalayas to Africa and the Middle East. He has crossed all three of Iceland's largest ice caps — Vatnajökull, Langjökull and Mýrdalsjökull — and has **over seven hundred days in glaciated terrain**.",
+      "He was part of the first Irish team to climb Mount Damavand in winter, and finished the Marathon des Sables in 2024. He is a commercial offshore diver and a 22-metre captain with fifteen years at sea. A Wilderness EMT, ice-field safety trained, search and rescue member and AIMG hard ice guide."
+    ],
+    "photo": "images/light/stafford-portrait.jpg",
+    "photoPosition": "center 38%",
+    "alt": "Stafford Tyrrell on the ice, sunglasses pushed up into his hair, fur-ruffed jacket"
+  },
+  "journalIntro": { "label": "Journal", "heading": "Dispatches" },
+  "partners": {
+    "label": "Partners",
+    "heading": "Working with brands",
+    "body": "Kit that works in Ireland in February is not kit that works at eighty-two degrees north. Stafford puts equipment into genuinely unforgiving conditions and reports back honestly — publicly if it performs, privately if it doesn't.",
+    "offers": [
+      { "tag": "Rare", "title": "Name a mountain", "text": "There is an unclimbed peak south-west of Mount Barbeau. A first ascent carries naming rights, and that is a rare thing to be able to offer anyone." },
+      { "tag": "Visibility", "title": "Hull, sails and screen", "text": "Logo space on the hull and sails of a sixty-foot ketch working the High Arctic, plus product placement through a feature-length documentary shot by professionals." },
+      { "tag": "Product", "title": "Field testing", "text": "Sustained use at temperature, with structured feedback to your product team rather than a photograph and a thumbs up." },
+      { "tag": "Audience", "title": "Talks and events", "text": "Expedition talks, screenings and corporate events — on decision-making, risk and turning round, not on heroics." }
+    ]
+  },
+  "contact": {
+    "label": "Contact",
+    "heading": "Get in touch",
+    "body": "For expedition enquiries, partnership conversations and press.",
+    "email": "stafford.tyrrell@gmail.com",
+    "pressKitText": "Press kit — bio & high-res images",
+    "pressKitUrl": "#"
+  },
+  "supporters": {
+    "show": true,
+    "label": "Supported by",
+    "items": [
+      { "name": "Tenzing", "sub": "Tenzing Digital · tenzing.ie", "url": "https://tenzing.ie", "mark": "images/sponsors/tenzing.webp" },
+      { "name": "Natterjack", "sub": "Irish Whiskey", "url": "#", "mark": "images/sponsors/natterjack.webp" },
+      { "name": "Buy Irish Art", "sub": "buyirishart.ie", "url": "https://buyirishart.ie", "mark": "images/sponsors/buyirishart.webp" }
+    ]
+  },
+  "nav": [
+    { "label": "Expeditions", "href": "#expeditions" },
+    { "label": "Patagonia", "href": "#patagonia" },
+    { "label": "About", "href": "#about" },
+    { "label": "Journal", "href": "#journal" },
+    { "label": "Partners", "href": "#partners" },
+    { "label": "Contact", "href": "#contact" }
+  ]
+}

@@ -1,0 +1,401 @@
+/* ════════════════════════════════════════════════════════════
+   STAFFORD TYRRELL
+   Type takes its cue from his own materials — expedition patches
+   and prospectus, which are set in heavy uppercase. One family,
+   Archivo, worked across its width and weight axes: condensed and
+   black for display, normal and light for reading.
+   The interface is monochrome. All colour comes from photographs.
+   ════════════════════════════════════════════════════════════ */
+
+:root{
+  --paper:#FFFFFF;
+  --ink:#0A0C0F;
+  --ink-2:#59646F;
+  --ink-3:#939CA5;
+  --rule:#D7DDE2;
+  --hair:#EBEFF2;
+  --mist:#F0F3F5;
+  --flare:#E8501E;          /* his own kit orange — live status only */
+
+  --gutter:clamp(1.25rem,5vw,5.5rem);
+  --band:clamp(3.5rem,8vw,7.5rem);
+  --marg:10rem;
+
+  --f:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:var(--f); font-size:17px; font-weight:400; line-height:1.6;
+  font-stretch:100%;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; }
+::selection{ background:var(--ink); color:#fff; }
+:focus-visible{ outline:2px solid var(--flare); outline-offset:3px; }
+
+/* ── display type: condensed, black, uppercase ──────────────── */
+
+.d{
+  font-family:var(--f);
+  font-stretch:80%; font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:-.005em; line-height:.88;
+  margin:0; text-wrap:balance;
+}
+h1,h2,h3{ margin:0; }
+
+.label{
+  margin:0; font-family:var(--f-mono);
+  font-size:.66rem; font-weight:500;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3);
+}
+
+.body{
+  margin:0; font-size:1.0625rem; line-height:1.7;
+  font-weight:300; color:var(--ink-2); max-width:34rem;
+}
+.body + .body{ margin-top:1rem; }
+.body strong{ color:var(--ink); font-weight:600; }
+
+.meta{
+  display:flex; flex-wrap:wrap; gap:.35rem 1.1rem;
+  font-family:var(--f-mono); font-size:.67rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3);
+}
+
+/* ── shell ──────────────────────────────────────────────────── */
+
+.sheet{ max-width:88rem; margin-inline:auto; padding-inline:var(--gutter); }
+.band{ padding-block:var(--band); }
+
+.marg{ display:grid; grid-template-columns:1fr; gap:1.1rem; }
+@media (min-width:1080px){
+  .marg{ grid-template-columns:var(--marg) minmax(0,1fr); gap:0 4rem; }
+  .marg > .label{ padding-top:.55rem; }
+}
+.marg h2{ font-size:clamp(2.1rem,5.4vw,4rem); max-width:16ch; }
+.marg .body{ margin-top:1.4rem; }
+
+/* ── notice ─────────────────────────────────────────────────── */
+
+.notice{
+  background:var(--ink); color:#B9C2CA;
+  font-family:var(--f-mono); font-size:.66rem; line-height:1.55;
+  padding:.65rem var(--gutter);
+  display:flex; gap:.8rem; flex-wrap:wrap; align-items:baseline;
+}
+.notice b{ color:#fff; font-weight:500; letter-spacing:.18em; text-transform:uppercase; }
+@media (max-width:620px){
+  .notice{ font-size:.6rem; padding-block:.5rem; gap:.45rem; }
+  .notice .more{ display:none; }
+}
+
+/* ── nav ────────────────────────────────────────────────────── */
+
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:1rem 2rem; flex-wrap:wrap;
+  padding:1.05rem var(--gutter);
+  border-bottom:1px solid var(--rule);
+}
+.mark{
+  font-stretch:80%; font-weight:800; text-transform:uppercase;
+  font-size:1rem; letter-spacing:.02em; text-decoration:none;
+}
+.nav ul{ display:flex; gap:1.6rem; flex-wrap:wrap; list-style:none; margin:0; padding:0; }
+.nav a:not(.mark){
+  font-family:var(--f-mono); font-size:.66rem; font-weight:500;
+  letter-spacing:.15em; text-transform:uppercase;
+  color:var(--ink-2); text-decoration:none;
+  padding-bottom:2px; border-bottom:1px solid transparent;
+  transition:color .18s, border-color .18s;
+}
+.nav a:not(.mark):hover{ color:var(--ink); border-bottom-color:var(--ink); }
+.navbtn{
+  display:none; cursor:pointer; background:none;
+  font-family:var(--f-mono); font-size:.66rem; font-weight:500;
+  letter-spacing:.15em; text-transform:uppercase; color:var(--ink);
+  border:1px solid var(--rule); padding:.5rem .8rem;
+}
+@media (max-width:880px){
+  .navbtn{ display:block; }
+  .nav ul{ display:none; width:100%; flex-direction:column; gap:0; margin-top:.35rem; border-top:1px solid var(--hair); }
+  .nav ul.open{ display:flex; }
+  .nav ul li{ border-bottom:1px solid var(--hair); }
+  .nav ul li a{ display:block; padding:.9rem 0; }
+}
+
+/* ── hero: the name as a poster, then the photograph full bleed ─ */
+
+.hero{ display:grid; grid-template-columns:1fr; }
+@media (min-width:900px){ .hero{ grid-template-columns:1.04fr .96fr; align-items:stretch; } }
+.hero-type{
+  display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(2.25rem,5vw,4.25rem) clamp(1.5rem,3.5vw,3.5rem) clamp(2rem,4vw,3.25rem) var(--gutter);
+}
+.hero h1{
+  font-size:clamp(2.9rem,7.4vw,6.75rem);
+  line-height:.83; letter-spacing:-.022em;
+}
+@media (max-width:899px){
+  .hero-shot{ order:-1; height:52vh; }
+  .hero h1{ font-size:clamp(2.9rem,13vw,4.25rem); }
+}
+.hero-foot{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  gap:1.5rem 2.5rem; flex-wrap:wrap;
+  margin-top:clamp(1.5rem,3vw,2.5rem);
+  padding-top:1.35rem; border-top:2px solid var(--ink);
+}
+.stand{
+  margin:0; max-width:30rem; font-size:clamp(1rem,1.5vw,1.1875rem);
+  font-weight:300; line-height:1.55; color:var(--ink-2);
+}
+.acts{ display:flex; gap:.55rem; flex-wrap:wrap; }
+.btn{
+  display:inline-block; text-decoration:none;
+  font-family:var(--f-mono); font-size:.68rem; font-weight:500;
+  letter-spacing:.15em; text-transform:uppercase;
+  padding:.85rem 1.5rem; border:1px solid var(--ink);
+  transition:background .18s,color .18s;
+}
+.btn-solid{ background:var(--ink); color:#fff; }
+.btn-solid:hover{ background:#2A3138; }
+.btn-line{ background:transparent; color:var(--ink); border-color:var(--rule); }
+.btn-line:hover{ border-color:var(--ink); }
+@media (max-width:480px){ .btn{ padding:.75rem 1rem; font-size:.62rem; letter-spacing:.11em; } }
+
+.hero-shot{ position:relative; overflow:hidden; min-height:clamp(20rem,58vh,40rem); }
+.hero-shot img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 16%; }
+
+/* the drone frame is panoramic — it earns a full-bleed band of its own */
+.plate-wide{ margin:0; position:relative; border-top:1px solid var(--rule); }
+.plate-wide img{ width:100%; height:clamp(14rem,42vw,30rem); object-fit:cover; object-position:center 55%; }
+.plate-wide figcaption{
+  position:absolute; left:var(--gutter); bottom:1.1rem;
+  font-family:var(--f-mono); font-size:.63rem; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:#fff; text-shadow:0 1px 12px rgba(0,0,0,.6);
+}
+
+/* ── status ─────────────────────────────────────────────────── */
+
+.status{
+  display:flex; align-items:center; gap:.6rem 1.15rem; flex-wrap:wrap;
+  padding:.95rem var(--gutter); border-bottom:1px solid var(--rule);
+  font-family:var(--f-mono); font-size:.68rem;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--ink-2);
+}
+.status .dot{
+  width:7px; height:7px; border-radius:50%; background:var(--flare); flex:0 0 auto;
+  animation:ping 2.6s ease-out infinite;
+}
+@keyframes ping{
+  0%{ box-shadow:0 0 0 0 rgba(232,80,30,.5); }
+  70%{ box-shadow:0 0 0 9px rgba(232,80,30,0); }
+  100%{ box-shadow:0 0 0 0 rgba(232,80,30,0); }
+}
+.status b{ color:var(--ink); font-weight:600; }
+.status i{ color:var(--rule); font-style:normal; }
+
+/* ── log ────────────────────────────────────────────────────── */
+
+.log{ display:grid; grid-template-columns:repeat(2,1fr); border-bottom:1px solid var(--rule); }
+@media (min-width:760px){ .log{ grid-template-columns:repeat(4,1fr); } }
+.log div{
+  padding:1.9rem var(--gutter) 2.1rem; border-right:1px solid var(--hair);
+  display:flex; flex-direction:column; gap:.8rem;
+}
+.log div:last-child{ border-right:none; }
+@media (max-width:759px){
+  .log div{ padding-inline:var(--gutter); border-bottom:1px solid var(--hair); }
+  .log div:nth-child(2n){ border-right:none; }
+}
+.log dt{
+  font-family:var(--f-mono); font-size:.6rem; font-weight:500;
+  letter-spacing:.19em; text-transform:uppercase; color:var(--ink-3);
+}
+.log dd{
+  margin:0; font-stretch:80%; font-weight:800; text-transform:uppercase;
+  font-size:clamp(1.9rem,4vw,2.9rem); line-height:.86;
+  font-variant-numeric:tabular-nums; letter-spacing:-.015em;
+}
+.log dd small{ font-family:var(--f-mono); font-weight:400; font-size:.3em; letter-spacing:.12em; color:var(--ink-3); margin-left:.35em; }
+.log dd small.tight{ margin-left:0; letter-spacing:0; }
+
+/* ── expedition bands ───────────────────────────────────────── */
+
+.exp{ display:grid; grid-template-columns:1fr; border-top:1px solid var(--rule); }
+@media (min-width:900px){
+  .exp{ grid-template-columns:1fr 1fr; }
+  .exp.rev .exp-shot{ order:2; }
+}
+.exp-shot{ position:relative; overflow:hidden; background:var(--mist); min-height:clamp(17rem,40vw,30rem); }
+.exp-shot > img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.6,.2,1);
+}
+.exp:hover .exp-shot > img{ transform:scale(1.035); }
+.exp-text{
+  padding:clamp(2.5rem,5vw,4.25rem) var(--gutter);
+  display:flex; flex-direction:column; gap:1.3rem; justify-content:center;
+}
+@media (min-width:900px){
+  .exp-text{ padding-inline:clamp(2.25rem,4vw,4rem); }
+  .exp:not(.rev) .exp-text{ padding-right:var(--gutter); }
+  .exp.rev .exp-text{ padding-left:var(--gutter); }
+}
+.lat{
+  display:flex; align-items:baseline; justify-content:space-between; gap:1rem;
+  font-stretch:78%; font-weight:800; text-transform:uppercase;
+  font-size:clamp(3.4rem,7vw,5.75rem); line-height:.8; letter-spacing:-.03em;
+  border-bottom:2px solid var(--ink); padding-bottom:.9rem; margin:0;
+}
+.lat em{
+  font-family:var(--f-mono); font-style:normal; font-weight:400;
+  font-size:.14em; letter-spacing:.16em; color:var(--ink-3);
+  align-self:flex-end; padding-bottom:.5em; text-align:right; line-height:1.5;
+}
+.exp-head{ display:flex; align-items:center; gap:.95rem; flex-wrap:wrap; }
+.patch{ width:clamp(50px,6vw,64px); height:auto; aspect-ratio:1; flex:0 0 auto; }
+.exp-text h3{ font-size:clamp(1.6rem,3vw,2.3rem); }
+
+.note{
+  margin:.3rem 0 0; padding:.95rem 1.05rem; background:var(--mist);
+  font-family:var(--f-mono); font-size:.71rem; line-height:1.85;
+  color:var(--ink-2); max-width:34rem;
+}
+.note b{ color:var(--ink); font-weight:500; }
+
+/* ── chart ──────────────────────────────────────────────────── */
+
+.chart-band{ background:var(--mist); }
+.chart{ margin-top:2.5rem; overflow-x:auto; }
+.chart svg{ min-width:32rem; width:100%; height:auto; display:block; }
+
+/* ── dark plate ─────────────────────────────────────────────── */
+
+.dark{ position:relative; background:var(--ink); margin:0; }
+.dark img{ width:100%; height:clamp(20rem,54vh,32rem); object-fit:cover; object-position:center 45%; opacity:.8; }
+.dark figcaption{
+  position:absolute; inset:auto var(--gutter) clamp(1.75rem,4.5vw,3rem) var(--gutter);
+  max-width:44rem; color:#fff;
+  font-stretch:82%; font-weight:800; text-transform:uppercase;
+  font-size:clamp(1.35rem,3.4vw,2.6rem); line-height:.95; letter-spacing:-.01em;
+}
+.dark cite{
+  display:block; margin-top:1rem; font-style:normal;
+  font-family:var(--f-mono); font-weight:400; font-size:.63rem;
+  letter-spacing:.16em; text-transform:uppercase; color:#9BA6B0;
+}
+
+/* ── split ──────────────────────────────────────────────────── */
+
+.split{ display:grid; grid-template-columns:1fr; }
+@media (min-width:900px){
+  .split{ grid-template-columns:1fr 1fr; align-items:center; }
+  .split.rev .split-shot{ order:2; }
+}
+.split-shot{ position:relative; overflow:hidden; min-height:clamp(16rem,36vw,27rem); }
+.split-shot img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.split-text{ padding:clamp(2.5rem,5vw,4.25rem) var(--gutter); display:flex; flex-direction:column; gap:1.15rem; }
+.split-text h2{ font-size:clamp(1.9rem,4vw,3rem); }
+.facts{ display:flex; flex-wrap:wrap; gap:.35rem; margin-top:.3rem; }
+.facts span{
+  font-family:var(--f-mono); font-size:.65rem;
+  letter-spacing:.11em; text-transform:uppercase;
+  color:var(--ink); border:1px solid var(--rule); padding:.4rem .65rem;
+}
+
+/* ── ruled indexes ──────────────────────────────────────────── */
+
+.index{ margin-top:2.25rem; border-top:2px solid var(--ink); }
+.row{
+  display:grid; grid-template-columns:1fr; gap:.4rem;
+  padding:1.75rem 0; border-bottom:1px solid var(--hair); text-decoration:none;
+}
+@media (min-width:780px){
+  .row{ grid-template-columns:var(--marg) minmax(0,24rem) 1fr; gap:0 4rem; align-items:baseline; }
+}
+.row .tag{
+  font-family:var(--f-mono); font-size:.63rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+}
+.row h3{ font-size:clamp(1.25rem,2.2vw,1.6rem); transition:color .18s; }
+.row p{ margin:0; font-size:.97rem; line-height:1.62; font-weight:300; color:var(--ink-2); }
+a.row:hover h3{ color:var(--flare); }
+
+
+/* ── supporters ─────────────────────────────────────────────── */
+
+.supporters{
+  border-top:1px solid var(--rule);
+  padding:clamp(2.25rem,4.5vw,3.25rem) var(--gutter);
+  background:var(--mist);
+}
+.supporters .inner{ max-width:88rem; margin-inline:auto; }
+.supporters ul{
+  list-style:none; margin:1.6rem 0 0; padding:0;
+  display:flex; flex-wrap:wrap;
+  gap:1.75rem clamp(2.5rem,6vw,5rem);
+  align-items:center;
+}
+.sponsor{
+  display:flex; align-items:center; gap:.8rem;
+  text-decoration:none; color:var(--ink-2);
+  transition:color .18s, opacity .18s;
+}
+.sponsor-txt{ display:flex; flex-direction:column; gap:.35rem; }
+.sponsor-mark{
+  height:clamp(40px,5vw,54px); width:auto; flex:0 0 auto;
+  opacity:.9; transition:opacity .18s;
+}
+.sponsor:hover .sponsor-mark{ opacity:1; }
+.sponsor:hover{ color:var(--ink); }
+/* a wordmark until a real logo file replaces it — swap the span for an
+   <img class="sponsor-logo"> and the row keeps its alignment */
+.sponsor .wm{
+  font-stretch:80%; font-weight:800; text-transform:uppercase;
+  font-size:clamp(1.05rem,2.2vw,1.4rem); line-height:.95;
+  letter-spacing:.005em; color:inherit;
+}
+.sponsor .sub{
+  font-family:var(--f-mono); font-size:.61rem; font-weight:400;
+  letter-spacing:.15em; text-transform:uppercase; color:var(--ink-3);
+}
+.sponsor-logo{ height:clamp(28px,4vw,40px); width:auto; }
+
+/* ── contact ────────────────────────────────────────────────── */
+
+.mail{
+  font-stretch:80%; font-weight:800; text-transform:uppercase;
+  font-size:clamp(1.3rem,4.4vw,2.9rem); line-height:.95; letter-spacing:-.015em;
+  color:var(--ink); text-decoration:none;
+  border-bottom:2px solid var(--rule); padding-bottom:.15rem;
+  word-break:break-word; align-self:flex-start; transition:border-color .18s;
+}
+.mail:hover{ border-bottom-color:var(--ink); }
+
+footer{
+  padding:2.1rem var(--gutter); border-top:1px solid var(--rule);
+  display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
+  font-family:var(--f-mono); font-size:.63rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+}
+
+@media (prefers-reduced-motion:reduce){ *{ transition:none !important; animation:none !important; } }
+
+/* ── markdown rendered from content files ───────────────────── */
+
+.prose p{
+  margin:0; font-size:1.0625rem; line-height:1.7;
+  font-weight:300; color:var(--ink-2); max-width:34rem;
+}
+.prose p + p{ margin-top:1rem; }
+.prose strong{ color:var(--ink); font-weight:600; }
+.prose a{ color:var(--ink); text-underline-offset:3px; }
