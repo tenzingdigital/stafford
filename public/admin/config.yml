@@ -9,6 +9,10 @@ backend:
   # the site. Opens a normal GitHub sign-in; no separate password to remember.
   base_url: https://stafford-cms-auth.onrender.com
   auth_endpoint: auth
+  # public_repo, not repo. This repository is public, so the narrower scope is
+  # sufficient — and a token issued with it cannot read or write ANY private
+  # repository, including the other work in this organisation.
+  auth_scope: public_repo
 
 media_folder: "public/images/uploads"   # where uploaded photos are stored
 public_folder: "images/uploads"          # how the site refers to them

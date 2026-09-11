@@ -59,7 +59,11 @@ const server = createServer(async (req, res) => {
     const state = randomBytes(16).toString('hex');
     const to = new URL('https://github.com/login/oauth/authorize');
     to.searchParams.set('client_id', CLIENT_ID);
-    to.searchParams.set('scope', url.searchParams.get('scope') || 'repo');
+    // Defence in depth: even if the CMS asks for broader access, cap it here.
+    // Only public_repo is issued, so a token from this service can never reach
+    // a private repository. Widen deliberately if the repo is ever made private.
+    const requested = url.searchParams.get('scope') || 'public_repo';
+    to.searchParams.set('scope', requested === 'repo' ? 'public_repo' : requested);
     to.searchParams.set('state', state);
     return res.writeHead(302, {
       location: to.toString(),
