@@ -382,6 +382,13 @@ a.row:hover h3{ color:var(--flare); }
 }
 .mail:hover{ border-bottom-color:var(--ink); }
 
+footer .credit a{
+  color:var(--ink); text-decoration:none;
+  border-bottom:1px solid var(--rule); padding-bottom:2px;
+  transition:border-color .18s;
+}
+footer .credit a:hover{ border-bottom-color:var(--ink); }
+
 footer{
   padding:2.1rem var(--gutter); border-top:1px solid var(--rule);
   display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;

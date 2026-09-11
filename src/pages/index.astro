@@ -266,7 +266,11 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
 
 <footer>
   <span>{site.name}</span>
-  <span>Prototype — draft content</span>
+  <span>{site.footer.note}</span>
+  <span class="credit">
+    {site.footer.creditPrefix}{' '}
+    <a href={site.footer.creditUrl} target="_blank" rel="noopener noreferrer">{site.footer.creditName}</a>
+  </span>
 </footer>
 
 <script is:inline>

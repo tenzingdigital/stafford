@@ -200,5 +200,11 @@
       "label": "Contact",
       "href": "#contact"
     }
-  ]
+  ],
+  "footer": {
+    "note": "Prototype — draft content",
+    "creditPrefix": "Website built by",
+    "creditName": "Tenzing Digital AI",
+    "creditUrl": "https://tenzing.ie"
+  }
 }

@@ -215,6 +215,14 @@ collections:
                   - { name: url, label: Website, widget: string }
                   - { name: mark, label: Logo, widget: image, required: false,
                       hint: "PNG or WebP with a transparent background works best." }
+          - name: footer
+            label: Footer
+            widget: object
+            fields:
+              - { name: note, label: Note, widget: string, required: false }
+              - { name: creditPrefix, label: Credit — wording, widget: string, default: "Website built by" }
+              - { name: creditName, label: Credit — name, widget: string }
+              - { name: creditUrl, label: Credit — link, widget: string }
           - name: nav
             label: Menu
             widget: list
