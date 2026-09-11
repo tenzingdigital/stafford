@@ -1,0 +1,7 @@
+{
+  "name": "stafford-cms-auth",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": { "start": "node server.js" }
+}

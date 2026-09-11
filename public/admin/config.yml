@@ -5,7 +5,10 @@ backend:
   name: github
   repo: tenzingdigital/stafford
   branch: main
-  # Opens a normal GitHub sign-in. No separate password to remember.
+  # Sign-in goes through the small OAuth handler in auth/, deployed alongside
+  # the site. Opens a normal GitHub sign-in; no separate password to remember.
+  base_url: https://stafford-cms-auth.onrender.com
+  auth_endpoint: auth
 
 media_folder: "public/images/uploads"   # where uploaded photos are stored
 public_folder: "images/uploads"          # how the site refers to them
