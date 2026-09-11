@@ -138,14 +138,23 @@ h1,h2,h3{ margin:0; }
 
 /* ── hero: the name as a poster, then the photograph full bleed ─ */
 
-.hero{ padding:clamp(2.5rem,6vw,5rem) var(--gutter) clamp(1.75rem,3.5vw,2.75rem); max-width:88rem; margin-inline:auto; }
+.hero{ display:grid; grid-template-columns:1fr; }
+@media (min-width:900px){ .hero{ grid-template-columns:1.04fr .96fr; align-items:stretch; } }
+.hero-type{
+  display:flex; flex-direction:column; justify-content:center;
+  padding:clamp(2.25rem,5vw,4.25rem) clamp(1.5rem,3.5vw,3.5rem) clamp(2rem,4vw,3.25rem) var(--gutter);
+}
 .hero h1{
-  font-size:clamp(3.4rem,13vw,11rem);
-  line-height:.82; letter-spacing:-.022em;
+  font-size:clamp(2.9rem,7.4vw,6.75rem);
+  line-height:.83; letter-spacing:-.022em;
+}
+@media (max-width:899px){
+  .hero-shot{ order:-1; height:52vh; }
+  .hero h1{ font-size:clamp(2.9rem,13vw,4.25rem); }
 }
 .hero-foot{
   display:flex; justify-content:space-between; align-items:flex-end;
-  gap:2rem 3rem; flex-wrap:wrap;
+  gap:1.5rem 2.5rem; flex-wrap:wrap;
   margin-top:clamp(1.5rem,3vw,2.5rem);
   padding-top:1.35rem; border-top:2px solid var(--ink);
 }
@@ -167,7 +176,18 @@ h1,h2,h3{ margin:0; }
 .btn-line:hover{ border-color:var(--ink); }
 @media (max-width:480px){ .btn{ padding:.75rem 1rem; font-size:.62rem; letter-spacing:.11em; } }
 
-.hero-shot img{ width:100%; height:clamp(15rem,46vw,34rem); object-fit:cover; object-position:center 52%; }
+.hero-shot{ position:relative; overflow:hidden; min-height:clamp(20rem,58vh,40rem); }
+.hero-shot img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center 16%; }
+
+/* the drone frame is panoramic — it earns a full-bleed band of its own */
+.plate-wide{ margin:0; position:relative; border-top:1px solid var(--rule); }
+.plate-wide img{ width:100%; height:clamp(14rem,42vw,30rem); object-fit:cover; object-position:center 55%; }
+.plate-wide figcaption{
+  position:absolute; left:var(--gutter); bottom:1.1rem;
+  font-family:var(--f-mono); font-size:.63rem; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase;
+  color:#fff; text-shadow:0 1px 12px rgba(0,0,0,.6);
+}
 
 /* ── status ─────────────────────────────────────────────────── */
 
@@ -355,20 +375,21 @@ footer{
 </nav>
 
 <header class="hero" id="top">
-  <p class="label" style="margin-bottom:clamp(1rem,2vw,1.75rem)">Captain &middot; Expedition leader &middot; Ireland</p>
-  <h1 class="d">Stafford<br>Tyrrell</h1>
-  <div class="hero-foot">
-    <p class="stand">Eighty-two degrees north under sail, a thousand four hundred kilometres across the ice of Lake Baikal, and a crossing of the Greenland ice cap.</p>
-    <div class="acts">
-      <a class="btn btn-solid" href="#expeditions">The expeditions</a>
-      <a class="btn btn-line" href="#partners">For partners</a>
+  <div class="hero-type">
+    <p class="label" style="margin-bottom:clamp(.9rem,1.8vw,1.5rem)">Captain &middot; Expedition leader &middot; Ireland</p>
+    <h1 class="d">Stafford<br>Tyrrell</h1>
+    <div class="hero-foot">
+      <p class="stand">Eighty-two degrees north under sail, a thousand four hundred kilometres across the ice of Lake Baikal, and a crossing of the Greenland ice cap.</p>
+      <div class="acts">
+        <a class="btn btn-solid" href="#expeditions">The expeditions</a>
+        <a class="btn btn-line" href="#partners">For partners</a>
+      </div>
     </div>
   </div>
+  <div class="hero-shot">
+    <img src="images/light/portrait-frost.jpg" alt="Stafford Tyrrell in a frost-covered fur-lined hood, ice formed across his beard, against a pale winter sky">
+  </div>
 </header>
-
-<figure class="hero-shot" style="margin:0">
-  <img src="images/light/berg-patagonia.jpg" alt="The expedition yacht Patagonia anchored beside an enormous iceberg in a Greenland fjord, mountains behind">
-</figure>
 
 <div class="status">
   <span class="dot" aria-hidden="true"></span>
@@ -385,6 +406,11 @@ footer{
   <div><dt>Baikal, on ski</dt><dd>1,400 <small>KM</small></dd></div>
   <div><dt>Days on glaciated terrain</dt><dd>700<small>+</small></dd></div>
 </dl>
+
+<figure class="plate-wide">
+  <img src="images/light/berg-patagonia.jpg" alt="The expedition yacht Patagonia anchored beside an enormous iceberg in a Greenland fjord, mountains behind">
+  <figcaption>S/Y Patagonia at anchor &mdash; East Greenland</figcaption>
+</figure>
 
 <section class="band sheet" id="expeditions" style="padding-bottom:clamp(1.75rem,3.5vw,3rem)">
   <div class="marg">
