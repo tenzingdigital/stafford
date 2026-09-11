@@ -1,34 +1,36 @@
 <title>Stafford Tyrrell</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Source+Sans+3:wght@300;400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Public+Sans:wght@300;400;500;600&display=swap">
 
 <style>
-/* ───────────────────────────────────────────────────────────
-   Stafford Tyrrell — light edition
-   White paper, cool snow-grey panels, one deep marine accent.
-   The photographs carry all the colour; the page stays out of
-   their way. Committed single theme: a dark variant would
-   fight a design whose whole point is air.
-   ─────────────────────────────────────────────────────────── */
+/* ════════════════════════════════════════════════════════════
+   Stafford Tyrrell
+   Laid out as a ship's log: labels in the margin, a narrow
+   measure for reading, photographs breaking the container to
+   the viewport edge, and every expedition indexed by the
+   latitude it reached rather than by a counter.
+   Committed single theme — white paper. Every colour painted.
+   ════════════════════════════════════════════════════════════ */
 
 :root{
-  --paper:   #FFFFFF;
-  --panel:   #F1F4F6;   /* snow in shadow — cool, never cream */
-  --rule:    #DDE3E8;
-  --ink:     #0F1720;   /* near-black, biased blue */
-  --ink-2:   #55636F;
-  --ink-3:   #8795A1;
-  --deep:    #123E5E;   /* the one accent: cold marine blue */
-  --deep-soft:#E4ECF2;
+  --paper:      #FFFFFF;
+  --mist:       #EDF1F4;   /* snow in shadow — cool, never cream */
+  --rule:       #D5DDE4;
+  --hair:       #E7ECF0;
+  --ink:        #0D141B;
+  --ink-2:      #4D5B67;
+  --ink-3:      #8493A0;
+  --deep:       #0E3B5C;
+  --deep-wash:  #DBE6EE;
 
-  --gutter: clamp(1.5rem, 6vw, 7rem);
-  --band:   clamp(4.5rem, 10vw, 9.5rem);
-  --measure: 36rem;
+  --gutter: clamp(1.25rem, 5vw, 6rem);
+  --band:   clamp(4rem, 9vw, 8.5rem);
+  --marg:   9.5rem;
 
-  --f-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --f-body:    "Source Sans 3", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
-  --f-mono:    "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --f-disp: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --f-body: "Public Sans", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -40,328 +42,337 @@ body{
   font-family:var(--f-body);
   font-size:17px;
   font-weight:400;
-  line-height:1.65;
+  line-height:1.62;
   -webkit-font-smoothing:antialiased;
 }
-
 img{ max-width:100%; display:block; }
 a{ color:inherit; }
+::selection{ background:var(--deep); color:#fff; }
 :focus-visible{ outline:2px solid var(--deep); outline-offset:4px; }
 
-h1,h2,h3,h4{
-  margin:0;
-  font-family:var(--f-display);
-  font-weight:600;
-  letter-spacing:-.015em;
-  line-height:1.08;
-  text-wrap:balance;
-}
+/* ── type roles ─────────────────────────────────────────────── */
 
-.eyebrow{
+h1,h2,h3{ margin:0; font-family:var(--f-disp); font-weight:400; line-height:1.02; letter-spacing:-.01em; text-wrap:balance; }
+
+.label{
   margin:0;
   font-family:var(--f-mono);
-  font-size:.7rem;
-  font-weight:500;
-  letter-spacing:.2em;
-  text-transform:uppercase;
+  font-size:.66rem; font-weight:500;
+  letter-spacing:.22em; text-transform:uppercase;
   color:var(--ink-3);
 }
 
-.lede{
-  font-size:1.25rem;
-  line-height:1.6;
-  color:var(--ink-2);
+.body{
+  margin:0;
+  font-size:1.0625rem; line-height:1.72;
+  color:var(--ink-2); max-width:34rem;
   font-weight:300;
-  max-width:32rem;
-  margin:0;
+}
+.body + .body{ margin-top:1.1rem; }
+.body strong{ color:var(--ink); font-weight:500; }
+
+.meta{
+  display:flex; flex-wrap:wrap; gap:.35rem 1.1rem;
+  font-family:var(--f-mono); font-size:.68rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--ink-3);
 }
 
-p.body{
-  margin:0;
-  font-size:1.0625rem;
-  line-height:1.72;
-  color:var(--ink-2);
-  max-width:var(--measure);
+/* ── shell + marginalia grid ────────────────────────────────── */
+
+.sheet{ max-width:88rem; margin-inline:auto; padding-inline:var(--gutter); }
+.band{ padding-block:var(--band); }
+
+.marg{ display:grid; grid-template-columns:1fr; gap:1.25rem; }
+@media (min-width:1080px){
+  .marg{ grid-template-columns:var(--marg) minmax(0,1fr); gap:0 4.5rem; }
+  .marg > .label{ padding-top:.7rem; }
 }
-p.body strong{ color:var(--ink); font-weight:600; }
+.marg h2{ font-size:clamp(2.25rem,5vw,3.75rem); max-width:18ch; }
+.marg .body{ margin-top:1.5rem; }
 
-/* ── shell ─────────────────────────────────────────────────── */
-
-.band{ padding-inline:var(--gutter); padding-block:var(--band); }
-.band.tight{ padding-block:calc(var(--band) * .55); }
-.inner{ max-width:82rem; margin-inline:auto; }
-
-.head{ display:flex; flex-direction:column; gap:1.1rem; max-width:44rem; }
-.head h2{ font-size:clamp(2rem,4.6vw,3.25rem); }
-
-/* ── notice ────────────────────────────────────────────────── */
+/* ── notice ─────────────────────────────────────────────────── */
 
 .notice{
-  background:var(--deep);
-  color:#DCE8F1;
-  font-family:var(--f-mono);
-  font-size:.7rem;
-  letter-spacing:.05em;
-  line-height:1.6;
+  background:var(--deep); color:#C9DCE9;
+  font-family:var(--f-mono); font-size:.68rem; line-height:1.6;
   padding:.7rem var(--gutter);
-  display:flex; gap:.8rem; flex-wrap:wrap; align-items:baseline;
+  display:flex; gap:.85rem; flex-wrap:wrap; align-items:baseline;
 }
-.notice b{ color:#fff; font-weight:500; letter-spacing:.16em; text-transform:uppercase; }
+.notice b{ color:#fff; font-weight:500; letter-spacing:.18em; text-transform:uppercase; }
 
-/* ── nav ───────────────────────────────────────────────────── */
+/* ── nav ────────────────────────────────────────────────────── */
 
 .nav{
   display:flex; align-items:baseline; justify-content:space-between;
-  gap:1.5rem 2rem; flex-wrap:wrap;
-  padding:1.6rem var(--gutter);
+  gap:1rem 2rem; flex-wrap:wrap;
+  padding:1.35rem var(--gutter);
   border-bottom:1px solid var(--rule);
 }
-.mark{
-  font-family:var(--f-display);
-  font-size:1.0625rem;
-  font-weight:600;
-  letter-spacing:.01em;
-  text-decoration:none;
-}
-.nav-links{
-  display:flex; gap:1.9rem; flex-wrap:wrap;
-  font-size:.78rem; font-weight:600;
-  letter-spacing:.13em; text-transform:uppercase;
-}
-.nav-links a{
+.mark{ font-family:var(--f-disp); font-size:1.3rem; text-decoration:none; letter-spacing:.01em; }
+.nav ul{ display:flex; gap:1.75rem; flex-wrap:wrap; list-style:none; margin:0; padding:0; }
+.nav a:not(.mark){
+  font-family:var(--f-mono); font-size:.68rem; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase;
   color:var(--ink-2); text-decoration:none;
   padding-bottom:3px; border-bottom:1px solid transparent;
   transition:color .18s, border-color .18s;
 }
-.nav-links a:hover{ color:var(--ink); border-bottom-color:var(--deep); }
+.nav a:not(.mark):hover{ color:var(--deep); border-bottom-color:var(--deep); }
 
-/* ── hero ──────────────────────────────────────────────────── */
+/* ── hero: split, photograph bleeds to the viewport edge ────── */
 
-.hero{
-  display:grid; grid-template-columns:1fr; gap:clamp(2.5rem,6vw,5rem);
-  padding:clamp(3rem,7vw,6rem) var(--gutter) clamp(3rem,6vw,5rem);
-  max-width:82rem; margin-inline:auto;
-  align-items:center;
+.hero{ display:grid; grid-template-columns:1fr; }
+@media (min-width:900px){
+  .hero{ grid-template-columns:1.02fr .98fr; min-height:clamp(30rem,72vh,44rem); }
 }
-@media (min-width:900px){ .hero{ grid-template-columns:.92fr 1.08fr; } }
-
-.hero-text{ display:flex; flex-direction:column; gap:1.75rem; }
+.hero-type{
+  display:flex; flex-direction:column; justify-content:center; gap:1.9rem;
+  padding:clamp(3rem,7vw,5.5rem) clamp(2rem,5vw,4.5rem) clamp(3rem,7vw,5.5rem) var(--gutter);
+}
 .hero h1{
-  font-size:clamp(3.25rem,8.5vw,6.75rem);
-  font-weight:600;
-  line-height:.95;
-  letter-spacing:-.03em;
+  font-size:clamp(3.5rem,8.2vw,7rem);
+  line-height:.92; letter-spacing:-.025em;
 }
-.hero h1 em{ display:block; font-style:normal; color:var(--deep); }
-.hero-figure{ position:relative; }
-.hero-figure img{ width:100%; aspect-ratio:4/5; object-fit:cover; object-position:center 20%; }
-.caption{
-  margin:.85rem 0 0;
-  font-family:var(--f-mono);
-  font-size:.66rem; letter-spacing:.14em; text-transform:uppercase;
-  color:var(--ink-3);
+.hero h1 i{ display:block; font-style:italic; color:var(--deep); }
+.hero .stand{
+  margin:0; max-width:26rem;
+  font-size:clamp(1.0625rem,1.6vw,1.25rem);
+  font-weight:300; line-height:1.58; color:var(--ink-2);
 }
+.hero-shot{ position:relative; overflow:hidden; min-height:20rem; }
+.hero-shot img{ width:100%; height:100%; min-height:20rem; object-fit:cover; object-position:center 18%; }
 
-.actions{ display:flex; gap:.75rem; flex-wrap:wrap; }
+.acts{ display:flex; gap:.6rem; flex-wrap:wrap; }
 .btn{
   display:inline-block; text-decoration:none;
-  font-size:.76rem; font-weight:600; letter-spacing:.13em; text-transform:uppercase;
-  padding:.9rem 1.6rem;
+  font-family:var(--f-mono); font-size:.7rem; font-weight:500;
+  letter-spacing:.16em; text-transform:uppercase;
+  padding:.95rem 1.7rem; border:1px solid var(--deep);
   transition:background .18s, color .18s, border-color .18s;
 }
-.btn-solid{ background:var(--deep); color:#fff; border:1px solid var(--deep); }
-.btn-solid:hover{ background:#0C2E47; border-color:#0C2E47; }
-.btn-line{ background:transparent; color:var(--ink); border:1px solid var(--rule); }
+.btn-solid{ background:var(--deep); color:#fff; }
+.btn-solid:hover{ background:#092B43; border-color:#092B43; }
+.btn-line{ background:transparent; color:var(--ink); border-color:var(--rule); }
 .btn-line:hover{ border-color:var(--ink); }
 
-/* ── status line ───────────────────────────────────────────── */
+/* ── status rule ────────────────────────────────────────────── */
 
 .status{
-  display:flex; align-items:center; gap:.7rem 1.25rem; flex-wrap:wrap;
-  padding:1.1rem var(--gutter);
+  display:flex; align-items:center; gap:.65rem 1.2rem; flex-wrap:wrap;
+  padding:1rem var(--gutter);
   border-block:1px solid var(--rule);
-  font-family:var(--f-mono);
-  font-size:.73rem; letter-spacing:.1em; text-transform:uppercase;
-  color:var(--ink-2);
+  font-family:var(--f-mono); font-size:.7rem;
+  letter-spacing:.13em; text-transform:uppercase; color:var(--ink-2);
 }
 .status .dot{
-  width:8px; height:8px; border-radius:50%; background:var(--deep); flex:0 0 auto;
-  box-shadow:0 0 0 0 rgba(18,62,94,.5);
+  width:7px; height:7px; border-radius:50%; background:var(--deep); flex:0 0 auto;
   animation:ping 2.6s ease-out infinite;
 }
 @keyframes ping{
-  0%{ box-shadow:0 0 0 0 rgba(18,62,94,.45); }
-  70%{ box-shadow:0 0 0 10px rgba(18,62,94,0); }
-  100%{ box-shadow:0 0 0 0 rgba(18,62,94,0); }
+  0%{ box-shadow:0 0 0 0 rgba(14,59,92,.45); }
+  70%{ box-shadow:0 0 0 9px rgba(14,59,92,0); }
+  100%{ box-shadow:0 0 0 0 rgba(14,59,92,0); }
 }
 .status b{ color:var(--deep); font-weight:500; }
-.status .sep{ color:var(--rule); }
+.status i{ color:var(--rule); font-style:normal; }
 
-/* ── figures ───────────────────────────────────────────────── */
+/* ── the log: ruled figures, label above value ──────────────── */
 
-.figures{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));
-  gap:2.5rem 2rem;
-  padding-block:calc(var(--band) * .55);
+.log{
+  display:grid; grid-template-columns:repeat(2,1fr);
+  border-bottom:1px solid var(--rule);
 }
-.fig-v{
-  font-family:var(--f-display);
-  font-size:clamp(2rem,4.4vw,3rem);
-  font-weight:400;
-  line-height:1;
-  font-variant-numeric:tabular-nums;
-  letter-spacing:-.02em;
+@media (min-width:760px){ .log{ grid-template-columns:repeat(4,1fr); } }
+.log div{
+  padding:2.1rem var(--gutter) 2.3rem;
+  border-right:1px solid var(--hair);
+  display:flex; flex-direction:column; gap:.9rem;
 }
-.fig-v small{ font-family:var(--f-mono); font-size:.32em; letter-spacing:.12em; color:var(--ink-3); }
-.fig-l{
-  display:block; margin-top:.6rem;
-  font-family:var(--f-mono); font-size:.66rem;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+.log div:last-child{ border-right:none; }
+@media (max-width:759px){
+  .log div{ padding-inline:var(--gutter); border-bottom:1px solid var(--hair); }
+  .log div:nth-child(2n){ border-right:none; }
+}
+.log dt{
+  font-family:var(--f-mono); font-size:.62rem; font-weight:500;
+  letter-spacing:.2em; text-transform:uppercase; color:var(--ink-3);
+}
+.log dd{
+  margin:0; font-family:var(--f-disp);
+  font-size:clamp(2.1rem,4.2vw,3.1rem); line-height:.9;
+  font-variant-numeric:tabular-nums; letter-spacing:-.02em;
+}
+.log dd small{ font-family:var(--f-mono); font-size:.3em; letter-spacing:.14em; color:var(--ink-3); }
+
+/* ── expedition bands: full bleed, alternating ──────────────── */
+
+.exp{ display:grid; grid-template-columns:1fr; border-top:1px solid var(--rule); }
+@media (min-width:900px){
+  .exp{ grid-template-columns:1fr 1fr; }
+  .exp.rev .exp-shot{ order:2; }
+}
+.exp-shot{
+  position:relative; overflow:hidden; background:var(--mist);
+  min-height:clamp(18rem,40vw,30rem);
+}
+.exp-shot > img{
+  position:absolute; inset:0;
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .8s cubic-bezier(.2,.6,.2,1);
+}
+.exp:hover .exp-shot img{ transform:scale(1.035); }
+
+.exp-text{
+  padding:clamp(2.75rem,5vw,4.5rem) var(--gutter);
+  display:flex; flex-direction:column; gap:1.4rem;
+  justify-content:center;
+}
+@media (min-width:900px){
+  .exp-text{ padding-inline:clamp(2.5rem,4.5vw,4.5rem); }
+  .exp:not(.rev) .exp-text{ padding-right:var(--gutter); }
+  .exp.rev .exp-text{ padding-left:var(--gutter); }
 }
 
-/* ── expeditions ───────────────────────────────────────────── */
-
-.exped{ padding-block:clamp(3rem,6vw,5.5rem); border-top:1px solid var(--rule); }
-.exped-grid{
-  display:grid; grid-template-columns:1fr; gap:clamp(2rem,5vw,4.5rem);
-  align-items:start;
+/* latitude as the index — real data, so it earns the size */
+.lat{
+  margin:0; font-family:var(--f-disp);
+  font-size:clamp(3.25rem,6.5vw,5.25rem); line-height:.82;
+  color:var(--deep); letter-spacing:-.03em;
+  border-bottom:1px solid var(--rule);
+  padding-bottom:1.1rem;
+  display:flex; align-items:baseline; justify-content:space-between; gap:1rem;
 }
-@media (min-width:880px){
-  .exped-grid{ grid-template-columns:1.35fr 1fr; }
-  .exped.flip .exped-figure{ order:2; }
+.lat em{
+  font-family:var(--f-mono); font-style:normal;
+  font-size:.155em; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--ink-3); align-self:flex-end; padding-bottom:.55em;
+  text-align:right;
 }
-.exped-figure img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
-.exped-figure.tall img{ aspect-ratio:3/4; }
-.exped-body{ display:flex; flex-direction:column; gap:1.25rem; }
-.title-row{ display:flex; align-items:center; gap:1.1rem; flex-wrap:wrap; }
-.patch{ width:clamp(56px,7.5vw,74px); height:auto; aspect-ratio:1; flex:0 0 auto; }
-.exped-body h3{ font-size:clamp(1.6rem,3.2vw,2.375rem); }
-.exped.lead .exped-body h3{ font-size:clamp(1.9rem,3.8vw,2.75rem); }
-
-.meta{
-  display:flex; flex-wrap:wrap; gap:.4rem 1rem;
-  font-family:var(--f-mono); font-size:.68rem;
-  letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3);
-}
-.meta span{ white-space:nowrap; }
+.exp-head{ display:flex; align-items:center; gap:1rem; flex-wrap:wrap; }
+.patch{ width:clamp(52px,6.5vw,68px); height:auto; aspect-ratio:1; flex:0 0 auto; }
+.exp-text h3{ font-size:clamp(1.75rem,3.2vw,2.5rem); }
 
 .route{
-  margin:0; padding:1.1rem 1.25rem;
-  background:var(--panel);
-  font-family:var(--f-mono); font-size:.74rem; line-height:1.9;
-  color:var(--ink-2); letter-spacing:.02em;
-  max-width:var(--measure);
+  margin:.4rem 0 0; padding:1rem 1.1rem;
+  background:var(--mist);
+  font-family:var(--f-mono); font-size:.72rem; line-height:1.95;
+  color:var(--ink-2); max-width:34rem;
 }
 .route b{ color:var(--ink); font-weight:500; }
 
-.patch-plate{
-  background:var(--panel);
-  aspect-ratio:4/3;
-  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:1.25rem;
-  padding:2rem;
+.plate-only{
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:1.3rem; padding:3rem 2rem; background:var(--mist); height:100%;
+  min-height:clamp(18rem,40vw,32rem);
 }
-.patch-plate img{ width:min(56%,215px); aspect-ratio:1; object-fit:contain; }
-.patch-plate span{
+.plate-only img{ position:static; width:min(54%,205px); height:auto; aspect-ratio:1; object-fit:contain; }
+.plate-only span{
   font-family:var(--f-mono); font-size:.64rem;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
 }
 
-/* ── latitude ──────────────────────────────────────────────── */
+/* ── latitude chart ─────────────────────────────────────────── */
 
-.scale-band{ background:var(--panel); }
-.scale-wrap{ margin-top:3rem; overflow-x:auto; }
-.scale-wrap svg{ min-width:34rem; width:100%; height:auto; display:block; }
+.chart-band{ background:var(--mist); }
+.chart{ margin-top:3rem; overflow-x:auto; }
+.chart svg{ min-width:32rem; width:100%; height:auto; display:block; }
 
-/* ── plate (full-bleed image) ──────────────────────────────── */
+/* ── dark plate ─────────────────────────────────────────────── */
 
-.plate{ position:relative; }
-.plate img{ width:100%; height:clamp(19rem,48vh,30rem); object-fit:cover; object-position:center 44%; }
-.plate figcaption{
-  padding:1.5rem var(--gutter) 0;
-  font-family:var(--f-display);
-  font-size:clamp(1.1rem,2.3vw,1.6rem);
-  font-weight:400; font-style:italic;
-  color:var(--ink); max-width:52rem;
-  line-height:1.4;
+.dark{ position:relative; background:var(--ink); }
+.dark img{ width:100%; height:clamp(21rem,56vh,34rem); object-fit:cover; object-position:center 42%; opacity:.78; }
+.dark figcaption{
+  position:absolute; inset:auto var(--gutter) clamp(2rem,5vw,3.5rem) var(--gutter);
+  max-width:40rem;
+  font-family:var(--f-disp); font-style:italic;
+  font-size:clamp(1.35rem,3vw,2.25rem); line-height:1.28;
+  color:#F4F8FB;
 }
-.plate cite{
-  display:block; margin-top:.8rem;
-  font-family:var(--f-mono); font-style:normal;
-  font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+.dark cite{
+  display:block; margin-top:1.1rem;
+  font-family:var(--f-mono); font-style:normal; font-size:.64rem;
+  letter-spacing:.16em; text-transform:uppercase; color:#9FB3C2;
 }
 
-/* ── vessel / about ────────────────────────────────────────── */
+/* ── split (vessel / about) ─────────────────────────────────── */
 
-.split{
-  display:grid; grid-template-columns:1fr; gap:clamp(2rem,5vw,4.5rem);
-  align-items:center;
+.split{ display:grid; grid-template-columns:1fr; }
+@media (min-width:900px){
+  .split{ grid-template-columns:1fr 1fr; align-items:center; }
+  .split.rev .split-shot{ order:2; }
 }
-@media (min-width:880px){ .split{ grid-template-columns:1fr 1fr; } }
-.split.text-first .split-figure{ order:2; }
-.split img{ width:100%; aspect-ratio:4/3; object-fit:cover; }
-.split-body{ display:flex; flex-direction:column; gap:1.25rem; }
-
-.facts{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.5rem; }
+.split-shot{ position:relative; overflow:hidden; min-height:clamp(17rem,36vw,28rem); }
+.split-shot img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.split-text{
+  padding:clamp(2.75rem,5vw,4.5rem) var(--gutter);
+  display:flex; flex-direction:column; gap:1.25rem;
+}
+.split-text h2{ font-size:clamp(2rem,4vw,3rem); }
+.facts{ display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.4rem; }
 .facts span{
-  font-family:var(--f-mono); font-size:.68rem;
-  letter-spacing:.1em; text-transform:uppercase;
-  color:var(--deep); background:var(--deep-soft);
-  padding:.4rem .75rem;
+  font-family:var(--f-mono); font-size:.66rem;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:var(--deep); border:1px solid var(--deep-wash);
+  padding:.42rem .7rem;
 }
 
-/* ── journal ───────────────────────────────────────────────── */
+/* ── journal: a ruled index, not cards ──────────────────────── */
 
-.entries{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));
-  gap:2.5rem 3rem; margin-top:3rem;
+.index{ margin-top:2.5rem; border-top:1px solid var(--rule); }
+.item{
+  display:grid; grid-template-columns:1fr; gap:.45rem;
+  padding:1.9rem 0; border-bottom:1px solid var(--hair);
+  text-decoration:none;
 }
-.entry{ display:flex; flex-direction:column; gap:.7rem; text-decoration:none; }
-.entry .tag{
+@media (min-width:780px){
+  .item{ grid-template-columns:var(--marg) minmax(0,26rem) 1fr; gap:0 4.5rem; align-items:baseline; }
+}
+.item .tag{
   font-family:var(--f-mono); font-size:.64rem;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
+  letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
 }
-.entry h3{ font-size:1.25rem; font-weight:600; }
-.entry p{ margin:0; font-size:1rem; line-height:1.65; color:var(--ink-2); }
-.entry:hover h3{ color:var(--deep); }
+.item h3{ font-size:clamp(1.35rem,2.4vw,1.75rem); transition:color .18s; }
+.item p{ margin:0; font-size:.98rem; line-height:1.65; color:var(--ink-2); font-weight:300; }
+.item:hover h3{ color:var(--deep); }
 
-/* ── offer ─────────────────────────────────────────────────── */
+/* ── offer: ruled list ──────────────────────────────────────── */
 
-.offer{
-  display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
-  gap:3rem 3rem; margin-top:3.25rem;
+.offer{ margin-top:2.5rem; border-top:1px solid var(--rule); }
+.offer-row{
+  display:grid; grid-template-columns:1fr; gap:.5rem;
+  padding:2rem 0; border-bottom:1px solid var(--hair);
 }
-.offer-item{ display:flex; flex-direction:column; gap:.7rem; }
-.offer-item h3{
-  font-size:1.1875rem; font-weight:600;
-  padding-top:1.1rem; border-top:2px solid var(--deep);
+@media (min-width:780px){
+  .offer-row{ grid-template-columns:var(--marg) minmax(0,20rem) 1fr; gap:0 4.5rem; align-items:baseline; }
 }
-.offer-item p{ margin:0; font-size:1rem; line-height:1.68; color:var(--ink-2); }
+.offer-row .n{
+  font-family:var(--f-mono); font-size:.64rem;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--deep);
+}
+.offer-row h3{ font-size:clamp(1.35rem,2.4vw,1.75rem); }
+.offer-row p{ margin:0; font-size:.98rem; line-height:1.68; color:var(--ink-2); font-weight:300; }
 
-/* ── contact ───────────────────────────────────────────────── */
+/* ── contact ────────────────────────────────────────────────── */
 
-.contact{ display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start; }
 .mail{
-  font-family:var(--f-display);
-  font-size:clamp(1.35rem,4vw,2.5rem);
-  font-weight:400;
+  font-family:var(--f-disp);
+  font-size:clamp(1.6rem,5vw,3.25rem);
   color:var(--deep); text-decoration:none;
-  border-bottom:1px solid var(--rule);
-  padding-bottom:.3rem; word-break:break-word;
-  transition:border-color .18s;
+  border-bottom:1px solid var(--rule); padding-bottom:.2rem;
+  word-break:break-word; transition:border-color .18s;
+  align-self:flex-start;
 }
 .mail:hover{ border-bottom-color:var(--deep); }
 
 footer{
-  padding:2.5rem var(--gutter);
+  padding:2.25rem var(--gutter);
   border-top:1px solid var(--rule);
   display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;
-  font-family:var(--f-mono); font-size:.66rem;
-  letter-spacing:.12em; text-transform:uppercase; color:var(--ink-3);
+  font-family:var(--f-mono); font-size:.64rem;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ink-3);
 }
 
-@media (prefers-reduced-motion:reduce){
-  *{ transition:none !important; animation:none !important; }
-}
+@media (prefers-reduced-motion:reduce){ *{ transition:none !important; animation:none !important; } }
 </style>
 
 <div class="notice">
@@ -371,176 +382,147 @@ footer{
 
 <nav class="nav">
   <a class="mark" href="#top">Stafford Tyrrell</a>
-  <div class="nav-links">
-    <a href="#expeditions">Expeditions</a>
-    <a href="#patagonia">Patagonia</a>
-    <a href="#about">About</a>
-    <a href="#journal">Journal</a>
-    <a href="#partners">Partners</a>
-    <a href="#contact">Contact</a>
-  </div>
+  <ul>
+    <li><a href="#expeditions">Expeditions</a></li>
+    <li><a href="#patagonia">Patagonia</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#journal">Journal</a></li>
+    <li><a href="#partners">Partners</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
 </nav>
 
 <header class="hero" id="top">
-  <div class="hero-text">
-    <p class="eyebrow">Captain &middot; Expedition leader &middot; Ireland</p>
-    <h1>Stafford <em>Tyrrell</em></h1>
-    <p class="lede">Sailing a steel ketch to eighty-two degrees north, and walking off the end of the chart from there.</p>
-    <div class="actions">
+  <div class="hero-type">
+    <p class="label">Captain &middot; Expedition leader &middot; Ireland</p>
+    <h1>Stafford <i>Tyrrell</i></h1>
+    <p class="stand">Sailing a steel ketch to eighty-two degrees north, and walking off the end of the chart from there.</p>
+    <div class="acts">
       <a class="btn btn-solid" href="#expeditions">The expeditions</a>
       <a class="btn btn-line" href="#partners">For partners</a>
     </div>
   </div>
-  <figure class="hero-figure">
+  <div class="hero-shot">
     <img src="images/light/portrait-frost.jpg" alt="Stafford Tyrrell in a frost-covered fur-lined hood, ice formed across his beard, against a pale winter sky">
-    <figcaption class="caption">High Arctic</figcaption>
-  </figure>
+  </div>
 </header>
 
-<section class="status" aria-label="Current expedition">
+<div class="status">
   <span class="dot" aria-hidden="true"></span>
   <b>At sea now</b>
-  <span class="sep">/</span>
+  <i>/</i>
   <span>High Arctic Expedition &mdash; Ellesmere Island</span>
-  <span class="sep">/</span>
+  <i>/</i>
   <span>30 June &ndash; 25 September 2026</span>
-</section>
+</div>
 
-<section class="band tight" aria-label="Summary figures">
-  <div class="inner">
-    <div class="figures">
-      <div><span class="fig-v">82°N</span><span class="fig-l">Furthest north</span></div>
-      <div><span class="fig-v">5,626 <small>NM</small></span><span class="fig-l">This season&rsquo;s route</span></div>
-      <div><span class="fig-v">1,400 <small>KM</small></span><span class="fig-l">Baikal, on ski</span></div>
-      <div><span class="fig-v">700+</span><span class="fig-l">Days on glaciated terrain</span></div>
-    </div>
-  </div>
-</section>
+<dl class="log">
+  <div><dt>Furthest north</dt><dd>82°N</dd></div>
+  <div><dt>This season&rsquo;s route</dt><dd>5,626 <small>NM</small></dd></div>
+  <div><dt>Baikal, on ski</dt><dd>1,400 <small>KM</small></dd></div>
+  <div><dt>Days on glaciated terrain</dt><dd>700<small>+</small></dd></div>
+</dl>
 
-<section class="band" id="expeditions" style="padding-top:0">
-  <div class="inner">
-    <div class="head" style="margin-bottom:1rem">
-      <p class="eyebrow">Expeditions</p>
+<section class="band sheet" id="expeditions" style="padding-bottom:clamp(2rem,4vw,3.5rem)">
+  <div class="marg">
+    <p class="label">Expeditions</p>
+    <div>
       <h2>Where the work has been done</h2>
-      <p class="body">Each expedition is marked with the latitude it reached. Latitude is the honest measure of a journey north — and of how much further there is to go.</p>
+      <p class="body">Each expedition is indexed by the latitude it reached, because latitude is the honest measure of a journey north — and of how much further there is to go.</p>
     </div>
-
-    <article class="exped lead">
-      <div class="exped-grid">
-        <figure class="exped-figure">
-          <img src="images/light/glacier-wall.jpg" alt="Stafford at the rail of Patagonia before a towering glacier face, turquoise meltwater below" style="object-position:center 42%">
-          <figcaption class="caption">82°00′N &nbsp;·&nbsp; S/Y Patagonia</figcaption>
-        </figure>
-        <div class="exped-body">
-          <p class="eyebrow" style="color:var(--deep)">In progress · Furthest north</p>
-          <div class="title-row">
-            <img class="patch" src="images/patches/high-arctic-82n.webp" alt="High Arctic Expedition patch: an Arctic wolf beneath the aurora, marked 82 degrees North, S/Y Patagonia">
-            <h3>High Arctic Expedition</h3>
-          </div>
-          <div class="meta"><span>30 Jun – 25 Sep 2026</span><span>76 days sailing</span><span>Ellesmere Island</span></div>
-          <p class="body">Iceland to Ellesmere Island by way of the west coast of Greenland, then a basecamp at Tanquary Fjord and a ski-mountaineering push onto the glacier to climb Mount Barbeau — and, a hundred kilometres south-west of it, a peak that has never been climbed by anybody.</p>
-          <p class="body">Ellesmere is the tenth largest island on earth and has a hundred and fifty permanent residents. The channels leading to it are uncharted, shoal-ridden and choked with multi-year ice. <strong>Tanquary Fjord lies 720 km from the North Pole.</strong></p>
-          <p class="route"><b>Route</b><br>Reykjavík → Nuuk → Qaanaaq → Ellesmere → Pond Inlet → Sisimiut → Qaqortoq → Reykjavík<br><b>5,626 nautical miles</b> · 21 days ashore at Tanquary</p>
-        </div>
-      </div>
-    </article>
-
-    <article class="exped flip">
-      <div class="exped-grid">
-        <figure class="exped-figure">
-          <div class="patch-plate">
-            <img src="images/patches/baikal.webp" alt="Trans-Siberian Baikal Winter Expedition 2026 patch: crossed ski poles, a compass rose, and the Russian and Irish flags">
-            <span>Photographs to come</span>
-          </div>
-        </figure>
-        <div class="exped-body">
-          <div class="title-row">
-            <img class="patch" src="images/patches/baikal.webp" alt="">
-            <h3>Circumnavigation of Lake Baikal</h3>
-          </div>
-          <div class="meta"><span>From 20 Feb 2026</span><span>1,400 km</span><span>53°N</span><span>Unsupported</span></div>
-          <p class="body">A full circuit of the frozen shoreline of the oldest and deepest lake on earth, on ski, hauling everything from the start with no resupply. South to north, then back again. Between forty-five and fifty-five days on the ice at <strong>−25°C to −40°C</strong>.</p>
-          <p class="body">It has been attempted and never completed. With Mark McInerney.</p>
-        </div>
-      </div>
-    </article>
-
-    <article class="exped">
-      <div class="exped-grid">
-        <figure class="exped-figure">
-          <img src="images/light/icecap-traverse.jpg" alt="Two skiers hauling loaded sledges across the flat white Greenland ice cap under a hard low sun" style="object-position:center 55%">
-          <figcaption class="caption">Greenland ice cap &nbsp;·&nbsp; 2024</figcaption>
-        </figure>
-        <div class="exped-body">
-          <div class="title-row">
-            <img class="patch" src="images/patches/trans-greenland.webp" alt="Trans Greenland Expedition 2024 patch: a polar bear against an ice field">
-            <h3>Trans Greenland Expedition</h3>
-          </div>
-          <div class="meta"><span>2024</span><span>100 days</span><span>Nine crew</span><span>Captain</span></div>
-          <p class="body">A hundred days and nine people, combining a sail passage with a man-hauled crossing of the world&rsquo;s largest ice cap. Sixty-kilo pulks, crevasses, polar bears and a late-season weather window. Stafford captained it.</p>
-        </div>
-      </div>
-    </article>
   </div>
 </section>
 
-<section class="band scale-band" aria-labelledby="scale-title">
-  <div class="inner">
-    <div class="head">
-      <p class="eyebrow">Progress north</p>
-      <h2 id="scale-title">Eighty-two degrees north</h2>
-      <p class="body">Tanquary Fjord, this season&rsquo;s basecamp, sits 720 kilometres from the Pole.</p>
+<article class="exp">
+  <div class="exp-shot">
+    <img src="images/light/glacier-wall.jpg" alt="Stafford at the rail of Patagonia before a towering glacier face, turquoise meltwater below" style="object-position:center 42%">
+  </div>
+  <div class="exp-text">
+    <p class="lat">82°N <em>In progress<br>S/Y Patagonia</em></p>
+    <div class="exp-head">
+      <img class="patch" src="images/patches/high-arctic-82n.webp" alt="High Arctic Expedition patch: an Arctic wolf beneath the aurora, marked 82 degrees North, S/Y Patagonia">
+      <h3>High Arctic Expedition</h3>
     </div>
-    <div class="scale-wrap">
+    <div class="meta"><span>30 Jun – 25 Sep 2026</span><span>76 days sailing</span><span>Ellesmere Island</span></div>
+    <p class="body">Iceland to Ellesmere Island by way of the west coast of Greenland, then a basecamp at Tanquary Fjord and a ski-mountaineering push onto the glacier to climb Mount Barbeau — and, a hundred kilometres south-west of it, a peak that has never been climbed by anybody.</p>
+    <p class="body">Ellesmere is the tenth largest island on earth and has a hundred and fifty permanent residents. <strong>Tanquary Fjord lies 720 km from the North Pole.</strong></p>
+    <p class="route"><b>Route</b><br>Reykjavík → Nuuk → Qaanaaq → Ellesmere → Pond Inlet → Sisimiut → Qaqortoq → Reykjavík<br><b>5,626 nautical miles</b> · 21 days ashore</p>
+  </div>
+</article>
+
+<article class="exp rev">
+  <div class="exp-shot">
+    <div class="plate-only">
+      <img src="images/patches/baikal.webp" alt="Trans-Siberian Baikal Winter Expedition 2026 patch: crossed ski poles, a compass rose, and the Russian and Irish flags">
+      <span>Photographs to come</span>
+    </div>
+  </div>
+  <div class="exp-text">
+    <p class="lat">53°N <em>Feb 2026<br>Siberia</em></p>
+    <div class="exp-head">
+      <img class="patch" src="images/patches/baikal.webp" alt="">
+      <h3>Circumnavigation of Lake Baikal</h3>
+    </div>
+    <div class="meta"><span>1,400 km</span><span>45–55 days</span><span>Unsupported</span></div>
+    <p class="body">A full circuit of the frozen shoreline of the oldest and deepest lake on earth, on ski, hauling everything from the start with no resupply. South to north, then back again, at <strong>−25°C to −40°C</strong>.</p>
+    <p class="body">It has been attempted and never completed. With Mark McInerney.</p>
+  </div>
+</article>
+
+<article class="exp">
+  <div class="exp-shot">
+    <img src="images/light/icecap-traverse.jpg" alt="Two skiers hauling loaded sledges across the flat white Greenland ice cap under a hard low sun" style="object-position:center 55%">
+  </div>
+  <div class="exp-text">
+    <p class="lat">66°N <em>2024<br>Greenland</em></p>
+    <div class="exp-head">
+      <img class="patch" src="images/patches/trans-greenland.webp" alt="Trans Greenland Expedition 2024 patch: a polar bear against an ice field">
+      <h3>Trans Greenland Expedition</h3>
+    </div>
+    <div class="meta"><span>100 days</span><span>Nine crew</span><span>Captain</span></div>
+    <p class="body">A hundred days and nine people, combining a sail passage with a man-hauled crossing of the world&rsquo;s largest ice cap. Sixty-kilo pulks, crevasses, polar bears and a late-season weather window. Stafford captained it.</p>
+  </div>
+</article>
+
+<section class="band chart-band" style="border-top:1px solid var(--rule)">
+  <div class="sheet" style="padding-inline:0">
+    <div class="marg" style="padding-inline:var(--gutter)">
+      <p class="label">Progress north</p>
+      <div>
+        <h2>Eighty-two degrees north</h2>
+        <p class="body">Tanquary Fjord, this season&rsquo;s basecamp, sits 720 kilometres from the Pole.</p>
+      </div>
+    </div>
+    <div class="chart" style="padding-inline:var(--gutter)">
       <svg viewBox="0 0 900 104" role="img" aria-label="A latitude scale from 50 to 90 degrees north. Expeditions are marked at 53 degrees north for Lake Baikal, 66 degrees north for the Greenland crossing and 82 degrees north for Ellesmere Island. A dashed line continues to 90 degrees north.">
-        <line x1="30" y1="58" x2="686" y2="58" stroke="#123E5E" stroke-width="1.5"/>
-        <line x1="686" y1="58" x2="850" y2="58" stroke="#B9C6D1" stroke-width="1.5" stroke-dasharray="2 6"/>
-        <g font-family="JetBrains Mono, monospace" text-anchor="middle" font-size="9" fill="#8795A1">
-          <line x1="30" y1="54" x2="30" y2="62" stroke="#C8D2DA"/><text x="30" y="78">50</text>
-          <line x1="132.5" y1="54" x2="132.5" y2="62" stroke="#C8D2DA"/><text x="132.5" y="78">55</text>
-          <line x1="235" y1="54" x2="235" y2="62" stroke="#C8D2DA"/><text x="235" y="78">60</text>
-          <line x1="337.5" y1="54" x2="337.5" y2="62" stroke="#C8D2DA"/><text x="337.5" y="78">65</text>
-          <line x1="440" y1="54" x2="440" y2="62" stroke="#C8D2DA"/><text x="440" y="78">70</text>
-          <line x1="542.5" y1="54" x2="542.5" y2="62" stroke="#C8D2DA"/><text x="542.5" y="78">75</text>
-          <line x1="645" y1="54" x2="645" y2="62" stroke="#C8D2DA"/><text x="645" y="78">80</text>
-          <line x1="747.5" y1="54" x2="747.5" y2="62" stroke="#C8D2DA"/><text x="747.5" y="78">85</text>
-          <line x1="850" y1="54" x2="850" y2="62" stroke="#C8D2DA"/><text x="850" y="78">90</text>
+        <line x1="30" y1="58" x2="686" y2="58" stroke="#0E3B5C" stroke-width="1.5"/>
+        <line x1="686" y1="58" x2="850" y2="58" stroke="#AEBFCC" stroke-width="1.5" stroke-dasharray="2 6"/>
+        <g font-family="IBM Plex Mono, monospace" text-anchor="middle" font-size="9" fill="#8493A0">
+          <line x1="30" y1="54" x2="30" y2="62" stroke="#BFCBD5"/><text x="30" y="78">50</text>
+          <line x1="132.5" y1="54" x2="132.5" y2="62" stroke="#BFCBD5"/><text x="132.5" y="78">55</text>
+          <line x1="235" y1="54" x2="235" y2="62" stroke="#BFCBD5"/><text x="235" y="78">60</text>
+          <line x1="337.5" y1="54" x2="337.5" y2="62" stroke="#BFCBD5"/><text x="337.5" y="78">65</text>
+          <line x1="440" y1="54" x2="440" y2="62" stroke="#BFCBD5"/><text x="440" y="78">70</text>
+          <line x1="542.5" y1="54" x2="542.5" y2="62" stroke="#BFCBD5"/><text x="542.5" y="78">75</text>
+          <line x1="645" y1="54" x2="645" y2="62" stroke="#BFCBD5"/><text x="645" y="78">80</text>
+          <line x1="747.5" y1="54" x2="747.5" y2="62" stroke="#BFCBD5"/><text x="747.5" y="78">85</text>
+          <line x1="850" y1="54" x2="850" y2="62" stroke="#BFCBD5"/><text x="850" y="78">90</text>
         </g>
-        <g font-family="JetBrains Mono, monospace" text-anchor="middle" font-size="11" fill="#123E5E">
-          <line x1="91.5" y1="48" x2="91.5" y2="68" stroke="#123E5E" stroke-width="1.5"/>
-          <text x="91.5" y="38">53°N</text>
-          <text x="91.5" y="96" fill="#55636F" font-size="10">Baikal</text>
-          <line x1="358" y1="48" x2="358" y2="68" stroke="#123E5E" stroke-width="1.5"/>
-          <text x="358" y="38">66°N</text>
-          <text x="358" y="96" fill="#55636F" font-size="10">Greenland</text>
-          <line x1="686" y1="44" x2="686" y2="72" stroke="#123E5E" stroke-width="2.5"/>
-          <text x="686" y="34" font-size="13">82°N</text>
-          <text x="686" y="96" fill="#55636F" font-size="10">Ellesmere</text>
-          <text x="846" y="38" text-anchor="end" fill="#A9B6C1">90°N</text>
+        <g font-family="IBM Plex Mono, monospace" text-anchor="middle" font-size="11" fill="#0E3B5C">
+          <line x1="91.5" y1="48" x2="91.5" y2="68" stroke="#0E3B5C" stroke-width="1.5"/>
+          <text x="91.5" y="38">53°N</text><text x="91.5" y="96" fill="#4D5B67" font-size="10">Baikal</text>
+          <line x1="358" y1="48" x2="358" y2="68" stroke="#0E3B5C" stroke-width="1.5"/>
+          <text x="358" y="38">66°N</text><text x="358" y="96" fill="#4D5B67" font-size="10">Greenland</text>
+          <line x1="686" y1="43" x2="686" y2="73" stroke="#0E3B5C" stroke-width="2.5"/>
+          <text x="686" y="33" font-size="13">82°N</text><text x="686" y="96" fill="#4D5B67" font-size="10">Ellesmere</text>
+          <text x="846" y="38" text-anchor="end" fill="#A2B2BF">90°N</text>
         </g>
       </svg>
     </div>
   </div>
 </section>
 
-<section class="band" id="patagonia">
-  <div class="inner split">
-    <figure class="split-figure">
-      <img src="images/light/crew-patagonia.jpg" alt="The expedition yacht Patagonia alongside, crew in survival suits on the bow">
-      <figcaption class="caption">S/Y Patagonia and crew</figcaption>
-    </figure>
-    <div class="split-body">
-      <p class="eyebrow">The vessel</p>
-      <h2>S/Y Patagonia</h2>
-      <p class="body">A steel Van de Stadt ketch, welded in the Netherlands and ice-reinforced for Arctic and Antarctic water. Solar, a diesel generator and tankage for transatlantic passages. Watertight crash bulkhead.</p>
-      <div class="facts">
-        <span>60 ft</span><span>Ketch rig</span><span>12 berths</span><span>Steel, ice-reinforced</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<figure class="plate">
+<figure class="dark" style="margin:0">
   <img src="images/light/sunset-helm.jpg" alt="Stafford at the helm in survival gear at dusk, an orange sunset reflected on flat water">
   <figcaption>
     “A ship in the harbour is safe, but that is not what ships are for.”
@@ -548,69 +530,81 @@ footer{
   </figcaption>
 </figure>
 
-<section class="band" id="about">
-  <div class="inner split text-first">
-    <figure class="split-figure">
-      <img src="images/light/deck-rigging.jpg" alt="Stafford sitting against the mast of Patagonia in grey light, coiled rope beside him" style="object-position:44% 38%">
-    </figure>
-    <div class="split-body">
-      <p class="eyebrow">About</p>
-      <h2>Captain and expedition leader</h2>
-      <p class="body">Stafford Tyrrell is an Irish expedition leader and sailor with more than ten years of expeditions behind him, from the Himalayas to Africa and the Middle East. He has crossed all three of Iceland&rsquo;s largest ice caps — Vatnajökull, Langjökull and Mýrdalsjökull — and has <strong>over seven hundred days in glaciated terrain</strong>.</p>
-      <p class="body">He was part of the first Irish team to climb Mount Damavand in winter, and finished the Marathon des Sables in 2024. He is a commercial offshore diver and a 22-metre captain with fifteen years at sea. In 2024 he captained a nine-person, hundred-day expedition to Greenland.</p>
-      <p class="body">He is a Wilderness EMT, ice-field safety trained, a search and rescue member and an AIMG hard ice guide. He is based in Ireland.</p>
-    </div>
+<section class="split" id="patagonia">
+  <div class="split-shot">
+    <img src="images/light/crew-patagonia.jpg" alt="The expedition yacht Patagonia alongside, crew in survival suits on the bow">
+  </div>
+  <div class="split-text">
+    <p class="label">The vessel</p>
+    <h2>S/Y Patagonia</h2>
+    <p class="body">A steel Van de Stadt ketch, welded in the Netherlands and ice-reinforced for Arctic and Antarctic water. Solar, a diesel generator and tankage for transatlantic passages. Watertight crash bulkhead.</p>
+    <div class="facts"><span>60 ft</span><span>Ketch rig</span><span>12 berths</span><span>Steel, ice-reinforced</span></div>
   </div>
 </section>
 
-<section class="band" id="journal" style="background:var(--panel)">
-  <div class="inner">
-    <div class="head">
-      <p class="eyebrow">Journal</p>
-      <h2>Dispatches</h2>
-      <p class="body">Short notes from the field, and from the workshop between trips.</p>
-    </div>
-    <div class="entries">
-      <a class="entry" href="#">
-        <span class="tag">Draft entry</span>
-        <h3>Uncharted means uncharted</h3>
-        <p>The channels into Ellesmere are shoal-ridden and full of multi-year ice, and the chart stops being a promise somewhere north of Qaanaaq. What you do instead.</p>
-      </a>
-      <a class="entry" href="#">
-        <span class="tag">Draft entry</span>
-        <h3>What a pulk actually weighs</h3>
-        <p>Everyone asks about the cold. Nobody asks about the drag of sixty-five kilos on wind-packed snow, which is the thing that decides whether you make your distance.</p>
-      </a>
-      <a class="entry" href="#">
-        <span class="tag">Draft entry</span>
-        <h3>A peak with no name</h3>
-        <p>A hundred kilometres south-west of Barbeau there is a mountain nobody has stood on. Notes on planning a first ascent from the deck of a boat.</p>
-      </a>
-    </div>
+<section class="split rev" id="about" style="border-top:1px solid var(--rule)">
+  <div class="split-shot">
+    <img src="images/light/deck-rigging.jpg" alt="Stafford sitting against the mast of Patagonia in grey light, coiled rope beside him" style="object-position:44% 38%">
+  </div>
+  <div class="split-text">
+    <p class="label">About</p>
+    <h2>Captain and expedition leader</h2>
+    <p class="body">An Irish expedition leader and sailor with more than ten years behind him, from the Himalayas to Africa and the Middle East. He has crossed all three of Iceland&rsquo;s largest ice caps — Vatnajökull, Langjökull and Mýrdalsjökull — and has <strong>over seven hundred days in glaciated terrain</strong>.</p>
+    <p class="body">He was part of the first Irish team to climb Mount Damavand in winter, and finished the Marathon des Sables in 2024. He is a commercial offshore diver and a 22-metre captain with fifteen years at sea. A Wilderness EMT, ice-field safety trained, search and rescue member and AIMG hard ice guide.</p>
   </div>
 </section>
 
-<section class="band" id="partners">
-  <div class="inner">
-    <div class="head">
-      <p class="eyebrow">Partners</p>
-      <h2>Working with brands</h2>
-      <p class="body">Kit that works in Ireland in February is not kit that works at eighty-two degrees north. Stafford puts equipment into genuinely unforgiving conditions and reports back honestly — publicly if it performs, privately if it doesn&rsquo;t.</p>
+<section class="band sheet" id="journal" style="border-top:1px solid var(--rule)">
+  <div class="marg">
+    <p class="label">Journal</p>
+    <div><h2>Dispatches</h2></div>
+  </div>
+  <div class="index">
+    <a class="item" href="#">
+      <span class="tag">Draft</span>
+      <h3>Uncharted means uncharted</h3>
+      <p>The channels into Ellesmere are shoal-ridden and full of multi-year ice, and the chart stops being a promise somewhere north of Qaanaaq.</p>
+    </a>
+    <a class="item" href="#">
+      <span class="tag">Draft</span>
+      <h3>What a pulk actually weighs</h3>
+      <p>Everyone asks about the cold. Nobody asks about the drag of sixty-five kilos on wind-packed snow, which decides whether you make your distance.</p>
+    </a>
+    <a class="item" href="#">
+      <span class="tag">Draft</span>
+      <h3>A peak with no name</h3>
+      <p>A hundred kilometres south-west of Barbeau there is a mountain nobody has stood on. Notes on planning a first ascent from the deck of a boat.</p>
+    </a>
+  </div>
+</section>
+
+<section class="band sheet" id="partners" style="background:var(--mist); max-width:none">
+  <div style="max-width:88rem; margin-inline:auto">
+    <div class="marg">
+      <p class="label">Partners</p>
+      <div>
+        <h2>Working with brands</h2>
+        <p class="body">Kit that works in Ireland in February is not kit that works at eighty-two degrees north. Stafford puts equipment into genuinely unforgiving conditions and reports back honestly — publicly if it performs, privately if it doesn&rsquo;t.</p>
+      </div>
     </div>
     <div class="offer">
-      <div class="offer-item">
+      <div class="offer-row">
+        <span class="n">Rare</span>
         <h3>Name a mountain</h3>
         <p>There is an unclimbed peak south-west of Mount Barbeau. A first ascent carries naming rights, and that is a rare thing to be able to offer anyone.</p>
       </div>
-      <div class="offer-item">
+      <div class="offer-row">
+        <span class="n">Visibility</span>
         <h3>Hull, sails and screen</h3>
         <p>Logo space on the hull and sails of a sixty-foot ketch working the High Arctic, plus product placement through a feature-length documentary shot by professionals.</p>
       </div>
-      <div class="offer-item">
+      <div class="offer-row">
+        <span class="n">Product</span>
         <h3>Field testing</h3>
         <p>Sustained use at temperature, with structured feedback to your product team rather than a photograph and a thumbs up.</p>
       </div>
-      <div class="offer-item">
+      <div class="offer-row">
+        <span class="n">Audience</span>
         <h3>Talks and events</h3>
         <p>Expedition talks, screenings and corporate events — on decision-making, risk and turning round, not on heroics.</p>
       </div>
@@ -618,13 +612,15 @@ footer{
   </div>
 </section>
 
-<section class="band" id="contact">
-  <div class="inner contact">
-    <p class="eyebrow">Contact</p>
-    <h2>Get in touch</h2>
-    <p class="body">For expedition enquiries, partnership conversations and press.</p>
-    <a class="mail" href="mailto:stafford.tyrrell@gmail.com">stafford.tyrrell@gmail.com</a>
-    <a class="btn btn-line" href="#">Download press kit — bio &amp; high-res images</a>
+<section class="band sheet" id="contact">
+  <div class="marg">
+    <p class="label">Contact</p>
+    <div style="display:flex; flex-direction:column; gap:1.6rem; align-items:flex-start">
+      <h2>Get in touch</h2>
+      <p class="body">For expedition enquiries, partnership conversations and press.</p>
+      <a class="mail" href="mailto:stafford.tyrrell@gmail.com">stafford.tyrrell@gmail.com</a>
+      <a class="btn btn-line" href="#">Press kit — bio &amp; high-res images</a>
+    </div>
   </div>
 </section>
 
