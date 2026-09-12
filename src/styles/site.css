@@ -407,3 +407,72 @@ footer{
 .prose p + p{ margin-top:1rem; }
 .prose strong{ color:var(--ink); font-weight:600; }
 .prose a{ color:var(--ink); text-underline-offset:3px; }
+
+/* ════════════════════════════════════════════════════════════
+   MOTION
+   Three things only: the page arriving, sections rising as you
+   reach them, and the latitude line drawing itself north.
+   Everything is opt-in — no JavaScript or reduced-motion means
+   the page renders exactly as it did before, fully visible.
+   ════════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ── the page arriving ─────────────────────────────────────
+     A single staggered entrance, finished inside a second.    */
+
+  @keyframes rise { from { opacity: 0; transform: translateY(20px); } }
+  @keyframes settle { from { opacity: 0; transform: scale(1.04); } }
+
+  .hero-type > * { animation: rise .85s cubic-bezier(.22,.68,.24,1) backwards; }
+  .hero-type > *:nth-child(1) { animation-delay: .06s; }
+  .hero-type > *:nth-child(2) { animation-delay: .14s; }
+  .hero-type > *:nth-child(3) { animation-delay: .24s; }
+  .hero-shot img { animation: settle 1.4s cubic-bezier(.22,.68,.24,1) backwards .08s; }
+  .status, .log { animation: rise .8s cubic-bezier(.22,.68,.24,1) backwards .34s; }
+
+  /* ── sections rising as you reach them ─────────────────────
+     Hidden only once JS has confirmed it can reveal them again. */
+
+  .has-js [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition: opacity .75s cubic-bezier(.22,.68,.24,1),
+                transform .75s cubic-bezier(.22,.68,.24,1);
+    transition-delay: calc(var(--i, 0) * 70ms);
+  }
+  .has-js [data-reveal].in { opacity: 1; transform: none; }
+
+  /* the expedition latitude gets a touch more travel — it is the
+     one number the eye should land on */
+  .has-js .exp [data-reveal].lat { transform: translateY(26px); }
+  .has-js .exp [data-reveal].lat.in { transform: none; }
+
+  /* ── the latitude line drawing north ───────────────────────
+     The signature moment: the solid line grows to the furthest
+     latitude reached, the marks land, then the dashed run to the
+     Pole appears. It draws the argument the page is making.     */
+
+  .has-js .chart .reached {
+    stroke-dasharray: var(--len, 660);
+    stroke-dashoffset: var(--len, 660);
+  }
+  .has-js .chart.in .reached {
+    transition: stroke-dashoffset 1.5s cubic-bezier(.3,.7,.2,1);
+    stroke-dashoffset: 0;
+  }
+  .has-js .chart .remaining { opacity: 0; }
+  .has-js .chart.in .remaining { transition: opacity .6s ease 1.45s; opacity: 1; }
+  .has-js .chart .mark-group { opacity: 0; transform: translateY(6px); }
+  .has-js .chart.in .mark-group {
+    transition: opacity .5s ease var(--d, 0s), transform .5s cubic-bezier(.22,.68,.24,1) var(--d, 0s);
+    opacity: 1; transform: none;
+  }
+
+  /* ── micro-interactions ────────────────────────────────────── */
+
+  .btn { transition: background .18s, color .18s, border-color .18s, transform .12s; }
+  .btn:active { transform: translateY(1px); }
+  .sponsor { transition: color .18s, transform .25s cubic-bezier(.22,.68,.24,1); }
+  .sponsor:hover { transform: translateY(-2px); }
+}
