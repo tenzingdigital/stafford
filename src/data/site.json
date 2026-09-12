@@ -194,6 +194,10 @@
       "href": "#journal"
     },
     {
+      "label": "Follow",
+      "href": "#follow"
+    },
+    {
       "label": "Partners",
       "href": "#partners"
     },
@@ -207,5 +211,35 @@
     "creditPrefix": "Website built by",
     "creditName": "Tenzing Digital AI",
     "creditUrl": "https://tenzing.ie"
+  },
+  "keepInTouch": {
+    "label": "Keep in touch",
+    "heading": "Follow the expedition",
+    "body": "Occasional dispatches from the ice and the water. No more than a handful a year, and nothing else.",
+    "subscribe": {
+      "action": "",
+      "nameLabel": "Name",
+      "emailLabel": "Email address",
+      "buttonLabel": "Subscribe",
+      "consent": "By subscribing you agree to receive occasional email updates. You can unsubscribe at any time.",
+      "successMessage": "Thank you — you're on the list."
+    },
+    "social": [
+      {
+        "name": "Instagram",
+        "handle": "@staffordtyrrell",
+        "url": ""
+      },
+      {
+        "name": "Facebook",
+        "handle": "Stafford Tyrrell",
+        "url": ""
+      },
+      {
+        "name": "TikTok",
+        "handle": "@staffordtyrrell",
+        "url": ""
+      }
+    ]
   }
 }

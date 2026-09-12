@@ -234,6 +234,50 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
   </div>
 </section>
 
+<section class="band sheet" id="follow" style="border-top:1px solid var(--rule)">
+  <div class="touch">
+    <div data-reveal>
+      <p class="label">{site.keepInTouch.label}</p>
+      <h2 class="d" style="font-size:clamp(1.9rem,4vw,3rem); margin-top:1.1rem">{site.keepInTouch.heading}</h2>
+      <p class="body" style="margin-top:1.2rem">{site.keepInTouch.body}</p>
+
+      {site.keepInTouch.subscribe.action && (
+        <form class="signup" id="signup" method="POST" action={site.keepInTouch.subscribe.action}
+              data-success={site.keepInTouch.subscribe.successMessage}>
+          <div class="signup-row">
+            <div class="field">
+              <label for="sub-name">{site.keepInTouch.subscribe.nameLabel}</label>
+              <input id="sub-name" name="name" type="text" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="sub-email">{site.keepInTouch.subscribe.emailLabel}</label>
+              <input id="sub-email" name="email" type="email" autocomplete="email" required />
+            </div>
+          </div>
+          <button type="submit">{site.keepInTouch.subscribe.buttonLabel}</button>
+          <p class="consent">{site.keepInTouch.subscribe.consent}</p>
+          <p class="signup-msg" id="signup-msg" hidden></p>
+        </form>
+      )}
+    </div>
+
+    <div data-reveal>
+      <ul class="social">
+        {site.keepInTouch.social.map((s) => (
+          <li>
+            <a href={s.url || '#'} {...(s.url
+                 ? { target: '_blank', rel: 'noopener noreferrer' }
+                 : { 'aria-disabled': 'true' })}>
+              <span class="who">{s.name}</span>
+              <span class="at">{s.handle}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>
+
 <section class="band sheet" id="contact">
   <div class="marg" data-reveal>
     <p class="label">{site.contact.label}</p>
@@ -299,6 +343,37 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
 
     /* Belt and braces: whatever happens, nothing stays invisible. */
     setTimeout(() => targets.forEach(reveal), 3000);
+  }
+
+  /* Subscribe: the form posts natively without JavaScript. With it, we keep
+     the visitor on the page and report back inline. */
+  const form = document.getElementById('signup');
+  if (form) {
+    const msg = document.getElementById('signup-msg');
+    const say = (text, state) => {
+      msg.textContent = text;
+      msg.dataset.state = state;
+      msg.hidden = false;
+    };
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const button = form.querySelector('button');
+      button.disabled = true;
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          headers: { accept: 'application/json' },
+          body: new FormData(form),
+        });
+        if (!res.ok) throw new Error(String(res.status));
+        form.reset();
+        say(form.dataset.success, 'ok');
+      } catch {
+        say('That did not go through. Please try again, or email instead.', 'error');
+      } finally {
+        button.disabled = false;
+      }
+    });
   }
 
   const btn = document.getElementById('navbtn');

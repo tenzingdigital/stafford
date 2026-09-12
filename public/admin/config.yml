@@ -224,6 +224,33 @@ collections:
                   - { name: url, label: Website, widget: string }
                   - { name: mark, label: Logo, widget: image, required: false,
                       hint: "PNG or WebP with a transparent background works best." }
+          - name: keepInTouch
+            label: Follow / Subscribe
+            widget: object
+            fields:
+              - { name: label, label: Small label, widget: string }
+              - { name: heading, label: Heading, widget: string }
+              - { name: body, label: Text, widget: text }
+              - name: subscribe
+                label: Email signup
+                widget: object
+                fields:
+                  - { name: action, label: Where signups go, widget: string, required: false,
+                      hint: "Paste the form address from your email service (Buttondown, EmailOctopus, Mailchimp). Leave empty and the signup form is hidden." }
+                  - { name: nameLabel, label: Name field label, widget: string }
+                  - { name: emailLabel, label: Email field label, widget: string }
+                  - { name: buttonLabel, label: Button text, widget: string }
+                  - { name: consent, label: Consent wording, widget: text,
+                      hint: "Shown under the form. Keep it accurate — this is what people are agreeing to." }
+                  - { name: successMessage, label: Message after signing up, widget: string }
+              - name: social
+                label: Social accounts
+                widget: list
+                fields:
+                  - { name: name, label: Platform, widget: string }
+                  - { name: handle, label: Handle, widget: string }
+                  - { name: url, label: Link, widget: string, required: false,
+                      hint: "Leave empty and it shows greyed out, not clickable." }
           - name: footer
             label: Footer
             widget: object
