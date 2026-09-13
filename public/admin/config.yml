@@ -243,6 +243,17 @@ collections:
                   - { name: consent, label: Consent wording, widget: text,
                       hint: "Shown under the form. Keep it accurate — this is what people are agreeing to." }
                   - { name: successMessage, label: Message after signing up, widget: string }
+              - name: prompt
+                label: The pop-up that asks people to subscribe
+                widget: object
+                fields:
+                  - { name: show, label: Show the pop-up, widget: boolean, required: false,
+                      hint: "It slides up from the bottom once someone has read a fair bit of the page, and never appears for anyone who scrolls all the way down to the signup themselves. Closing it keeps it closed for three months. Turn this off to stop it entirely." }
+                  - { name: heading, label: Heading, widget: string }
+                  - { name: body, label: Text, widget: text,
+                      hint: "Keep it to a line or two — the panel is small." }
+                  - { name: dismissLabel, label: Wording for the close button, widget: string,
+                      hint: "Not shown on screen. It is what a screen reader says for the × button." }
               - name: social
                 label: Social accounts
                 widget: list

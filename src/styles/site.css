@@ -618,3 +618,74 @@ footer{
   .has-js .spine.in .spine-tail{ opacity:1; }
 }
 
+
+/* ── the signup prompt ──────────────────────────────────────────
+   For the visitor who reads a screen or two and leaves without ever
+   reaching the signup at the bottom. It sits over the page rather
+   than blocking it: nothing is dimmed, the page can still be read
+   and scrolled behind it, and it can be closed and stays closed.
+
+   Bottom of the screen on a phone, where a thumb is; bottom corner
+   on a wide one, where it is out of the way of the reading column. */
+
+.prompt{
+  position:fixed;
+  z-index:50;
+  left:0; right:0; bottom:0;
+  background:var(--paper);
+  border-top:3px solid var(--ink);
+  box-shadow:0 -18px 50px rgba(10,12,15,.13);
+  padding:1.5rem 1.35rem 1.6rem;
+  /* Out of the way until asked for. It is also hidden outright until then,
+     so it takes no part in the tab order and is not read out. */
+  transform:translateY(102%);
+  transition:transform .34s cubic-bezier(.22,.61,.36,1);
+}
+.prompt.in{ transform:translateY(0); }
+
+.prompt .label{ margin:0; }
+.prompt h2{
+  font-size:clamp(1.25rem,5vw,1.55rem);
+  line-height:1.05;
+  margin:.55rem 0 0;
+}
+.prompt .body{ font-size:.95rem; margin:.55rem 0 0; }
+
+/* A close that is unmistakably a close, and big enough to hit on a phone
+   without aiming. */
+.prompt-x{
+  position:absolute; top:.4rem; right:.4rem;
+  width:2.75rem; height:2.75rem;
+  display:grid; place-items:center;
+  border:0; background:none; cursor:pointer;
+  font:400 1.6rem/1 var(--f);
+  color:var(--muted);
+}
+.prompt-x:hover{ color:var(--ink); }
+.prompt-x:focus-visible{ outline:2px solid var(--ink); outline-offset:-4px; }
+
+/* Tighter than the full-page version: this is a panel, not a section. */
+.signup-compact{ margin-top:1.1rem; gap:.6rem; max-width:none; }
+.signup-compact .consent{ font-size:.68rem; margin-top:.15rem; }
+.signup-compact .signup-msg{ margin-top:.3rem; }
+
+@media (min-width:760px){
+  .prompt{
+    left:auto; right:1.75rem; bottom:1.75rem;
+    width:min(25rem, calc(100vw - 3.5rem));
+    border:1px solid var(--rule);
+    border-top:3px solid var(--ink);
+    padding:1.75rem 1.6rem 1.7rem;
+  }
+  /* Far enough to clear its own shadow while sliding. */
+  .prompt{ transform:translateY(calc(100% + 2.5rem)); }
+  .prompt.in{ transform:translateY(0); }
+}
+
+/* Movement is the point of a panel that arrives, but not at the cost of
+   someone who has asked their machine to stop moving things. It simply
+   appears instead. */
+@media (prefers-reduced-motion:reduce){
+  .prompt{ transition:none; transform:none; }
+  .prompt.in{ transform:none; }
+}

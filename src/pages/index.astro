@@ -2,6 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import site from '../data/site.json';
 import Photo from '../components/Photo.astro';
+import SignupForm from '../components/SignupForm.astro';
 import '../styles/site.css';
 
 /* Tiny inline-markdown helper for short CMS strings (bold, line breaks).
@@ -249,29 +250,7 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
       <p class="body" style="margin-top:1.2rem">{site.keepInTouch.body}</p>
 
       {site.keepInTouch.subscribe.action && (
-        <form class="signup" id="signup" method="POST" action={site.keepInTouch.subscribe.action}
-              data-success={site.keepInTouch.subscribe.successMessage}>
-          <div class="signup-row">
-            <div class="field">
-              <label for="sub-name">{site.keepInTouch.subscribe.nameLabel}</label>
-              <input id="sub-name" name="name" type="text" autocomplete="name" required />
-            </div>
-            <div class="field">
-              <label for="sub-email">{site.keepInTouch.subscribe.emailLabel}</label>
-              <input id="sub-email" name="email" type="email" autocomplete="email" required />
-            </div>
-          </div>
-          {/* Not for people: kept out of sight and out of the tab order, and
-              labelled with a name robots like to fill in. Anything that arrives
-              with it completed is discarded server-side. */}
-          <p class="hp" aria-hidden="true">
-            <label for="sub-website">Leave this empty</label>
-            <input id="sub-website" name="website" type="text" tabindex="-1" autocomplete="off" />
-          </p>
-          <button type="submit">{site.keepInTouch.subscribe.buttonLabel}</button>
-          <p class="consent">{site.keepInTouch.subscribe.consent}</p>
-          <p class="signup-msg" id="signup-msg" hidden></p>
-        </form>
+        <SignupForm subscribe={site.keepInTouch.subscribe} idPrefix="sub" />
       )}
     </div>
 
@@ -334,6 +313,18 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
   </span>
 </footer>
 
+{site.keepInTouch.prompt?.show && site.keepInTouch.subscribe.action && (
+  <aside class="prompt" id="prompt" role="dialog" aria-labelledby="prompt-h"
+         aria-describedby="prompt-b" hidden>
+    <button class="prompt-x" id="prompt-x" type="button"
+            aria-label={site.keepInTouch.prompt.dismissLabel}>&#215;</button>
+    <p class="label">{site.keepInTouch.label}</p>
+    <h2 class="d" id="prompt-h">{site.keepInTouch.prompt.heading}</h2>
+    <p class="body" id="prompt-b">{site.keepInTouch.prompt.body}</p>
+    <SignupForm subscribe={site.keepInTouch.subscribe} idPrefix="pop" compact />
+  </aside>
+)}
+
 <script is:inline>
   /* Only now do we allow anything to start hidden — if this script never runs,
      the page renders complete. */
@@ -359,11 +350,17 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     setTimeout(() => targets.forEach(reveal), 3000);
   }
 
-  /* Subscribe: the form posts natively without JavaScript. With it, we keep
-     the visitor on the page and report back inline. */
-  const form = document.getElementById('signup');
-  if (form) {
-    const msg = document.getElementById('signup-msg');
+  /* Subscribe. Both copies of the form — the one in its own section and the
+     one inside the prompt — are wired the same way. Without JavaScript they
+     post on their own and the service answers with a readable page; with it,
+     the visitor stays where they are and hears back in place. */
+  const forms = [...document.querySelectorAll('form.signup')];
+  const DONE = 'stafford:subscribed';
+  const remember = (key) => { try { localStorage.setItem(key, String(Date.now())); } catch {} };
+  const asked = (key) => { try { return localStorage.getItem(key); } catch { return null; } };
+
+  for (const form of forms) {
+    const msg = form.querySelector('.signup-msg');
     const say = (text, state) => {
       msg.textContent = text;
       msg.dataset.state = state;
@@ -371,10 +368,10 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     };
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const button = form.querySelector('button');
+      const button = form.querySelector('button[type="submit"]');
       const label = button.textContent;
       button.disabled = true;
-      button.textContent = 'Sending\u2026';
+      button.textContent = 'Sending…';
       try {
         const res = await fetch(form.action, {
           method: 'POST',
@@ -384,6 +381,9 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
         if (!res.ok) throw new Error(String(res.status));
         form.reset();
         say(form.dataset.success, 'ok');
+        /* Subscribed once is subscribed. Never prompt this person again. */
+        remember(DONE);
+        if (prompt && form.closest('#prompt')) setTimeout(closePrompt, 2200);
       } catch {
         say('That did not go through. Please try again, or email instead.', 'error');
       } finally {
@@ -391,22 +391,96 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
         button.textContent = label;
       }
     });
+  }
 
-    /* The service this posts to sleeps when nobody has used it, and waking it
-       takes the best part of a minute. Knock on the door as soon as the signup
-       comes into view, so it is already awake by the time anyone presses the
-       button. Failures here do not matter and are ignored on purpose. */
-    const wake = () => {
-      try {
-        fetch(new URL('/healthz', form.action).toString(), { mode: 'no-cors' }).catch(() => {});
-      } catch { /* a relative action, or an old browser: nothing to wake */ }
+  /* The service the forms post to sleeps when nobody has used it, and waking it
+     takes the best part of a minute. Knock on the door the first time a signup
+     could plausibly be used, so it is already awake by the time anyone presses
+     the button. Failures here do not matter and are ignored on purpose. */
+  let woken = false;
+  const wake = () => {
+    if (woken || !forms.length) return;
+    woken = true;
+    try {
+      fetch(new URL('/healthz', forms[0].action).toString(), { mode: 'no-cors' }).catch(() => {});
+    } catch { /* a relative action, or an old browser: nothing to wake */ }
+  };
+
+  /* The prompt.
+     It exists for one kind of visitor: the one who reads a screen or two and
+     leaves without ever reaching the signup section at the bottom. So it waits
+     until someone has actually read something, and it never appears at all for
+     anyone who reaches that section under their own steam — being asked twice
+     is worse than not being asked. Dismissing it is remembered for three
+     months; subscribing, for good. */
+  const prompt = document.getElementById('prompt');
+  const follow = document.getElementById('follow');
+  const DISMISSED = 'stafford:prompt-dismissed';
+  const THREE_MONTHS = 90 * 24 * 60 * 60 * 1000;
+
+  let promptOpen = false;
+  function closePrompt(remembering) {
+    if (!prompt) return;
+    promptOpen = false;
+    prompt.classList.remove('in');
+    if (remembering) remember(DISMISSED);
+    const done = () => { prompt.hidden = true; };
+    /* Let it slide back down before it leaves the page, unless the visitor has
+       asked for less movement, in which case it just goes. */
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) done();
+    else setTimeout(done, 320);
+  }
+
+  if (prompt && forms.length) {
+    const dismissedAt = Number(asked(DISMISSED) || 0);
+    const recentlyDismissed = dismissedAt && Date.now() - dismissedAt < THREE_MONTHS;
+    let allowed = !asked(DONE) && !recentlyDismissed;
+
+    const open = () => {
+      if (!allowed || promptOpen) return;
+      allowed = false;
+      promptOpen = true;
+      wake();
+      prompt.hidden = false;
+      /* Two frames: one for the browser to lay the panel out, one for the
+         change of position to be something it can animate rather than the
+         state it started in. */
+      requestAnimationFrame(() => requestAnimationFrame(() => prompt.classList.add('in')));
     };
-    if ('IntersectionObserver' in window) {
-      const woken = new IntersectionObserver((entries, self) => {
-        if (entries.some((e) => e.isIntersecting)) { wake(); self.disconnect(); }
-      }, { rootMargin: '300px' });
-      woken.observe(form);
+
+    document.getElementById('prompt-x').addEventListener('click', () => closePrompt(true));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && promptOpen) closePrompt(true);
+    });
+
+    /* Reaching the signup section cancels the prompt outright, and closes it if
+       it happens to be open — without recording a dismissal, since the visitor
+       did not refuse anything. */
+    if (follow && 'IntersectionObserver' in window) {
+      new IntersectionObserver((entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        allowed = false;
+        wake();
+        if (promptOpen) closePrompt(false);
+      }, { rootMargin: '200px' }).observe(follow);
     }
+
+    /* "Has read something" means a little over half the page, which on this
+       site is past the expeditions. Passive so it cannot make scrolling
+       stutter. */
+    const onScroll = () => {
+      const seen = window.scrollY + window.innerHeight;
+      const total = document.documentElement.scrollHeight;
+      if (seen / total > 0.55) {
+        window.removeEventListener('scroll', onScroll);
+        open();
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  } else if (follow && 'IntersectionObserver' in window) {
+    new IntersectionObserver((entries, self) => {
+      if (entries.some((e) => e.isIntersecting)) { wake(); self.disconnect(); }
+    }, { rootMargin: '300px' }).observe(follow);
   }
 
   const btn = document.getElementById('navbtn');

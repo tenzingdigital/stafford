@@ -236,6 +236,12 @@
         "handle": "@staffordtyrrell",
         "url": ""
       }
-    ]
+    ],
+    "prompt": {
+      "show": true,
+      "heading": "Follow the expedition",
+      "body": "One or two emails a year: when the next expedition is announced, and from the ice while it is under way.",
+      "dismissLabel": "Close this"
+    }
   }
 }

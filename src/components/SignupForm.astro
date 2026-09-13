@@ -1,0 +1,35 @@
+---
+/* The email signup. Used twice on the page — once in its own section near the
+   bottom, once inside the prompt that slides up for people who never get that
+   far — so it lives here rather than being written out twice and drifting
+   apart. Every id has to be unique within a page, hence the prefix.
+
+   It works without JavaScript: the form posts on its own and the service
+   answers with a readable page. The script in index.astro upgrades it to
+   submit in place. */
+const { subscribe, idPrefix = 'sub', compact = false } = Astro.props;
+const id = (name) => `${idPrefix}-${name}`;
+---
+<form class:list={['signup', compact && 'signup-compact']} method="POST"
+      action={subscribe.action} data-success={subscribe.successMessage}>
+  <div class="signup-row">
+    <div class="field">
+      <label for={id('name')}>{subscribe.nameLabel}</label>
+      <input id={id('name')} name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="field">
+      <label for={id('email')}>{subscribe.emailLabel}</label>
+      <input id={id('email')} name="email" type="email" autocomplete="email" required />
+    </div>
+  </div>
+  {/* Not for people: kept out of sight and out of the tab order, and labelled
+      with a name robots like to fill in. Anything that arrives with it
+      completed is discarded server-side. */}
+  <p class="hp" aria-hidden="true">
+    <label for={id('website')}>Leave this empty</label>
+    <input id={id('website')} name="website" type="text" tabindex="-1" autocomplete="off" />
+  </p>
+  <button type="submit">{subscribe.buttonLabel}</button>
+  <p class="consent">{subscribe.consent}</p>
+  <p class="signup-msg" hidden></p>
+</form>
