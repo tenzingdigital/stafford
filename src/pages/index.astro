@@ -255,9 +255,14 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
           <noscript>
             <p class="body" style="margin-top:1.25rem">
               Signing up needs JavaScript. Email
-              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> and you'll be added.
+              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> and you&rsquo;ll be added.
             </p>
           </noscript>
+          <p class="eo-fallback body" id="eo-fallback" hidden>
+            The signup form didn&rsquo;t load. Email
+            <a href={`mailto:${site.contact.email}?subject=Subscribe`}>{site.contact.email}</a> and
+            you&rsquo;ll be added to the list.
+          </p>
         </div>
       )}
 
@@ -363,6 +368,17 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
 
     /* Belt and braces: whatever happens, nothing stays invisible. */
     setTimeout(() => targets.forEach(reveal), 3000);
+  }
+
+  /* If the provider's embed hasn't produced a form after a moment — blocked,
+     offline, or the service is down — say so and offer the email address.
+     A silent gap where a signup should be is the worst outcome. */
+  const eo = document.querySelector('.eo-form');
+  if (eo) {
+    setTimeout(() => {
+      const rendered = eo.querySelector('form, iframe, input');
+      if (!rendered) document.getElementById('eo-fallback').hidden = false;
+    }, 2500);
   }
 
   /* Subscribe: the form posts natively without JavaScript. With it, we keep

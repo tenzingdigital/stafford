@@ -650,3 +650,6 @@ footer{
   text-transform:uppercase !important;
   color:var(--ink-3) !important;
 }
+
+.eo-fallback{ margin-top:1.25rem; }
+.eo-fallback a{ color:var(--ink); text-underline-offset:3px; }
