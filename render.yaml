@@ -23,6 +23,25 @@ services:
       - path: /images/*
         name: Cache-Control
         value: public, max-age=604800
+      # The pages themselves must never be served from cache without a check.
+      # Without this a phone can sit on a copy from hours ago and show none of
+      # his edits. 'no-cache' does not mean 'do not store' — the browser keeps
+      # the page but asks the server whether it has changed, and an unchanged
+      # page comes back as a tiny 304, so this costs almost nothing. Paths are
+      # listed one by one rather than as a wildcard so they cannot collide with
+      # the two rules above.
+      - path: /
+        name: Cache-Control
+        value: no-cache
+      - path: /index.html
+        name: Cache-Control
+        value: no-cache
+      - path: /admin/
+        name: Cache-Control
+        value: no-cache
+      - path: /admin/index.html
+        name: Cache-Control
+        value: no-cache
       - path: /*
         name: X-Content-Type-Options
         value: nosniff
