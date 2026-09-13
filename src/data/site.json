@@ -115,17 +115,17 @@
   "journalIntro": {
     "label": "Journal",
     "heading": "Dispatches",
-    "show": true
+    "show": false
   },
   "partners": {
     "label": "Partners",
     "heading": "Working with brands",
-    "body": "Kit that works in Ireland in February is not kit that works at eighty-two degrees north. Stafford puts equipment into genuinely unforgiving conditions and reports back honestly — publicly if it performs, privately if it doesn't.",
+    "body": "Stafford tests equipment in sustained cold and on long passages at sea, and reports back honestly on how it holds up. Enquiries welcome.",
     "offers": [
       {
         "tag": "Rare",
         "title": "Name a mountain",
-        "text": "There is an unclimbed peak south-west of Mount Barbeau. A first ascent carries naming rights, and that is a rare thing to be able to offer anyone."
+        "text": "There is an unclimbed peak south-west of Mount Barbeau. A first ascent carries naming rights."
       },
       {
         "tag": "Visibility",
@@ -135,12 +135,12 @@
       {
         "tag": "Product",
         "title": "Field testing",
-        "text": "Sustained use at temperature, with structured feedback to your product team rather than a photograph and a thumbs up."
+        "text": "Sustained use at temperature, with written feedback to your product team."
       },
       {
         "tag": "Audience",
         "title": "Talks and events",
-        "text": "Expedition talks, screenings and corporate events — on decision-making, risk and turning round, not on heroics."
+        "text": "Expedition talks, screenings and corporate events — on planning, risk and when to turn back."
       }
     ]
   },
@@ -190,10 +190,6 @@
       "href": "#about"
     },
     {
-      "label": "Journal",
-      "href": "#journal"
-    },
-    {
       "label": "Follow",
       "href": "#follow"
     },
@@ -215,7 +211,7 @@
   "keepInTouch": {
     "label": "Keep in touch",
     "heading": "Follow the expedition",
-    "body": "Occasional dispatches from the ice and the water. No more than a handful a year, and nothing else.",
+    "body": "Email updates from expeditions, a few times a year.",
     "subscribe": {
       "action": "",
       "nameLabel": "Name",
