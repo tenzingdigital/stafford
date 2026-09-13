@@ -45,8 +45,8 @@
   ],
   "expeditionsIntro": {
     "label": "Expeditions",
-    "heading": "Where the work has been done",
-    "body": "Each expedition is indexed by the latitude it reached, because latitude is the honest measure of a journey north — and of how much further there is to go."
+    "heading": "Previous expeditions",
+    "body": "Past expeditions are listed below, indexed by the latitude each one reached."
   },
   "plate": {
     "photo": "images/light/berg-patagonia.jpg",
