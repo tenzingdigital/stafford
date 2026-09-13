@@ -248,7 +248,20 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
       <h2 class="d" style="font-size:clamp(1.9rem,4vw,3rem); margin-top:1.1rem">{site.keepInTouch.heading}</h2>
       <p class="body" style="margin-top:1.2rem">{site.keepInTouch.body}</p>
 
-      {site.keepInTouch.subscribe.action && (
+      {site.keepInTouch.subscribe.embed?.src && (
+        <div class="eo-form">
+          <script is:inline async src={site.keepInTouch.subscribe.embed.src}
+                  data-form={site.keepInTouch.subscribe.embed.formId}></script>
+          <noscript>
+            <p class="body" style="margin-top:1.25rem">
+              Signing up needs JavaScript. Email
+              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> and you'll be added.
+            </p>
+          </noscript>
+        </div>
+      )}
+
+      {!site.keepInTouch.subscribe.embed?.src && site.keepInTouch.subscribe.action && (
         <form class="signup" id="signup" method="POST" action={site.keepInTouch.subscribe.action}
               data-success={site.keepInTouch.subscribe.successMessage}>
           <div class="signup-row">

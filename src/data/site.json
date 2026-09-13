@@ -222,7 +222,11 @@
       "emailLabel": "Email address",
       "buttonLabel": "Subscribe",
       "consent": "By subscribing you agree to receive occasional email updates. You can unsubscribe at any time.",
-      "successMessage": "Thank you — you're on the list."
+      "successMessage": "Thank you — you're on the list.",
+      "embed": {
+        "src": "https://eocampaign1.com/form/6802bc1c-af74-11f1-85ce-c7be771114dd.js",
+        "formId": "6802bc1c-af74-11f1-85ce-c7be771114dd"
+      }
     },
     "social": [
       {

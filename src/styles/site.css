@@ -609,3 +609,44 @@ footer{
   .has-js .spine-tail{ opacity:0; transition:opacity .6s ease 1.3s; }
   .has-js .spine.in .spine-tail{ opacity:1; }
 }
+
+/* ── embedded signup form ───────────────────────────────────────
+   EmailOctopus injects its own markup and styles. These rules nudge
+   it toward the rest of the page — typeface, square corners, the
+   site's ink — without fighting it. Anything it insists on keeping,
+   it keeps. */
+
+.eo-form{ margin-top:2rem; max-width:32rem; }
+.eo-form *{ font-family:var(--f) !important; }
+.eo-form input[type="text"],
+.eo-form input[type="email"]{
+  border-radius:0 !important;
+  border:1px solid var(--rule) !important;
+  padding:.8rem .9rem !important;
+  font-size:1rem !important;
+  color:var(--ink) !important;
+  background:var(--paper) !important;
+}
+.eo-form input[type="text"]:focus,
+.eo-form input[type="email"]:focus{ border-color:var(--ink) !important; outline:none !important; }
+.eo-form button,
+.eo-form input[type="submit"]{
+  border-radius:0 !important;
+  background:var(--ink) !important;
+  color:#fff !important;
+  border:1px solid var(--ink) !important;
+  font-family:var(--f-mono) !important;
+  font-size:.68rem !important;
+  font-weight:500 !important;
+  letter-spacing:.15em !important;
+  text-transform:uppercase !important;
+  padding:.85rem 1.6rem !important;
+  cursor:pointer;
+}
+.eo-form label{
+  font-family:var(--f-mono) !important;
+  font-size:.62rem !important;
+  letter-spacing:.18em !important;
+  text-transform:uppercase !important;
+  color:var(--ink-3) !important;
+}

@@ -235,8 +235,16 @@ collections:
                 label: Email signup
                 widget: object
                 fields:
-                  - { name: action, label: Where signups go, widget: string, required: false,
-                      hint: "Paste the form address from your email service (Buttondown, EmailOctopus, Mailchimp). Leave empty and the signup form is hidden." }
+                  - name: embed
+                    label: Embedded form
+                    widget: object
+                    required: false
+                    fields:
+                      - { name: src, label: Script address, widget: string, required: false,
+                          hint: "From EmailOctopus: the src of the embed code. Leave empty to use the plain form below instead." }
+                      - { name: formId, label: Form ID, widget: string, required: false }
+                  - { name: action, label: Where signups go (plain form), widget: string, required: false,
+                      hint: "Only used when no embedded form is set. The address a plain HTML form posts to." }
                   - { name: nameLabel, label: Name field label, widget: string }
                   - { name: emailLabel, label: Email field label, widget: string }
                   - { name: buttonLabel, label: Button text, widget: string }
