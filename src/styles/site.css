@@ -544,3 +544,68 @@ footer{
 .social a[aria-disabled="true"]{ cursor:default; }
 .social a[aria-disabled="true"] .who{ color:var(--ink-3); }
 .social a[aria-disabled="true"]:hover .who{ color:var(--ink-3); }
+
+/* ── the latitude spine ─────────────────────────────────────────
+   A hairline rail down the left of the expeditions, carrying the
+   latitude each one reached and ending in a dashed run to the Pole.
+   Not a proportional scale — the entries are ordered by importance,
+   not by latitude — so it indexes rather than measures.
+   Wide screens only: below that the rail would eat the gutter.     */
+
+.spine{ position:relative; }
+.spine-line, .spine-mark, .spine-tail{ display:none; }
+
+@media (min-width:1100px){
+  .spine{ --rail:6rem; --rail-x:2rem; padding-left:var(--rail); }
+
+  .spine-line{
+    display:block; position:absolute;
+    left:var(--rail-x); top:0; bottom:0; width:1px;
+    background:var(--rule); transform-origin:top center;
+  }
+
+  .exp{ position:relative; }
+
+  .spine-mark{
+    display:flex; align-items:center; gap:.55rem;
+    position:absolute; left:calc(-1 * var(--rail)); top:50%;
+    transform:translateY(-50%);
+    width:var(--rail); padding-left:var(--rail-x);
+    pointer-events:none;
+  }
+  .spine-mark i{ display:block; width:1rem; height:1px; background:var(--ink); flex:0 0 auto; }
+  .spine-mark b{
+    font-family:var(--f-mono); font-size:.63rem; font-weight:500;
+    letter-spacing:.06em; color:var(--ink); white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+  }
+
+  /* the run that has not been made yet */
+  .spine-tail{
+    display:flex; align-items:center; gap:.55rem;
+    position:relative; height:5.5rem;
+    padding-left:var(--rail-x);
+    /* escape the rail padding so it lines up with the markers above */
+    margin-left:calc(-1 * var(--rail)); width:var(--rail);
+  }
+  .spine-tail::before{
+    content:""; position:absolute; left:var(--rail-x); top:0; height:100%;
+    border-left:1px dashed var(--rule);
+  }
+  .spine-tail i{ display:block; width:1rem; height:1px; background:var(--ink-3); margin-top:auto; margin-bottom:0; }
+  .spine-tail b{
+    font-family:var(--f-mono); font-size:.63rem; letter-spacing:.06em;
+    color:var(--ink-3); margin-top:auto; line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+}
+
+@media (min-width:1100px) and (prefers-reduced-motion: no-preference){
+  .has-js .spine-line{ transform:scaleY(0); transition:transform 1.6s cubic-bezier(.3,.7,.2,1); }
+  .has-js .spine.in .spine-line{ transform:scaleY(1); }
+  .has-js .spine-mark{ opacity:0; transform:translateY(-50%) translateX(-8px); transition:opacity .6s ease, transform .6s cubic-bezier(.22,.68,.24,1); }
+  .has-js .spine.in .spine-mark{ opacity:1; transform:translateY(-50%); }
+  .has-js .spine-mark:nth-of-type(1){ transition-delay:.35s; }
+  .has-js .spine-tail{ opacity:0; transition:opacity .6s ease 1.3s; }
+  .has-js .spine.in .spine-tail{ opacity:1; }
+}

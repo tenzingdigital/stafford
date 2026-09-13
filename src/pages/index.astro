@@ -104,8 +104,12 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
   </div>
 </section>
 
+<div class="spine">
+<span class="spine-line" aria-hidden="true"></span>
+
 {rendered.map(({ data, Body }) => (
   <article class={`exp${data.flip ? ' rev' : ''}`}>
+    <span class="spine-mark" aria-hidden="true"><i></i><b>{data.latitude}</b></span>
     <div class="exp-shot">
       <Photo src={data.photo} alt={data.photoAlt} style={`object-position:${data.photoPosition}`}
              sizes="(min-width: 900px) 50vw, 100vw" />
@@ -126,6 +130,9 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     </div>
   </article>
 ))}
+
+<div class="spine-tail" aria-hidden="true"><i></i><b>{c.max}&deg;N</b></div>
+</div>
 
 {c.show && (
   <section class="band chart-band" style="border-top:1px solid var(--rule)">
@@ -328,7 +335,7 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     document.documentElement.classList.add('has-js');
 
     const reveal = (el) => el.classList.add('in');
-    const targets = [...document.querySelectorAll('[data-reveal]'), ...document.querySelectorAll('.chart')];
+    const targets = [...document.querySelectorAll('[data-reveal]'), ...document.querySelectorAll('.chart, .spine')];
 
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
