@@ -235,16 +235,8 @@ collections:
                 label: Email signup
                 widget: object
                 fields:
-                  - name: embed
-                    label: Embedded form
-                    widget: object
-                    required: false
-                    fields:
-                      - { name: src, label: Script address, widget: string, required: false,
-                          hint: "From EmailOctopus: the src of the embed code. Leave empty to use the plain form below instead." }
-                      - { name: formId, label: Form ID, widget: string, required: false }
-                  - { name: action, label: Where signups go (plain form), widget: string, required: false,
-                      hint: "Only used when no embedded form is set. The address a plain HTML form posts to." }
+                  - { name: action, label: Where signups go, widget: string, required: false,
+                      hint: "The address the form sends names and email addresses to. Already set up — leave this alone unless you are told otherwise. Emptying it removes the signup form from the site." }
                   - { name: nameLabel, label: Name field label, widget: string }
                   - { name: emailLabel, label: Email field label, widget: string }
                   - { name: buttonLabel, label: Button text, widget: string }

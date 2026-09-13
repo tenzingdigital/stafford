@@ -248,25 +248,7 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
       <h2 class="d" style="font-size:clamp(1.9rem,4vw,3rem); margin-top:1.1rem">{site.keepInTouch.heading}</h2>
       <p class="body" style="margin-top:1.2rem">{site.keepInTouch.body}</p>
 
-      {site.keepInTouch.subscribe.embed?.src && (
-        <div class="eo-form">
-          <script is:inline async src={site.keepInTouch.subscribe.embed.src}
-                  data-form={site.keepInTouch.subscribe.embed.formId}></script>
-          <noscript>
-            <p class="body" style="margin-top:1.25rem">
-              Signing up needs JavaScript. Email
-              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a> and you&rsquo;ll be added.
-            </p>
-          </noscript>
-          <p class="eo-fallback body" id="eo-fallback" hidden>
-            The signup form didn&rsquo;t load. Email
-            <a href={`mailto:${site.contact.email}?subject=Subscribe`}>{site.contact.email}</a> and
-            you&rsquo;ll be added to the list.
-          </p>
-        </div>
-      )}
-
-      {!site.keepInTouch.subscribe.embed?.src && site.keepInTouch.subscribe.action && (
+      {site.keepInTouch.subscribe.action && (
         <form class="signup" id="signup" method="POST" action={site.keepInTouch.subscribe.action}
               data-success={site.keepInTouch.subscribe.successMessage}>
           <div class="signup-row">
@@ -279,6 +261,13 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
               <input id="sub-email" name="email" type="email" autocomplete="email" required />
             </div>
           </div>
+          {/* Not for people: kept out of sight and out of the tab order, and
+              labelled with a name robots like to fill in. Anything that arrives
+              with it completed is discarded server-side. */}
+          <p class="hp" aria-hidden="true">
+            <label for="sub-website">Leave this empty</label>
+            <input id="sub-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </p>
           <button type="submit">{site.keepInTouch.subscribe.buttonLabel}</button>
           <p class="consent">{site.keepInTouch.subscribe.consent}</p>
           <p class="signup-msg" id="signup-msg" hidden></p>
@@ -370,17 +359,6 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     setTimeout(() => targets.forEach(reveal), 3000);
   }
 
-  /* If the provider's embed hasn't produced a form after a moment — blocked,
-     offline, or the service is down — say so and offer the email address.
-     A silent gap where a signup should be is the worst outcome. */
-  const eo = document.querySelector('.eo-form');
-  if (eo) {
-    setTimeout(() => {
-      const rendered = eo.querySelector('form, iframe, input');
-      if (!rendered) document.getElementById('eo-fallback').hidden = false;
-    }, 2500);
-  }
-
   /* Subscribe: the form posts natively without JavaScript. With it, we keep
      the visitor on the page and report back inline. */
   const form = document.getElementById('signup');
@@ -394,7 +372,9 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const button = form.querySelector('button');
+      const label = button.textContent;
       button.disabled = true;
+      button.textContent = 'Sending\u2026';
       try {
         const res = await fetch(form.action, {
           method: 'POST',
@@ -408,8 +388,25 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
         say('That did not go through. Please try again, or email instead.', 'error');
       } finally {
         button.disabled = false;
+        button.textContent = label;
       }
     });
+
+    /* The service this posts to sleeps when nobody has used it, and waking it
+       takes the best part of a minute. Knock on the door as soon as the signup
+       comes into view, so it is already awake by the time anyone presses the
+       button. Failures here do not matter and are ignored on purpose. */
+    const wake = () => {
+      try {
+        fetch(new URL('/healthz', form.action).toString(), { mode: 'no-cors' }).catch(() => {});
+      } catch { /* a relative action, or an old browser: nothing to wake */ }
+    };
+    if ('IntersectionObserver' in window) {
+      const woken = new IntersectionObserver((entries, self) => {
+        if (entries.some((e) => e.isIntersecting)) { wake(); self.disconnect(); }
+      }, { rootMargin: '300px' });
+      woken.observe(form);
+    }
   }
 
   const btn = document.getElementById('navbtn');
