@@ -1,5 +1,5 @@
 ---
-/* A photograph with AVIF and WebP srcsets, falling back to the original file.
+/* A photograph with AVIF and WebP srcsets, falling back to a plain JPEG.
  * <picture> is display:contents in the stylesheet, so the <img> stays a direct
  * layout child of whatever contains it and the existing CSS still applies. */
 import manifest from '../data/images.json';
@@ -14,7 +14,7 @@ const srcset = (fmt) =>
   <picture>
     <source type="image/avif" srcset={srcset('avif')} sizes={sizes} />
     <source type="image/webp" srcset={srcset('webp')} sizes={sizes} />
-    <img src={src} alt={alt} style={style} width={entry.width} height={entry.height}
+    <img src={entry.fallback || src} alt={alt} style={style} width={entry.width} height={entry.height}
          loading={loading} decoding="async" fetchpriority={fetchpriority} />
   </picture>
 ) : (
