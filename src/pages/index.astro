@@ -431,10 +431,18 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     else setTimeout(done, 320);
   }
 
+  /* Adding ?prompt to the address shows it straight away and ignores every rule
+     below — including the browser's memory of having closed it. Deliberately
+     provided: the rules that make this thing bearable for a visitor also make
+     it very hard to look at on purpose. Once a browser has been shown it and
+     closed it, it will not reappear there for three months, which reads
+     exactly like the feature is missing. This is the way back in. */
+  const forced = new URLSearchParams(location.search).has('prompt');
+
   if (prompt && forms.length) {
     const dismissedAt = Number(asked(DISMISSED) || 0);
     const recentlyDismissed = dismissedAt && Date.now() - dismissedAt < THREE_MONTHS;
-    let allowed = !asked(DONE) && !recentlyDismissed;
+    let allowed = forced || (!asked(DONE) && !recentlyDismissed);
 
     const open = () => {
       if (!allowed || promptOpen) return;
@@ -448,9 +456,11 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
       requestAnimationFrame(() => requestAnimationFrame(() => prompt.classList.add('in')));
     };
 
-    document.getElementById('prompt-x').addEventListener('click', () => closePrompt(true));
+    /* Closing it during a deliberate look is not a refusal, so it is not
+       remembered — otherwise checking it once would hide it for three months. */
+    document.getElementById('prompt-x').addEventListener('click', () => closePrompt(!forced));
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && promptOpen) closePrompt(true);
+      if (e.key === 'Escape' && promptOpen) closePrompt(!forced);
     });
 
     /* Reaching the signup section cancels the prompt outright, and closes it if
@@ -459,8 +469,9 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     if (follow && 'IntersectionObserver' in window) {
       new IntersectionObserver((entries) => {
         if (!entries.some((e) => e.isIntersecting)) return;
-        allowed = false;
         wake();
+        if (forced) return;
+        allowed = false;
         if (promptOpen) closePrompt(false);
       }, { rootMargin: '200px' }).observe(follow);
     }
@@ -468,6 +479,8 @@ for (let l = c.min; l <= c.max; l += 5) minorTicks.push(l);
     /* "Has read something" means a little over half the page, which on this
        site is past the expeditions. Passive so it cannot make scrolling
        stutter. */
+    if (forced) { setTimeout(open, 600); }
+
     const onScroll = () => {
       const seen = window.scrollY + window.innerHeight;
       const total = document.documentElement.scrollHeight;
