@@ -16,7 +16,7 @@
     "photoPosition": "center 16%"
   },
   "status": {
-    "show": true,
+    "show": false,
     "label": "At sea now",
     "detail": "High Arctic Expedition — Ellesmere Island",
     "dates": "30 June – 25 September 2026"
