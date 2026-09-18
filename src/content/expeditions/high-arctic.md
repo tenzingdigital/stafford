@@ -3,7 +3,7 @@ title: High Arctic Expedition
 order: 10
 latitude: 82°N
 stampTop: In progress
-stampBottom: S/Y Patagonia
+stampBottom: Patagonia
 meta:
   - 30 Jun – 25 Sep 2026
   - 76 days sailing
@@ -12,7 +12,7 @@ photo: images/light/glacier-boat.jpg
 photoPosition: center 42%
 photoAlt: Patagonia dwarfed by a glacier face in a Greenland fjord
 patch: images/patches/high-arctic-82n.webp
-patchAlt: "High Arctic Expedition patch: an Arctic wolf beneath the aurora, marked 82 degrees North, S/Y Patagonia"
+patchAlt: "High Arctic Expedition patch: an Arctic wolf beneath the aurora, marked 82 degrees North, sailing yacht Patagonia"
 note: |
   **Route**
   Reykjavík → Nuuk → Qaanaaq → Ellesmere → Pond Inlet → Sisimiut → Qaqortoq → Reykjavík

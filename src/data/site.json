@@ -51,7 +51,7 @@
   "plate": {
     "photo": "images/light/berg-patagonia.jpg",
     "alt": "The expedition yacht Patagonia anchored beside an enormous iceberg in a Greenland fjord, mountains behind",
-    "caption": "S/Y Patagonia at anchor — East Greenland"
+    "caption": "Patagonia at anchor — East Greenland"
   },
   "latitudeChart": {
     "show": true,
@@ -90,8 +90,8 @@
   },
   "vessel": {
     "label": "The vessel",
-    "heading": "S/Y Patagonia",
-    "body": "A steel Van de Stadt ketch, welded in the Netherlands and ice-reinforced for Arctic and Antarctic water. Solar, a diesel generator and tankage for transatlantic passages. Watertight crash bulkhead.",
+    "heading": "Patagonia",
+    "body": "A two-masted steel Van de Stadt ketch, welded in the Netherlands and ice-reinforced for Arctic and Antarctic water. Solar, a diesel generator and tankage for transatlantic passages. Watertight crash bulkhead.",
     "facts": [
       "60 ft",
       "Ketch rig",
